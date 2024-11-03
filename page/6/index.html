@@ -150,7 +150,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2022/06/25/%E6%88%91%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%F0%9F%93%99/">
+    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2021/12/06/Chrome-CVE-2020-6449-UAF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/06/25/%E6%88%91%E7%9A%84%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%F0%9F%93%99/" class="post-title-link" itemprop="url">我的漏洞学习笔记📙</a>
+          <a href="/2021/12/06/Chrome-CVE-2020-6449-UAF/" class="post-title-link" itemprop="url">Chrome CVE-2020-6449 UAF</a>
         </h2>
 
         <div class="post-meta-container">
@@ -178,15 +178,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2022-06-25 10:47:19" itemprop="dateCreated datePublished" datetime="2022-06-25T10:47:19+08:00">2022-06-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-07-03 22:32:29" itemprop="dateModified" datetime="2022-07-03T22:32:29+08:00">2022-07-03</time>
+      <time title="Created: 2021-12-06 21:00:55 / Modified: 21:09:54" itemprop="dateCreated datePublished" datetime="2021-12-06T21:00:55+08:00">2021-12-06</time>
     </span>
 
   
@@ -199,242 +193,218 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>漏洞的学习要有连续性，多记录，多总结，多回顾。</p>
-<h1 id="🌟漏洞学习方法"><a href="#🌟漏洞学习方法" class="headerlink" title="🌟漏洞学习方法"></a>🌟漏洞学习方法</h1><p>以下要说的漏洞挖掘方法都是从<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7Ysy6iA2sqA">OffensiveCon22 - Mark Dowd- Keynote -How Do You Actually Find Bugs?</a>学的，个人感觉是贴合实际的，也很具有可执行性。</p>
-<h2 id="1、心态"><a href="#1、心态" class="headerlink" title="1、心态"></a>1、心态</h2><p><strong>耐心、毅力、细心、思考、好奇心</strong></p>
-<p>要有一个积极的心态，就是当发现代码的逻辑与自己的理解有很大不同时，能接受失败，从头再来。</p>
-<p>漏洞挖掘就是一个不断失败的过程。</p>
-<h3 id="如何处理失败？"><a href="#如何处理失败？" class="headerlink" title="如何处理失败？"></a>如何处理失败？</h3><ol>
-<li>两个项目同时进行，这两个项目可以是相同代码的不同组件，当一个项目到达瓶颈时，搁置一段时间，进行另一个项目；</li>
-<li>第二个项目最好是开发项目，开发容易获得成就感。</li>
-</ol>
-<h3 id="知道什么时候该结束"><a href="#知道什么时候该结束" class="headerlink" title="知道什么时候该结束"></a>知道什么时候该结束</h3><ol>
-<li>当切换了几次，还是无法突破瓶颈时；<ol>
-<li>一直持续到针对一个问题，会很容易打击积极性和信息。</li>
-</ol>
-</li>
-<li>不要在意沉没成本，可以当作只是暂时搁置，时机合适时再来，这需要对已做的工作做好记录，防止下次进入时又从头再来；</li>
-<li>而且，过段时间再来，代码可能就由于更新引入了新的问题。</li>
-</ol>
-<p>不要想着一口吃个胖子，思考很重要，只有主动思考代码的实现思想，才能减少审计时间，就是主动去猜去想。</p>
-<h3 id="补丁"><a href="#补丁" class="headerlink" title="补丁"></a>补丁</h3><ol>
-<li>审计时发现补丁说明思考的路径是正确的，还有助于理解问题与解决问题。</li>
-</ol>
-<h3 id="信心"><a href="#信心" class="headerlink" title="信心"></a>信心</h3><p>初次踏入安全研究会很容易不自信，应该从小处做起，逐渐扩大，以增加信心。</p>
-<h3 id="偏见和假设"><a href="#偏见和假设" class="headerlink" title="偏见和假设"></a>偏见和假设</h3><p>这些思想不要有：</p>
-<ol>
-<li>有很多人审计过这一块了；<ol>
-<li>其实可能并没有。</li>
-</ol>
-</li>
-<li>即使我能发现问题，也是不可利用的；<ol>
-<li>缓解措施或许可以绕过。</li>
-</ol>
-</li>
-<li>XXX攻击面现在已经过时了；</li>
-<li>这儿没什么bugl；<ol>
-<li>变体或代码重新引入bug。</li>
-</ol>
-</li>
-<li>协议不允许做XXX动作。</li>
-<li>不要一开始就阅读文档手册，会影响想象力，当审计遇到模棱两可的时候，在看手册。</li>
-</ol>
-<h2 id="2、审计流程"><a href="#2、审计流程" class="headerlink" title="2、审计流程"></a>2、审计流程</h2><ol>
-<li>试图理解代码，理解代码以后，才能更好地写出漏洞利用；<ol>
-<li>一般都想要缩短这个过程，借助工具、fuzz、静态分析等，这些有用，但是很依赖于工具本身。</li>
-</ol>
-</li>
-<li>理解一件事最好的方式是向他人讲解这个东西；<ol>
-<li>写文章或是找个人分享。</li>
-</ol>
-</li>
-</ol>
-<h3 id="寻找什么？"><a href="#寻找什么？" class="headerlink" title="寻找什么？"></a>寻找什么？</h3><p>软件风险点 &#x3D; 供给面X复杂度（漏挖之友）</p>
-<p>攻击面可以是间接的，隐藏或不明显的攻击面是最好的，供应商自定义的那些。</p>
-<p>复杂度：</p>
-<ol>
-<li>新的功能；</li>
-<li>对旧东西的兼容；</li>
-<li>为了开发简单，使用现有库等，引入自己不需要的东西，如<code>log4j</code>。</li>
-</ol>
-<h3 id="借用想法"><a href="#借用想法" class="headerlink" title="借用想法"></a>借用想法</h3><ol>
-<li>bugtracker&#x2F;diff，关注经常写bug的那个人的提交；</li>
-<li>看看公开漏洞，借鉴思路，复现思路，自动化。</li>
-</ol>
-<h3 id="记录自己的发现"><a href="#记录自己的发现" class="headerlink" title="记录自己的发现"></a>记录自己的发现</h3><p>想法、bug条件、数据结构、算法等等都可以，记录失败的想法及原因，避免再犯这个错误。</p>
-<h3 id="广泛的应用自己的知识"><a href="#广泛的应用自己的知识" class="headerlink" title="广泛的应用自己的知识"></a>广泛的应用自己的知识</h3><p>审计复杂的组件时，去看看其他人如何实现它的，还有，当难以理解组件时，可以查看不同的代码库，说不定能理解。</p>
-<h3 id="重启失败的项目"><a href="#重启失败的项目" class="headerlink" title="重启失败的项目"></a>重启失败的项目</h3><p>重启之前失败的审计或bug，代码会被重写，会添加新特性，执行环境也会变，查看当时不可行的bug，现在是否依然不可行。</p>
-<h2 id="3、分析失败"><a href="#3、分析失败" class="headerlink" title="3、分析失败"></a>3、分析失败</h2><ol>
-<li>同一块代码为什么别人成功而你没有？</li>
-<li>试着找出：我忽视了什么？</li>
-<li>这是一个有用的技巧或是自己盲点吗？</li>
-<li>通过这个能有所提高吗？</li>
-<li>这个错误是一种模式吗？</li>
-</ol>
-<h2 id="4、借助工具"><a href="#4、借助工具" class="headerlink" title="4、借助工具"></a>4、借助工具</h2><p>工具、fuzz、静态分析等可以节省大量时间，但别迷失在工具中，开发一个fuzz不要急于求成，可以让其慢慢成长，工具与代码审计之间要找到平衡。</p>
-<h1 id="🌟代码审计"><a href="#🌟代码审计" class="headerlink" title="🌟代码审计"></a>🌟代码审计</h1><h1 id="🌟漏洞复现"><a href="#🌟漏洞复现" class="headerlink" title="🌟漏洞复现"></a>🌟漏洞复现</h1><h2 id="CVE-2020-0108"><a href="#CVE-2020-0108" class="headerlink" title="CVE-2020-0108"></a>CVE-2020-0108</h2><p>要想实现自动化，这个漏洞需要：</p>
-<ol>
-<li>构造输入，触发异常；</li>
-<li>在应用程序端接受异常；</li>
-<li>判断是否可利用。</li>
-</ol>
-<h2 id="CVE-2021-0694"><a href="#CVE-2021-0694" class="headerlink" title="CVE-2021-0694"></a>CVE-2021-0694</h2><p>下面是已知的一些信息：</p>
-<p><code>BG-FGS-start while-in-use</code>权限限制的改进。</p>
-<p>从后台启动的前台服务不应具有<code>while-in-use</code>的访问权限，如定位&#x2F;摄像&#x2F;麦克风。</p>
-<p>以前我们只在服务启动时通过<code>startService()</code>或<code>bindService()</code>命令设置<code>mAllowWhileInUsePermissionInFgs</code>。但是在 服务启动后，<code>Service.startForeground()</code>的调用可能会在一段时间后进行。而那个时候，调用者可能已经不在前台了。<br>这个 CL将在此基础上增加进一步的限制：</p>
-<ol>
-<li>如果第一次调用<code>Service.startForeground()</code>超过10秒（可由<code>DeviceConfig</code>键 <code>fgs_start_foreground_timeout </code>配置）。<code>Context.startService()</code>调用后，检查服务的应用程序状态并设置 <code>mAllowWhileInUsePermissionInFgs</code>。</li>
-<li>在<code>Service.stopForeground()</code>调用时，<code>mAllowWhileInUsePermissionInFgs</code> 应该被重置为false，这样<code>FGS</code>的<code>while-in-use</code>的权限就不被允许了。</li>
-<li>在<code>Context.startForegroundService()</code>(或<code>Context.startService())</code>之后<code>-&gt; Service.startForeground() -&gt; Service.stopForeground()</code>，第二次或更多次 调用<code>Service.startForeground()</code>，检查该服务的 <code>app proc</code>状态，并再次设置<code>mAllowWhileInUsePermissionInFgs</code>。</li>
-</ol>
-<h3 id="复现情况"><a href="#复现情况" class="headerlink" title="复现情况"></a>复现情况</h3><p>可以看出问题应该与<code>mAllowWhileInUsePermissionInFgs</code>有关，但是奈何对<code>service</code>的启动还有框架源码的理解不够，写不出来<code>poc</code>。暂时先搁置一下，再看看有没有类似的漏洞，找找思路，或者是再积累一些知识。</p>
-<p>又试了一下，还是不对，可能需要看看源码了。</p>
-<p><code>poc</code>写了，也跑了一下，当程序不在前台时获取录音，也成功了，但是不好证伪，因为，官方的Android11镜像应该都是没有修复的，而漏洞又只影响Android11，所以不好去测试补丁后的情况。</p>
-<h2 id="CVE-2019-2225"><a href="#CVE-2019-2225" class="headerlink" title="CVE-2019-2225"></a>CVE-2019-2225</h2><p>配置错误导致的严重漏洞，也很有意思，关键是可以通过应用程序直接进行攻击</p>
-<h2 id="CVE-2020-0069"><a href="#CVE-2020-0069" class="headerlink" title="CVE-2020-0069"></a>CVE-2020-0069</h2><p>驱动漏洞：</p>
-<p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/217231">https://www.anquanke.com/post/id/217231</a></p>
-<p><a target="_blank" rel="noopener" href="https://forum.xda-developers.com/t/amazing-temp-root-for-mediatek-armv8-2020-08-24.3922213/">https://forum.xda-developers.com/t/amazing-temp-root-for-mediatek-armv8-2020-08-24.3922213/</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.quarkslab.com/cve-2020-0069-autopsy-of-the-most-stable-mediatek-rootkit.html">https://blog.quarkslab.com/cve-2020-0069-autopsy-of-the-most-stable-mediatek-rootkit.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/quarkslab/CVE-2020-0069_poc">https://github.com/quarkslab/CVE-2020-0069_poc</a></p>
-<h1 id="🌟工具开发"><a href="#🌟工具开发" class="headerlink" title="🌟工具开发"></a>🌟工具开发</h1><h2 id="Android静态漏洞扫描工具"><a href="#Android静态漏洞扫描工具" class="headerlink" title="Android静态漏洞扫描工具"></a>Android静态漏洞扫描工具</h2><p>以soot为基础进行的，现在也只进行到能获取一些AndroidManifest数据，没有进行到下一步的原因是：一是想做界面，但是和Java后端又不会，成本很高；二是，还没有想好要怎么继续分析，或者说功能要怎么开发。</p>
-<h2 id="💡想法"><a href="#💡想法" class="headerlink" title="💡想法"></a>💡想法</h2><p>虽然<code>PendingIntent</code>增加了<code>PendingIntent.FLAG_IMMUTABLE</code>标志，但是，可以想办法监听系统中发送的<code>PendingIntent</code>，看哪个倒霉催的程序员不适用这个标志，或许这种漏洞真是绝了，也说不定。</p>
-<h1 id="Android内核知识"><a href="#Android内核知识" class="headerlink" title="Android内核知识"></a>Android内核知识</h1><h2 id="1、Android内核简介"><a href="#1、Android内核简介" class="headerlink" title="1、Android内核简介"></a>1、Android内核简介</h2><ul>
-<li><code>EL0</code>层：普通<code>Application</code>、<code>TA (Trusted Application)</code>；</li>
-<li><code>EL1</code>层：<code>Linux</code>内核 (<code>Guest OS</code>)、<code>TEE</code>内核 (<code>Trusted OS</code>)；</li>
-<li><code>EL2</code>层：<code>Hypervisor (No Hypervisor in Secure World)</code>；</li>
-<li><code>EL3</code>层：<code>Secure Monitor</code>；</li>
-<li>不同的<code>EL</code>对应不同的权限，不同的寄存器，高权限的行为在低<code>EL</code>上是不能执行的；</li>
-<li>常见安全问题：低权限攻击高权限、非安全侧攻击安全侧。</li>
-</ul>
-<h2 id="2、内核内存"><a href="#2、内核内存" class="headerlink" title="2、内核内存"></a>2、内核内存</h2><ul>
-<li>单个进程角度：低地址为<code>user</code>内存，高地址（<code>TASK_SIZE</code>以上）为<code>kernel</code>内存；</li>
-<li>系统角度：内核地址是共享的，各个进程地址隔离。</li>
-</ul>
-<h2 id="3、内核接口"><a href="#3、内核接口" class="headerlink" title="3、内核接口"></a>3、内核接口</h2><ul>
-<li><code>EL0</code>调用<code>EL1</code>方法：通过中断指令，内核进入中断向量表，再通过系统调用号进入各类系统调用；</li>
-<li><code>ARM</code>中的指令：<code>svc</code>；</li>
-<li><code>libc.so</code>里面所有系统调用都会用到<code>DO_CALL</code>这个宏，包括但不限于：<code>open</code>, <code>read</code>, <code>write</code>, <code>fork</code>,<code> ioctl</code>等；</li>
-<li>虚拟文件系统（<code>VFS</code>）：所有的驱动程序都是通过文件进行调用的。</li>
-</ul>
-<h2 id="4、识别攻击面"><a href="#4、识别攻击面" class="headerlink" title="4、识别攻击面"></a>4、识别攻击面</h2><ul>
-<li>入口：<code>/dev</code>、<code>/proc</code>等驱动，系统调用；</li>
-<li>内存操作函数：<code>put_user</code>, <code>get_user</code>, <code>copy_to_user</code>, <code>clear_user</code>, <code>copy_from_user</code>, <code>strncpy_from_user</code>；</li>
-<li>驱动：经常用到的比如字符设备驱动、网络设备驱动以及<code>NetLink</code>等<ul>
-<li>重要结构体：<code>file_operations</code>；</li>
-<li><code>read/write</code>函数：内核<code>VFS</code>框架里，<code>count</code>是被校验过的；</li>
-<li><code>ioctl</code>：<code>arg</code>是一个指针，没有标准的类型，<code>VFS</code>框架无法校验，如何使用全部取决于开发人员；</li>
-<li><code>mmap</code>：内核驱动需实现<code>xxxx_mmap</code>，最终调用到<code>remap_pfn_range</code>。</li>
-</ul>
-</li>
-</ul>
-<h2 id="5、内核缓解机制"><a href="#5、内核缓解机制" class="headerlink" title="5、内核缓解机制"></a>5、内核缓解机制</h2><ul>
-<li><code>KASLR</code>：内核地址随机化；</li>
-<li><code>NX</code>：数据区不可执行；</li>
-<li>栈<code>Cookie</code>：返回地址之前的随机数，覆盖返回地址之前会先覆盖<code>Cookie</code>；</li>
-<li><code>SELinux</code>：基于策略的保护方式；</li>
-<li><code>PXN</code>：内核态不能执行用户态地址的代码；</li>
-<li><code>PAN</code>：内核态不能访问用户态地址数据；</li>
-<li><code>CFI</code>：控制流完整性，只有特定流才能调用。</li>
-</ul>
-<h1 id="Android应用沙盒机制"><a href="#Android应用沙盒机制" class="headerlink" title="Android应用沙盒机制"></a>Android应用沙盒机制</h1><h2 id="1、DAC沙盒"><a href="#1、DAC沙盒" class="headerlink" title="1、DAC沙盒"></a>1、DAC沙盒</h2><ul>
-<li><code>Android</code>上的<code>App</code>并不像<code>Linux</code>上的用户程序那样，启动应用的<code>uid</code>默认就是登录用户的<code>uid</code>，除非你使用<code>sudo</code>或者<code>setuid</code>等机制。而是每个<code>Android</code>应用都对应了一个<code>uid</code>，也就是一个用户，通过<code>Linux</code>系统的<code>DAC</code>机制将应用的数据严格隔离开来。</li>
-<li><code>Android</code>并没有使用<code>/etc/passwd</code>配置文件以及<code>useradd</code>、<code>usermod</code>和<code>userdel</code>等二进制来管理用户。实际上<code>Android</code>应用到<code>uid</code>的映射是由<code>PackageManagerService</code>完成的，也就是<code>PMS</code>，并且存储在<code>/data/system/packages.xml</code>中。</li>
-<li>将<code>Android</code>应用使用<code>DAC</code>隔离开之后，如果应用要访问任何系统资源，便会被拒绝，所以<code>Android</code>设计了应用权限机制来向应用提供访问系统资源的通道，同时保护系统资源不被滥用。</li>
-</ul>
-<h2 id="2、应用权限"><a href="#2、应用权限" class="headerlink" title="2、应用权限"></a>2、应用权限</h2><ul>
-<li><code>Android</code>应用权限的核心类型分为四种：普通权限、危险权限、签名权限、签名或系统权限。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>权限类型</th>
-<th>权限行为</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>普通权限(<code>Normal</code>)</td>
-<td>普通权限是只需要在<code>AndroidManifest.xml</code>中声明后就可以使用的权限</td>
-</tr>
-<tr>
-<td>危险权限(<code>dangerous</code>)</td>
-<td>危险权限除了需要在<code>AndroidManifest.xml</code>中声明之外，在<code>Android 6.0</code>或更高版本还需要使用动态权限API进行申请，并且用户点击同意之后才能使用；在<code>Android 5.1</code>以及更早版本，会在安装时单独列出危险权限以特别提醒用户。<strong>注意，如果自定义权限设置为了危险权限，无论<code>Android</code>版本是多少都只是会在安装时单独列出危险权限。</strong></td>
-</tr>
-<tr>
-<td>签名权限(<code>signature</code>)</td>
-<td>签名权限仅会授予给与定义这个权限的包相同签名的应用。</td>
-</tr>
-<tr>
-<td>签名或系统权限(<code>signatureOrSystem</code>)</td>
-<td>&#96;signature</td>
-</tr>
-</tbody></table>
+          <h1 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2021/12/02/CVE-2020-15972-Chrome%E6%B5%8F%E8%A7%88%E5%99%A8RCE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="buffer0verflooow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/12/02/CVE-2020-15972-Chrome%E6%B5%8F%E8%A7%88%E5%99%A8RCE/" class="post-title-link" itemprop="url">CVE-2020-15972 Chrome浏览器RCE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-12-02 18:58:56" itemprop="dateCreated datePublished" datetime="2021-12-02T18:58:56+08:00">2021-12-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-12-12 17:51:28" itemprop="dateModified" datetime="2021-12-12T17:51:28+08:00">2021-12-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>漏洞原因</p>
+<p>Chrome 的 WebAudio 组件中的UAF</p>
+<p>影响范围</p>
+<p>该错误已在 10 月份的 Chrome <a target="_blank" rel="noopener" href="https://chromereleases.googleblog.com/2020/10/stable-channel-update-for-desktop.html">86.0.4240.75</a>版中<a target="_blank" rel="noopener" href="https://chromereleases.googleblog.com/2020/10/stable-channel-update-for-desktop.html">修复</a>。影响了 Chrome 85 稳定版的大部分。</p>
+<blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://securitylab.github.com/research/one_day_short_of_a_fullchain_renderer/">https://securitylab.github.com/research/one_day_short_of_a_fullchain_renderer/</a></p>
+</blockquote>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>以前，网页对于音频的处理仅限于<code>&lt;audio&gt;</code>标签，能力十分有限，为了实现更高级的操作，W3C设计实现了WebAudio API，通过这些API，我们几乎可以完成一个专业的音频处理软件的构建。</p>
+<p>WebAudio API可以实现：</p>
 <ul>
-<li>在自定义权限中，经常使用<code>signature</code>权限来保护敏感的接口，使其只能被可信的应用调用——那些具备和定义权限者相同签名的应用，如果使用的是<code>signatureOrSystem</code>，这个权限还可以被授予给特权应用。</li>
+<li>实现高精度的音频计算。</li>
+<li>音频混响器。</li>
+<li>3D音频。</li>
+<li>与<code>&lt;audio&gt;/WebRTC</code>的集成。</li>
 </ul>
-<h2 id="3、应用信息的存储"><a href="#3、应用信息的存储" class="headerlink" title="3、应用信息的存储"></a>3、应用信息的存储</h2><ul>
-<li>应用信息的存储位于<code>/data/system/packages.xml</code>中，这里面存储了应用的各种信息，下面是一个示例：</li>
+<p>设计思路：类似于标准IO函数，从某个地方（input）读取一个音频流，经过实时计算处理后发送去某个地方（destination），这个处理过程是effect。</p>
+<p><img src="https://mdn.mozillademos.org/files/12241/webaudioAPI_en.svg"></p>
+<h1 id="漏洞"><a href="#漏洞" class="headerlink" title="漏洞"></a>漏洞</h1><p>由于音频处理是一项计算密集型任务，它将在单独的音频线程上完成，以便不阻塞浏览器的响应。WebAudio中的音频输入以128帧为单位进行处理，称为quantum。一旦一个quantum开始处理，整个quantum就必须完成，这意味着所有的节点都必须处理这128帧，即使有些节点被主线程删除和收集垃圾。</p>
+<p>在下面的情况中，convolver实际上不会被删除，因为每个节点都持有对它所连接的输出节点的引用。然而，如果我们断开节点的连接，则convolver可能会被删除，但音频图仍然在被处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> soundSource1 = audioContext.<span class="title function_">createConstantSource</span>();</span><br><span class="line"><span class="keyword">let</span> convolver = audioContext.<span class="title function_">createConvolver</span>();</span><br><span class="line">soundSource1.<span class="title function_">connect</span>(convolver).<span class="title function_">connect</span>(audioContext.<span class="property">destination</span>);</span><br><span class="line">audioContext.<span class="title function_">startRendering</span>();       <span class="comment">//&lt;-------- start processing the audio graph</span></span><br><span class="line">soundSource1.<span class="title function_">disconnect</span>();</span><br><span class="line">convolver = <span class="literal">null</span>;</span><br><span class="line"><span class="title function_">gc</span>();</span><br></pre></td></tr></table></figure>
+
+<p>那么一个死去的节点如何继续处理音频数据呢？在WebAudio中，AudioNode实际上只是javascript的一个接口，实际的处理是由它拥有的AudioHandler处理的。当一个AudioNode被销毁时，它将使用IsPullingAudioGraph函数检查此刻是否正在处理一个quantum。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioNode::Dispose</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">DCHECK</span>(<span class="built_in">IsMainThread</span>());</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> DEBUG_AUDIONODE_REFERENCES</span></span><br><span class="line">  <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;[%16p]: %16p: %2d: AudioNode::dispose %16p @%g\n&quot;</span>, <span class="built_in">context</span>(),</span><br><span class="line">          <span class="keyword">this</span>, <span class="built_in">Handler</span>().<span class="built_in">GetNodeType</span>(), handler_.<span class="built_in">get</span>(),</span><br><span class="line">          <span class="built_in">context</span>()-&gt;<span class="built_in">currentTime</span>());</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">  <span class="function">BaseAudioContext::GraphAutoLocker <span class="title">locker</span><span class="params">(context())</span></span>;</span><br><span class="line">  <span class="built_in">Handler</span>().<span class="built_in">Dispose</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果上下文被拉到音频图上，就把处理程序添加到孤儿列表中。 </span></span><br><span class="line">  <span class="comment">// 这将使处理程序保持运行，直到它可以在一个安全点（在处理程序任务的前/后）被删除。 </span></span><br><span class="line">  <span class="comment">// 如果图没有被拉动，我们现在就可以删除处理程序，因为音频线程上没有任何东西会接触到它。</span></span><br><span class="line">  <span class="built_in">DCHECK</span>(<span class="built_in">context</span>());</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">context</span>()-&gt;<span class="built_in">IsPullingAudioGraph</span>()) &#123;</span><br><span class="line">    <span class="built_in">context</span>()-&gt;<span class="built_in">GetDeferredTaskHandler</span>().<span class="built_in">AddRenderingOrphanHandler</span>(</span><br><span class="line">        std::<span class="built_in">move</span>(handler_));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Notify the inspector that this node is going away. The actual clean up</span></span><br><span class="line">  <span class="comment">// will be done in the subclass implementation.</span></span><br><span class="line">  <span class="built_in">ReportWillBeDestroyed</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果一个quantum正在被处理，它将把AudioHandler（handler_）的所有权转移到由AudioContext本身拥有的<code>deferred_task_handler_</code>。然后DeferredTaskHandler将确保AudioHandler保持运行，直到quantum的处理完成，然后清理孤儿AudioHandler。</p>
+<p>然而，有一个例外。如果包含音频图的javascript框架被破坏了，例如，当包含图的iframe被破坏时，那么DeferredTaskHandler将在quantum仍在处理时立即进行清理，调用ClearHandlersToBeDeleted函数，这将删除孤儿AudioHandler（之前有一个信号量可以解决这个问题，但该信号量在这次<a target="_blank" rel="noopener" href="https://source.chromium.org/chromium/chromium/src/+/e4c27b508976fb751ccd4d34e52b70b668618271?originalUrl=https//////:////////cs.chromium.org/">commit</a>中被删除了）。</p>
+<h2 id="控制竞争"><a href="#控制竞争" class="headerlink" title="控制竞争"></a>控制竞争</h2><p>为了在竞争获取足够的时间，来操作AudioHandler，exp使用了<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/AudioWorkletNode"><code>AudioWorkletNode</code></a>，AudioWorkletNode允许节点运行用户自定义的JavaScript代码，具体如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> audioContext.<span class="property">audioWorklet</span>.<span class="title function_">addModule</span>(<span class="string">&#x27;tear-down.js&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> worklet;</span><br><span class="line">worklet = <span class="keyword">new</span> <span class="title class_">AudioWorkletNode</span>(audioContext, <span class="string">&#x27;tear-down&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> convolver = audioContext.<span class="title function_">createConvolver</span>();</span><br><span class="line">soundSource.<span class="title function_">connect</span>(worklet).<span class="title function_">connect</span>(convolver).<span class="title function_">connect</span>(audioContext.<span class="property">destination</span>);</span><br></pre></td></tr></table></figure>
+
+<p>可以在tear-down.js中使用sleep函数，这样就有足够的时间删除和替换ConvolverNode：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AutoProcessor</span> <span class="keyword">extends</span> <span class="title class_ inherited__">AudioWorkletProcessor</span> &#123;</span><br><span class="line">  <span class="title function_">process</span> (inputs, outputs, parameters) &#123;</span><br><span class="line">    <span class="title function_">sleep</span>(<span class="number">5000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>删除ConvolverNode的例子如下（实际上，convolver需要运行在另一个不调用parent.removeFrame的函数的范围之内，这里只是举个例子）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">await</span> audioContext.<span class="property">audioWorklet</span>.<span class="title function_">addModule</span>(<span class="string">&#x27;tear-down.js&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> worklet = <span class="keyword">new</span> <span class="title class_">AudioWorkletNode</span>(audioContext, <span class="string">&#x27;tear-down&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> convolver = audioContext.<span class="title function_">createConvolver</span>();</span><br><span class="line">soundSource.<span class="title function_">connect</span>(worklet).<span class="title function_">connect</span>(convolver).<span class="title function_">connect</span>(audioContext.<span class="property">destination</span>);</span><br><span class="line">audioContext.<span class="title function_">startRendering</span>();</span><br><span class="line"><span class="title function_">sleep</span>(<span class="number">200</span>);</span><br><span class="line">worklet.<span class="title function_">disconnect</span>();</span><br><span class="line">convolver = <span class="literal">null</span>;</span><br><span class="line"><span class="title function_">gc</span>();</span><br><span class="line">parent.<span class="title function_">removeFrame</span>(); <span class="comment">//&lt;-------- Get parent frame to delete outselves;</span></span><br></pre></td></tr></table></figure>
+
+<p>另一个有用的事实是，在这样做的时候，只有与所有输入断开连接的节点才会被删除，而与输入保持连接的节点即使在iframe被删除后也会保持活力，只有在处理完成后才会被删除。如下所示，当worklet完成处理时，convolver将保持运行直到gain结束为止：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> convolver = audioContext.<span class="title function_">createConvolver</span>();</span><br><span class="line"><span class="keyword">let</span> gain = audioContext.<span class="title function_">createGain</span>();</span><br><span class="line">soundSource.<span class="title function_">connect</span>(worklet).<span class="title function_">connect</span>(convolver).<span class="title function_">connect</span>(gain).<span class="title function_">connect</span>(audioContext.<span class="property">destination</span>);</span><br><span class="line">audioContext.<span class="title function_">startRendering</span>();</span><br><span class="line"><span class="title function_">sleep</span>(<span class="number">200</span>);</span><br><span class="line">convolver.<span class="title function_">disconnect</span>();</span><br><span class="line">gain = <span class="literal">null</span>;</span><br><span class="line"><span class="title function_">gc</span>();</span><br><span class="line">parent.<span class="title function_">removeFrame</span>(); <span class="comment">//&lt;-------- Get parent frame to delete outselves;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="漏洞原语"><a href="#漏洞原语" class="headerlink" title="漏洞原语"></a>漏洞原语</h2><p>每个AudioHandler拥有一个音频节点的输入和输出的列表。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MODULES_EXPORT</span> <span class="title class_">AudioHandler</span> : public <span class="title class_">ThreadSafeRefCounted</span>&lt;<span class="title class_">AudioHandler</span>&gt; &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="title class_">Vector</span>&lt;<span class="attr">std</span>::unique_ptr&lt;<span class="title class_">AudioNodeInput</span>&gt;&gt; inputs_;</span><br><span class="line">  <span class="title class_">Vector</span>&lt;<span class="attr">std</span>::unique_ptr&lt;<span class="title class_">AudioNodeOutput</span>&gt;&gt; outputs_;</span><br></pre></td></tr></table></figure>
+
+<p>AudioNodeInput（AudioSummingJunction的一个子类）也持有一个连接到它的输出列表：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AudioSummingJunction</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// m_renderingOutputs is a copy of m_outputs which will never be modified</span></span><br><span class="line">  <span class="comment">// during the graph rendering on the audio thread.  This is the list which</span></span><br><span class="line">  <span class="comment">// is used by the rendering code.</span></span><br><span class="line">  <span class="comment">// Whenever m_outputs is modified, the context is told so it can later</span></span><br><span class="line">  <span class="comment">// update m_renderingOutputs from m_outputs at a safe time.  Most of the</span></span><br><span class="line">  <span class="comment">// time, m_renderingOutputs is identical to m_outputs.</span></span><br><span class="line">  <span class="comment">// These raw pointers are safe. Owner of this AudioSummingJunction has</span></span><br><span class="line">  <span class="comment">// strong references to owners of these AudioNodeOutput.</span></span><br><span class="line">  <span class="title class_">Vector</span>&lt;<span class="title class_">AudioNodeOutput</span>*&gt; rendering_outputs_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>AudioNodeOutput保留了一个与它相连的AudioNodeInput的列表：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MODULES_EXPORT</span> <span class="title class_">AudioNodeOutput</span> final &#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">// This HashSet holds connection references. We must call</span></span><br><span class="line">  <span class="comment">// AudioNode::makeConnection when we add an AudioNodeInput to this, and must</span></span><br><span class="line">  <span class="comment">// call AudioNode::breakConnection() when we remove an AudioNodeInput from</span></span><br><span class="line">  <span class="comment">// this.</span></span><br><span class="line">  <span class="title class_">HashSet</span>&lt;<span class="title class_">AudioNodeInput</span>*&gt; inputs_;</span><br></pre></td></tr></table></figure>
+
+<p>在下面的例子中，ConvolverHandler拥有一个AudioNodeInput和一个AudioNodeOutput，AudioNodeInput持有对worklet的AudioNodeOutput的引用，而AudioNodeOutput持有对gain的AudioNodeInput的引用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soundSource.<span class="title function_">connect</span>(worklet).<span class="title function_">connect</span>(convolver).<span class="title function_">connect</span>(gain).<span class="title function_">connect</span>(audioContext.<span class="property">destination</span>);</span><br></pre></td></tr></table></figure>
+
+<p>当处理一个音频图时，代码实际上是从目的地开始向后传播，并调用AudioNodeInput::Pull，然后它将为每个连接到它的输出调用AudioNodeOutput::Pull。然后AudioNodeOutput::Pull调用拥有它的AudioHandler::ProcessIfNecessary，后者又会为它的输入调用AudioNodeInput::Pull，并将调用传播给连接到它的AudioHandler。这一直持续到没有输入的源节点，然后实际的处理将从调用AudioHandler::Process开始。在AudioHandler::Process完成后，它将通过AudioNodeOutput::Pull-&gt;AudioNodeInput::Pull-&gt;AudioHandler::PullInputs-&gt;AudioHandler::ProcessIfNecessary返回到下一个AudioHandler的AudioHandler::Process。下图以两个AudioHandler为例说明了这一点，下面的一个是AudioWorkletNode：</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/graph_pull.png"></p>
+<p>在上图中，每个大的矩形代表了对AudioHandler所拥有的对象的所有调用，里面的小矩形代表了被调用的函数。蓝色箭头代表控制流边缘，从一个AudioHandler跳到另一个。当用一个等待了很长时间的AudioWorkletHandler来触发UAF时，相关的跳转是在AudioHandler::Process完成之后，因为在那个时候，下一个AudioHandler会被删除和替换。在上图中，红色区域表示用对象进行的调用，这些对象在调用时将被删除。此时，代码将首先返回AudioWorkletHandler拥有的AudioNodeOutput::Pull，就在对ProcessIfNecessary的调用之后。下面是它随后将遵循的代码路径，以及一些利用的可能性。</p>
+<ol>
+<li>当Process返回时，它首先会返回到AudioWorkletHandler的ProcessIfNecessary，然后是它所拥有的AudioNodeOutput::Pull。这时，这些对象都不会被删除（对应于图中左下角灰色框中AudioHandler::Process之后的蓝色箭头部分）。如果AudioNodeOutput::Pull是从AudioNodeInput::Pull，而不是AudioNodeInput::SumAllConnections中调用的，那么它将跳回到已释放的 AudioHandler::PullInputs，这意味着inputs_将在循环仍在迭代时被删除。</li>
+<li>如果上面的inputs_的大小是一个开始，那么循环就会直接退出，而ProcessIfNecessary将从PullInputs之后继续。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioHandler::ProcessIfNecessary</span><span class="params">(<span class="type">uint32_t</span> frames_to_process)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="built_in">PullInputs</span>(frames_to_process);</span><br><span class="line">    ...</span><br><span class="line">    <span class="type">bool</span> silent_inputs = <span class="built_in">InputsAreSilent</span>();</span><br><span class="line">    <span class="keyword">if</span> (silent_inputs &amp;&amp; <span class="built_in">PropagatesSilence</span>()) &#123;</span><br><span class="line">      <span class="built_in">SilenceOutputs</span>();</span><br><span class="line">      <span class="built_in">ProcessOnlyAudioParams</span>(frames_to_process);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">UnsilenceOutputs</span>();</span><br><span class="line">      <span class="built_in">Process</span>(frames_to_process);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时，AudioHandler已经被释放了。根据InputsAreSilent的结果，虚函数PropagatesSilence或Process将被调用。</p>
+<ol start="3">
+<li>如果上一点中被删除的AudioHandler被另一个有效的AudioHandler替换了，这样虚拟函数的调用就不会崩溃，那么ProcessIfNecessary将返回到调用AudioNodeOutput::Pull。现在因为AudioNodeOutput和AudioHandler的大小不同，所以有可能AudioNodeOutput（在调用AudioNodeOutput::Pull）仍然被释放的情况下替换AudioHandler（堆栈&#x2F;注册表仍然存储指向被释放对象的指针，而不是替换后的AudioHandler的AudioNodeOutput）。然后，AudioNodeOutput::Pull函数将调用Bus并返回一个指向该AudioNodeOutput拥有的AudioBus对象的指针。这意味着返回值也将被释放，指向的对象（AudioBus）可以被替换成受控数据。然而，这只在从AudioNodeInput::SumAllConnections调用AudioNodeOutput::Pull的路径中才有意义，因为通过AudioNodeInput::Pull的路径并不利用返回值。</li>
+</ol>
+<p>虽然第二点可以通过伪造vtable来劫持控制流，但这需要有信息泄露来打败ASLR，并获得一个堆地址来存储假vtable，所以在这一点上我无法使用它。第一点有可能是非常强大的，因为它有可能让我用任何类型的指针向量来替换inputs_，导致AudioNodeInput和许多可能的类型之间的类型混淆。可以用一个简单的CodeQL查询来找到可能的类型。</p>
+<h2 id="信息泄露"><a href="#信息泄露" class="headerlink" title="信息泄露"></a>信息泄露</h2><h3 id="可选"><a href="#可选" class="headerlink" title="可选"></a>可选</h3><p>先看第三种可能，当通过SumAllConnections调用时，输出的返回值output，现在已经被释放了，被传递给SumFrom。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioNodeInput::SumAllConnections</span><span class="params">(scoped_refptr&lt;AudioBus&gt; summing_bus,</span></span></span><br><span class="line"><span class="params"><span class="function">                                       <span class="type">uint32_t</span> frames_to_process)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">unsigned</span> i = <span class="number">0</span>; i &lt; <span class="built_in">NumberOfRenderingConnections</span>(); ++i) &#123;</span><br><span class="line">    ...</span><br><span class="line">    AudioBus* connection_bus = output-&gt;<span class="built_in">Pull</span>(<span class="literal">nullptr</span>, frames_to_process);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Sum, with unity-gain.</span></span><br><span class="line">    summing_bus-&gt;<span class="built_in">SumFrom</span>(*connection_bus, interpretation);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据summing_bus和connection_bus之间的通道数量，可以采取各种路径。最简单的路径只是调用AudioChannel::SumFrom</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioBus::SumFrom</span><span class="params">(<span class="type">const</span> AudioBus&amp; source_bus,</span></span></span><br><span class="line"><span class="params"><span class="function">                       ChannelInterpretation channel_interpretation)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (number_of_source_channels == number_of_destination_channels) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">unsigned</span> i = <span class="number">0</span>; i &lt; number_of_source_channels; ++i)</span><br><span class="line">      <span class="built_in">Channel</span>(i)-&gt;<span class="built_in">SumFrom</span>(source_bus.<span class="built_in">Channel</span>(i));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>AudioChannel::SumFrom简单地将source_bus, (connection_bus)中的数据复制到summing_bus，使用summing_bus的长度。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioChannel::SumFrom</span><span class="params">(<span class="type">const</span> AudioChannel* source_channel)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">IsSilent</span>()) &#123;</span><br><span class="line">    <span class="built_in">CopyFrom</span>(source_channel);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">//Copies using the length of `summing_bus` (`length()`)</span></span><br><span class="line">    vector_math::<span class="built_in">Vadd</span>(<span class="built_in">Data</span>(), <span class="number">1</span>, source_channel-&gt;<span class="built_in">Data</span>(), <span class="number">1</span>, <span class="built_in">MutableData</span>(), <span class="number">1</span>,</span><br><span class="line">                      <span class="built_in">length</span>());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因此，如果可以用一个长度短于summing_bus的Bus来替换已释放的AudioNodeOutput，那么就可以得到一个越界的读取。通过安排堆，就可以利用这一点获得一个vtable和&#x2F;或堆指针的地址，这将能够使用第二点中的虚拟函数调用原语来实现远程代码执行。</p>
+<p>然而，有几个问题。首先，即使可以替换掉已释放的AudioNodeOutput，我仍然需要有一个有效的指向connection_bus的指针，这个指针是一个有效的AudioBus。一个简单的方法是用另一个有短总线的AudioNodeOutput替换AudioNodeOutput。不幸的是，所有AudioNodeOutput的Bus都是相同的长度（128），这是有道理的，否则会一直有越界的读写。另一种可能性是，由于Bus为AudioNodeOutput所有，可以直接替换Bus，而让AudioNodeOutput空出来。由于用于分配AudioNodeOutput和Bus的内存分配器PartitionAlloc是一个桶分配器，AudioNodeOutput的大小为104，而AudioBus的大小为32，通过分别操作这两个桶，可以在释放AudioNodeOutput的同时替换Bus。虽然PartitionAlloc会把释放对象的前8个字节弄乱作为额外的保护，但这并不影响AudioNodeOutput::Bus返回的指针，所以connection_bus仍然会指向用来替换的对象。如果用一个长度较短的对象替换Bus，那么就会得到一个信息泄露。</p>
+<p>现在的问题是如何创建一个具有任意长度的AudioBus。看看对AudioBus::Create的各种调用，ConvolverHandler::SetBuffer中的调用看起来很有希望，因为它可以通过指定ConvolverNode的buffer字段从javascript中轻松到达。不幸的是，创建的AudioBus只是本地的，并且在函数调用结束后会被删除，这使得它很难使用。最后，WebAudioBus::Initialize中的那个函数效果更好，因为它可以通过javascript中的decodeAudioData函数达到，创建的AudioBus的长度由输入ArrayBuffer（包含一些音频数据）的大小控制。通过使用ffmpeg来创建不同长度的MP3文件，我能够使用这个函数来创建不同长度的AudioBus。</p>
+<p>下一个问题更难解决。虽然可以造成越界读取，并将结果复制到summing_bus的backing store中，但由于几个原因，没有办法将这些数据读出来：</p>
+<ul>
+<li>为了触发UAF，需要删除包含音频图的iframe，这意味着当越界读取发生时，所有的音频节点将无法到达，因此没有办法检索属于该图的AudioNodeInput的summing_bus中的数据。</li>
+<li>如果summing_bus也被释放，那么也许可以用仍然可以到达的AudioNodeInput中的另一个AudioBus来代替它，然后也许有办法从该AudioNodeInput的summing_bus中读出数据。不幸的是，情况也不是这样的，因为summing_bus不是一个原始指针，而是一个共享所有权的scoped_refptr。</li>
 </ul>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.android.storagemanager&quot;</span> <span class="attr">codePath</span>=<span class="string">&quot;/system/priv-app/StorageManager&quot;</span> <span class="attr">nativeLibraryPath</span>=<span class="string">&quot;/system/priv-app/StorageManager/lib&quot;</span> <span class="attr">publicFlags</span>=<span class="string">&quot;541605445&quot;</span> <span class="attr">privateFlags</span>=<span class="string">&quot;8&quot;</span> <span class="attr">ft</span>=<span class="string">&quot;165151eba60&quot;</span> <span class="attr">it</span>=<span class="string">&quot;165151eba60&quot;</span> <span class="attr">ut</span>=<span class="string">&quot;165151eba60&quot;</span> <span class="attr">version</span>=<span class="string">&quot;29&quot;</span> <span class="attr">userId</span>=<span class="string">&quot;10036&quot;</span> <span class="attr">appUseNotchMode</span>=<span class="string">&quot;0&quot;</span> <span class="attr">appUseSideMode</span>=<span class="string">&quot;1&quot;</span> <span class="attr">hwExtraFlags</span>=<span class="string">&quot;0&quot;</span> <span class="attr">isOrphaned</span>=<span class="string">&quot;true&quot;</span> <span class="attr">forceDarkMode</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sigs</span> <span class="attr">count</span>=<span class="string">&quot;1&quot;</span> <span class="attr">schemeVersion</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cert</span> <span class="attr">index</span>=<span class="string">&quot;13&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sigs</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">perms</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android.permission.USE_RESERVED_DISK&quot;</span> <span class="attr">granted</span>=<span class="string">&quot;true&quot;</span> <span class="attr">flags</span>=<span class="string">&quot;0&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">perms</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">proper-signing-keyset</span> <span class="attr">identifier</span>=<span class="string">&quot;3&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">package</span> <span class="attr">name</span>=<span class="string">&quot;com.android.settings&quot;</span> <span class="attr">codePath</span>=<span class="string">&quot;/system/priv-app/Settings&quot;</span> <span class="attr">nativeLibraryPath</span>=<span class="string">&quot;/system/priv-app/Settings/lib&quot;</span> <span class="attr">publicFlags</span>=<span class="string">&quot;675823173&quot;</span> <span class="attr">privateFlags</span>=<span class="string">&quot;8&quot;</span> <span class="attr">ft</span>=<span class="string">&quot;165151eba60&quot;</span> <span class="attr">it</span>=<span class="string">&quot;165151eba60&quot;</span> <span class="attr">ut</span>=<span class="string">&quot;165151eba60&quot;</span> <span class="attr">version</span>=<span class="string">&quot;10010400&quot;</span> <span class="attr">sharedUserId</span>=<span class="string">&quot;1000&quot;</span> <span class="attr">appUseNotchMode</span>=<span class="string">&quot;0&quot;</span> <span class="attr">appUseSideMode</span>=<span class="string">&quot;1&quot;</span> <span class="attr">hwExtraFlags</span>=<span class="string">&quot;0&quot;</span> <span class="attr">isOrphaned</span>=<span class="string">&quot;true&quot;</span> <span class="attr">forceDarkMode</span>=<span class="string">&quot;2&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">sigs</span> <span class="attr">count</span>=<span class="string">&quot;1&quot;</span> <span class="attr">schemeVersion</span>=<span class="string">&quot;1&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">cert</span> <span class="attr">index</span>=<span class="string">&quot;0&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">sigs</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">perms</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">&quot;android.permission.REAL_GET_TASKS&quot;</span> <span class="attr">granted</span>=<span class="string">&quot;true&quot;</span> <span class="attr">flags</span>=<span class="string">&quot;0&quot;</span> /&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- ... --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">perms</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">proper-signing-keyset</span> <span class="attr">identifier</span>=<span class="string">&quot;1&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">package</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioNodeInput::SumAllConnections</span><span class="params">(scoped_refptr&lt;AudioBus&gt; summing_bus,</span></span></span><br><span class="line"><span class="params"><span class="function">                                       <span class="type">uint32_t</span> frames_to_process)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">unsigned</span> i = <span class="number">0</span>; i &lt; <span class="built_in">NumberOfRenderingConnections</span>(); ++i) &#123;</span><br><span class="line">    ...</span><br><span class="line">    summing_bus-&gt;<span class="built_in">SumFrom</span>(*connection_bus, interpretation);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>可以看到这个文件中存储有很多内容，最关键的信息包括应用的<code>uid</code>、包名、各类路径，以及定义和授予的权限。</p>
-<h2 id="4、应用权限的映射"><a href="#4、应用权限的映射" class="headerlink" title="4、应用权限的映射"></a>4、应用权限的映射</h2><p><code>Android</code>使用的是<code>Linux</code>内核，而在<code>Linux</code>的安全模型中，如果需要访问系统资源，访问系统资源的用户和进程必须具备相应的权限。如何将自行定义的<code>Android</code>权限映射到<code>Linux</code>层面的权限呢？答案就位于<code>/etc/permissions/platform.xml</code>中，下面是该文件的节选：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">permission</span> <span class="attr">name</span>=<span class="string">&quot;android.permission.BLUETOOTH_ADMIN&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span> <span class="attr">gid</span>=<span class="string">&quot;net_bt_admin&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">permission</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">permission</span> <span class="attr">name</span>=<span class="string">&quot;android.permission.BLUETOOTH&quot;</span> &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">group</span> <span class="attr">gid</span>=<span class="string">&quot;net_bt&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">permission</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这意味着，即使现在所有的东西都被释放了，summing_bus仍将保持活力，至少在SumAllConnections调用完成之前，所以没有办法去替换summing_bus。</p>
+<p><strong>实际的方式</strong></p>
+<p>回到上一节第1点中的迭代器无效原语。如前所述，通过把一个接受多个输入的AudioNode，如ChannelMergerNode放在AudioWorkletNode之后，然后删除包含音频图的iframe来触发UAF，ChannelMergerNode和由此产生的inputs_将被删除，而AudioHandler::PullInputs的循环仍在迭代中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioHandler::PullInputs</span><span class="params">(<span class="type">uint32_t</span> frames_to_process)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; input : inputs_)</span><br><span class="line">    input-&gt;<span class="built_in">Pull</span>(<span class="literal">nullptr</span>, frames_to_process);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><code>Android</code>的两个蓝牙权限，分别对应了<code>net_bt_admin</code>和<code>net_bt</code>两个<code>Linux</code>组，在应用被授予相应的权限时，<code>PMS</code>会自动将应用<code>uid</code>加入这两个组中，这样应用就拥有了相应系统资源的访问权限了。</p>
-<h2 id="5、应用的SELinux标签"><a href="#5、应用的SELinux标签" class="headerlink" title="5、应用的SELinux标签"></a>5、应用的SELinux标签</h2><p>在<code>Android</code>引入<code>SELinux</code>之后，对应用权限的划分更为细致，<code>Android</code>默认将应用分为四种：不可信应用、特权应用、平台应用和系统应用。</p>
-<table>
-<thead>
-<tr>
-<th>SELinux标签</th>
-<th>标签行为</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>app_domain</td>
-<td>所有应用的<code>SELinux</code>标签都继承于此</td>
-</tr>
-<tr>
-<td>isolated_app</td>
-<td>在Manifest中配置了<code>isolatedProcess=true</code>的服务进程，几乎没有特权，最典型的例子是<code>WebView</code>和浏览器的渲染进程</td>
-</tr>
-<tr>
-<td>ephemeral_app</td>
-<td>所有用户使用的免安装应用都属于此标签，权限低于一般的第三方应用</td>
-</tr>
-<tr>
-<td>untrusted_app_all</td>
-<td>所有用户安装的应用都属于此标签，还包括一部分预装应用</td>
-</tr>
-<tr>
-<td>untrusted_app_29</td>
-<td><code>targetSdkVersion = 29</code>的不可信应用</td>
-</tr>
-<tr>
-<td>untrusted_app_27</td>
-<td><code>25 &lt; targetSdkVersion &lt;= 28</code>的不可信应用</td>
-</tr>
-<tr>
-<td>untrusted_app_25</td>
-<td><code>targetSdkVersion &lt;= 25</code>的不可信应用</td>
-</tr>
-<tr>
-<td>priv_app</td>
-<td>带有<code>Privileged</code>标记的预装应用，一般安装在<code>/system/priv-app</code>中，不可卸载，但不以<code>system uid</code>运行</td>
-</tr>
-<tr>
-<td>platform_app</td>
-<td>具备平台签名，但不以<code>system uid</code>运行的应用。除了AOSP和部分第三方ROM之外，几乎所有的OEM都不会公开其平台私钥，所以一般情况下平台应用只能是OEM提供的</td>
-</tr>
-<tr>
-<td>system_app</td>
-<td>既具备平台签名，又以<code>system uid</code>运行(配置<code>android:sharedUserId=”android.uid.system”</code>)的应用。使用<code>system uid</code>运行意味着它们实际不受应用沙盒的限制，并能访问绝大部分<code>Android</code>框架中的系统资源</td>
-</tr>
-</tbody></table>
-<p>具体的配置路径为：<code>aosp/system/sepolicy/</code>，也可以看<code>git</code>上的信息：<a target="_blank" rel="noopener" href="https://android.googlesource.com/platform/external/sepolicy/%E3%80%82">https://android.googlesource.com/platform/external/sepolicy/。</a></p>
-<h2 id="6、MAC沙盒"><a href="#6、MAC沙盒" class="headerlink" title="6、MAC沙盒"></a>6、MAC沙盒</h2><p>上面所说的<code>SELinux</code>标签，<code>Android</code>在源代码中为它们定义了不同的<code>SELinux</code>政策，这便实现了<code>MAC</code>层面的沙盒增强。这些政策的路径如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">system/sepolicy/public/app.te</span><br><span class="line">system/sepolicy/private/app.te</span><br><span class="line">system/sepolicy/private/isolated_app.te</span><br><span class="line">system/sepolicy/private/ephemeral_app.te</span><br><span class="line">system/sepolicy/private/untrusted_app_all.te</span><br><span class="line">system/sepolicy/private/untrusted_app_29.te</span><br><span class="line">system/sepolicy/private/untrusted_app_27.te</span><br><span class="line">system/sepolicy/private/untrusted_app_25.te</span><br><span class="line">system/sepolicy/private/priv_app.te</span><br><span class="line">system/sepolicy/private/platform_app.te</span><br><span class="line">system/sepolicy/private/system_app.te</span><br></pre></td></tr></table></figure>
+<p>在实践中，这意味着在完成input-&gt;Pull调用后，input迭代器将被递增，并指向现在被删除的<code>input_</code>的已释放backing store中的下一个位置。这将继续下去，直到达到<code>input_</code>的长度。因此，通过分配另一个与inputs_相同大小的Vector，我用新Vector的支持存储空间替换了已释放的backing store。虽然这可以用来造成类型混乱，并在许多不同类型的对象上调用AudioNodeInput::Pull，但应该用什么对象来替换AudioNodeInput并不明显。</p>
+<p>将ChannelMergerNode换成另一个ChannelMergerNode，它运行在父帧的音频图上。因此，当这个错误触发时，它将继续运行另一个运行在父帧中的音频图。</p>
+<p>下面的图展示了替换这个对象时会发生什么：</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/replace_graph.png"></p>
+<p>破折号边框和边表示如果子iframe没有被删除，将会被运行的节点和边，而绿色节点表示实际被运行的节点。在处理完子iframe的顶部分支后，该框架被删除，ChannelMergerNode被替换成父帧中的节点。这导致父帧中的音频图的底部分支被代替运行。</p>
+<p>当删除一个AudioNode时会发生什么？正如前面解释的那样，当一个AudioNode被垃圾回收时，为了防止底层的AudioHandler被删除，而它还在被用来处理音频图，AudioNode将通过调用AudioContext的IsPullingAudioGraph方法来检查它所属的音频图是否正在被处理：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AudioNode::Dispose</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">context</span>()-&gt;<span class="built_in">IsPullingAudioGraph</span>()) &#123;</span><br><span class="line">    <span class="built_in">context</span>()-&gt;<span class="built_in">GetDeferredTaskHandler</span>().<span class="built_in">AddRenderingOrphanHandler</span>(</span><br><span class="line">        std::<span class="built_in">move</span>(handler_));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
 
-<p>一般来说不建议<code>App</code>层面直接访问具备独立标签的用户态进程或者内核驱动，因为<code>App</code>的<code>SELinux</code>标签划分并非像<code>UID</code>一样细致，如果这样做会导致授予某一个应用权限的时候必须授予应用所在的整个标签权限，违反权限最小化原则。</p>
+<p>IsPullingAudioGraph检查音频图是否处于kRunning状态：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">OfflineAudioContext::IsPullingAudioGraph</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">ContextState</span>() == BaseAudioContext::kRunning;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并转移AudioHandler的所有权（如果它是）。然而，在这种情况下，因为父帧中的音频图正在作为子框架中的图的一部分被处理，音频图不会处于kRunning状态，因为它没有从父帧中启动。(在实际利用中，将不得不启动然后暂停图形以使节点相互连接，但这没有什么区别，因为图形将处于kSuspended状态，所以IsPullingAudioGraph检查仍将通过)这意味着AudioHandler的所有权转移将不会发生，它将在图形被处理时被删除。</p>
+<p>这意味着可以在这个图中引起同样类型的UAF，而不需要删除包含它的框架。这一点很重要，因为之前试图获得信息泄露的主要问题是，所有的节点和包含它们的iframe都被删除了，所以没有办法检索到泄露的数据。但现在可以在不删除包含节点的框架的情况下导致UAF，将能够在UAF触发后访问它们，并能够读取泄露的数据。</p>
+<h3 id="获取信息泄露"><a href="#获取信息泄露" class="headerlink" title="获取信息泄露"></a>获取信息泄露</h3><p>第一步，在一个子iframe中触发UAF，并使用循环迭代器无效原语，使音频图的一个分支在父帧中运行。</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/replace_graph2.png"></p>
+<p>上图显示了将用于替换的实际图形。它由两个ScriptProcessorNode夹着一个GainNode组成。ScriptProcessorNode就像AudioWorkletNode，它允许运行用户提供的脚本来处理音频数据。然而，在ScriptProcessorNode的情况下，脚本是在dom窗口的上下文中运行的，它允许我访问AudioContext和各种节点，这使得使用ScriptProcessorNode进行开发更容易，exp将在父框架图中使用它而不是AudioWorkletNode。</p>
+<p>第二步，在ScriptProcessorNode脚本2的音频处理脚本中，移除跟随它的GainNode，并对其进行垃圾回收，这样它的AudioInputNode和AudioOutputNode，就被释放了。</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/replace_graph3.png"></p>
+<p>为了构建信息泄露，还需要替换被删除的GainNode，以防止虚函数调用崩溃，同时让它的AudioOutputNode保持自由。可以通过操纵堆来创建额外的释放的AudioOutputNode，这样当GainNode被释放时，它的AudioOutputNode就不会在free列表的首位，不会被替换。我通过创建一个额外的ChannelMergerNode来做到这一点。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function <span class="title">createSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  let s = audioCtx.<span class="built_in">createChannelMerger</span>(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 第一个ScriptProcessorNode的音频处理器。</span></span><br><span class="line"><span class="function">function <span class="title">scriptProcess2</span><span class="params">(audioProcessingEvent)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 需要为AudioOutputNode创建孔，使它们不会被回收。</span></span><br><span class="line">  <span class="built_in">createSource</span>();</span><br><span class="line">  ...</span><br><span class="line">  script<span class="number">2.</span><span class="built_in">disconnect</span>();  <span class="comment">//&lt;--- 移除GainNode的引用</span></span><br><span class="line">  <span class="built_in">gc</span>();                  <span class="comment">//&lt;--- 首先删除GainNode, 然后在createSource中创建ChannelMergerNode</span></span><br><span class="line">  <span class="comment">// 需要等待GC分配的小对象被清除。</span></span><br><span class="line">  <span class="built_in">sleep</span>(<span class="number">4000</span>);</span><br><span class="line">  let gain = audioCtx<span class="number">2.</span><span class="built_in">createGain</span>();  							 <span class="comment">//&lt;---- 替换gain以获取虚函数调用</span></span><br><span class="line">  let src0 = audioCtx<span class="number">2.</span><span class="built_in">createChannelMerger</span>(<span class="number">1</span>); 		   <span class="comment">//&lt;--- 为AudioBus安排堆栈</span></span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>虽然对createSource的调用看起来是多余的，但是，在createSource中创建的ChannelMergerNode直到垃圾回收时才会被删除，到那时，它实际上会在GainNode之后被删除，在freelist的头部留下额外的AudioOutputNode。</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/heap1.png"></p>
+<p>当被删除的GainNode被另一个GainNode取代时，旧GainNode的已释放的AudioNodeOutput将不会被占用。这个被释放的GainNode将负责调用Bus并为我们提供一个被释放的AudioBus。</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/heap2.png"></p>
+<p>在图中，绿色箭头表示当另一个对象被删除时被释放的对象，红色箭头表示被创建的对象。</p>
+<p>为了替换AudioNodeOutput拥有的大小为32的AudioBus，也需要对大小为32的桶进行操作。为此再次使用另一个ChannelMergerNode。</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/heap3.png"></p>
+<p>同时，还必须注意不要替换被删除的GainNode的AudioNodeOutput…</p>
+<p>虽然有很多要求需要满足，而且AudioBus是从一个相当嘈杂的桶中分配的，但与其他情况不同的是，在其他情况下，堆经常被其他进程共享，而这些进程并不在我们的控制范围内，而渲染器在很大程度上是一个孤立的进程，完全拥有其堆。因此，只要脚本是从一个新的渲染器中运行的，就可以以非常精确和具体的方式进行渲染器堆的喷射（当从登录的上下文中点击一个链接时，如通过电子邮件或Twitter），所以这不会对漏洞的可靠性造成太大的问题。</p>
+<p>一旦堆被放入正确的状态，使现在被删除的GainNode所拥有的AudioBus处于freelist的正确位置，AudioContext::decodeAudioData函数就可以用来创建一个适当长度的AudioBus来触发越界读取。这个函数接收一个音频文件的ArrayBuffer（例如mp3、ogg），并在后台线程中对其进行解码。它将创建一个具有适当长度的AudioBus来容纳解码后的结果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AsyncAudioDecoder::DecodeOnBackgroundThread</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    DOMArrayBuffer* audio_data,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">float</span> sample_rate,</span></span></span><br><span class="line"><span class="params"><span class="function">    V8DecodeSuccessCallback* success_callback,</span></span></span><br><span class="line"><span class="params"><span class="function">    V8DecodeErrorCallback* error_callback,</span></span></span><br><span class="line"><span class="params"><span class="function">    ScriptPromiseResolver* resolver,</span></span></span><br><span class="line"><span class="params"><span class="function">    BaseAudioContext* context,</span></span></span><br><span class="line"><span class="params"><span class="function">    scoped_refptr&lt;base::SingleThreadTaskRunner&gt; task_runner)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  scoped_refptr&lt;AudioBus&gt; bus = <span class="built_in">CreateBusFromInMemoryAudioFile</span>(</span><br><span class="line">      audio_data-&gt;<span class="built_in">Data</span>(), audio_data-&gt;<span class="built_in">ByteLength</span>(), <span class="literal">false</span>, sample_rate);  <span class="comment">//&lt;----- 创建AudioBus</span></span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (context) &#123;</span><br><span class="line">    <span class="built_in">PostCrossThreadTask</span>(</span><br><span class="line">        *task_runner, FROM_HERE,</span><br><span class="line">        <span class="built_in">CrossThreadBindOnce</span>(&amp;AsyncAudioDecoder::NotifyComplete,</span><br><span class="line">                            <span class="built_in">WrapCrossThreadPersistent</span>(audio_data),</span><br><span class="line">                            <span class="built_in">WrapCrossThreadPersistent</span>(success_callback),</span><br><span class="line">                            <span class="built_in">WrapCrossThreadPersistent</span>(error_callback),</span><br><span class="line">                            WTF::<span class="built_in">RetainedRef</span>(std::<span class="built_in">move</span>(bus)),            <span class="comment">//&lt;------ 传入NotifyComplete</span></span><br><span class="line">                            <span class="built_in">WrapCrossThreadPersistent</span>(resolver),</span><br><span class="line">                            <span class="built_in">WrapCrossThreadPersistent</span>(context)));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，创建的AudioBus被作为主线程上的一个任务传递给NotifyComplete，并在NotifyComplete完成后被删除。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">AsyncAudioDecoder::NotifyComplete</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">    DOMArrayBuffer*,</span></span></span><br><span class="line"><span class="params"><span class="function">    V8DecodeSuccessCallback* success_callback,</span></span></span><br><span class="line"><span class="params"><span class="function">    V8DecodeErrorCallback* error_callback,</span></span></span><br><span class="line"><span class="params"><span class="function">    AudioBus* audio_bus,</span></span></span><br><span class="line"><span class="params"><span class="function">    ScriptPromiseResolver* resolver,</span></span></span><br><span class="line"><span class="params"><span class="function">    BaseAudioContext* context)</span> </span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  AudioBuffer* audio_buffer = AudioBuffer::<span class="built_in">CreateFromAudioBus</span>(audio_bus);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// If the context is available, let the context finish the notification.</span></span><br><span class="line">  <span class="keyword">if</span> (context) &#123;</span><br><span class="line">    context-&gt;<span class="built_in">HandleDecodeAudioData</span>(audio_buffer, resolver, success_callback,</span><br><span class="line">                                   error_callback);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于AudioBus在这里只是一个临时对象，在解码完成后会被删除，所以需要确保它的寿命足够长，以便发生越界读取。为了做到这一点，可以使用javascript函数setInterval来干扰任务队列。当调用setInterval时，它会创建一个延迟的任务。这个任务以及DecodeOnBackgroundThread发布的NotifyComplete任务被发布到同一个任务队列中，在主线程上执行。通过用setInterval创建任务，我可以使NotifyComplete的运行出现延迟，因为在NotifyComplete之前发布的任何任务都必须在NotifyComplete之前运行，而且它们都必须在主线程上运行。这将允许在足够长的时间内保持AudioBus的活力，这样当AudioNodeInput::SumAllConnections导致越界读取时，在音频线程中使用这个AudioBus，它将仍然活着。</p>
+<p>通过使用ffmpeg来创建一个无声的mp3文件，创建一个最小长度为47的AudioBus。由于来自AudioNodeInput的AudioBus的长度是128，而且AudioBus的后备存储是浮点格式，有16个大小的padding（Android为16，x86为32），这意味着可以使用界外读原语来读取大小在204和528之间的对象。CodeQL查询，可以用来识别这样的对象，并选择适当的文件长度来使用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FastMallocClass</span> extends Class &#123;</span><br><span class="line">    <span class="built_in">FastMallocClass</span>() &#123;</span><br><span class="line">        <span class="built_in">exists</span>(Operator op, Function fastMalloc | op.<span class="built_in">hasName</span>(<span class="string">&quot;operator new&quot;</span>) <span class="keyword">and</span></span><br><span class="line">          fastMalloc.<span class="built_in">hasName</span>(<span class="string">&quot;FastMalloc&quot;</span>) <span class="keyword">and</span> op.<span class="built_in">calls</span>(fastMalloc) <span class="keyword">and</span></span><br><span class="line">          op.<span class="built_in">getDeclaringType</span>() = <span class="keyword">this</span>.getABaseClass*()</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">from FastMallocClass c</span><br><span class="line">where c.<span class="built_in">getSize</span>() &lt;= <span class="number">528</span> <span class="keyword">and</span> c.<span class="built_in">getSize</span>() &gt; <span class="number">204</span></span><br><span class="line">select c, c.<span class="built_in">getLocation</span>(), c.<span class="built_in">getSize</span>()</span><br></pre></td></tr></table></figure>
+
+<p>在这里做了改进，只包括在FastMalloc分区中分配的对象，也就是分配AudioBus的备份存储（AudioArray）的地方。看了一下结果，BiquadDSPKernel特别有用。除了要泄露vtable之外，它还包含一个字段biquad_，存储了5个AudioDoubleArray。这意味着通过泄露BiquadDSPKernel类型的对象，就能同时泄露这些AudioDoubleArray的后备存储地址，然后可以用来存储一个假的vtable来劫持虚拟函数调用。</p>
+<p>因此，通过安排堆，把BiquadDSPKernel放在AudioBus后面，然后触发bug导致越界读取，就能把BiquadDSPKernel对象泄漏到下一个AudioNodeInput的AudioBus中。为了读取输入数据，可以使用ScriptProcessorNode，它允许使用javascript函数来读取输入。然后，可以获得泄漏的vtable和各种AudioDoubleArray的地址。</p>
+<h2 id="RCE"><a href="#RCE" class="headerlink" title="RCE"></a>RCE</h2><p>在这一点上，其余的利用方法是相当标准的。一旦获得了BiquadDSPKernel的vtable的地址，就可以用它来找到libchrome.so的偏移。有了libchrome.so的偏移量，就可以找到里面的ROP小工具的地址，并在属于BiquadDSPKernel的AudioDoubleArray中创建一个假的vtable，这样，这个假vtable中的虚拟函数指针就会指向所选择的小工具。</p>
+<p>之后，自由使用后的漏洞就可以再一次被触发了。这一次，它直接进入漏洞的第二节Primitives中的路径，调用一个虚拟函数。被释放的AudioHandler对象现在可以被一个适当大小的AudioArray所取代，这个AudioArray被填充了受控数据，这样它的vtable就指向了在上面创建的假vtable。</p>
+<p><img src="https://securitylab.github.com/assets/img/post-images/webaudio/call_func.png"></p>
+<p>使用类似于<a target="_blank" rel="noopener" href="https://securitylab.github.com/research/CVE-2020-6449-exploit-chrome-uaf/">这篇文章</a>中使用的小工具，调用OS::SetPermissions，将BiquadDSPKernel中的AudioDoubleArray的页面权限覆盖为rwx。一旦完成，就可以在这些AudioDoubleArray中放置shell代码，并再次触发这个bug来运行任意代码。在实际的漏洞中，一个延迟节点被用作免费的AudioHandler，IIRFilterNode的前馈系数被用来伪造DelayHandler。</p>
+<p>完整的exp在<a target="_blank" rel="noopener" href="https://github.com/github/securitylab/tree/main/SecurityExploits/Chrome/blink/CVE-2020-15972">这里</a>。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在这篇文章中，我们再次看到，复杂的对象清理，加上多线程的微妙性，导致了WebAudio中的漏洞可以作为渲染器RCE来利用。虽然与v8中的漏洞相比，blink中的漏洞一般需要更多的时间来利用，但它仍然是Chrome中获得（沙盒）RCE的一个巨大而可行的攻击面。</p>
+<p>就整个系列而言，我们还看到了沙盒架构，加上Chrome浏览器中漏洞的快速修复，确实有助于使其难以获得完整的链（并确保完整的链即使进入野外也不会持续太久）。本系列中使用的渲染器漏洞从首次报告到修复大约需要六周时间，而沙盒逃逸也需要类似的时间来修复，这对Chrome来说是相当标准的。这大大降低了渲染器漏洞与沙盒逃逸重叠的可能性。正如我们在这一系列案例中看到的那样，由于这种快速修复漏洞的方式，在稳定版本的Chrome浏览器中，渲染器漏洞并没有与沙盒逃逸重叠在一起。正是修复漏洞的效率使沙箱变得更加有效。另一方面，我们也从沙盒逃逸的帖子中看到了每次启动一次的ASLR（即从Zygote分叉的进程）如何大大降低了安卓系统中应用沙盒的有效性。虽然Chrome的基本地址在渲染器和浏览器之间仍然是随机的，但许多其他库不是，我仍然能够使用这些库中的小工具，不费吹灰之力就逃出Chrome的沙箱。虽然每次启动一次的ASLR对于缓解远程攻击仍然非常有用，但正如我们在这篇文章中所看到的，编写漏洞的大部分精力都花在了击败ASLR上，它对于本地权限升级没有什么用处。由于两个主要平台（Windows和Android）都实施了每次启动一次的ASLR，这仍然是Chrome沙箱的最大弱点之一。</p>
 
       
     </div>
@@ -453,8 +423,531 @@
 
 
 
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2021/11/28/AFL-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="buffer0verflooow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/28/AFL-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-%E6%8A%80%E6%9C%AF%E7%BB%86%E8%8A%82/" class="post-title-link" itemprop="url">AFL++ 阅读笔记 - 技术细节</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-28 22:18:21" itemprop="dateCreated datePublished" datetime="2021-11-28T22:18:21+08:00">2021-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-12-09 21:12:30" itemprop="dateModified" datetime="2021-12-09T21:12:30+08:00">2021-12-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="代码覆盖率统计"><a href="#代码覆盖率统计" class="headerlink" title="代码覆盖率统计"></a>代码覆盖率统计</h1><p>插桩指令的功能是检测边缘覆盖率和分支命中计数，插桩指令等价于下面的代码:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cur_location = &lt;COMPILE_TIME_RANDOM&gt;;</span><br><span class="line">shared_mem[cur_location ^ prev_location]++; </span><br><span class="line">prev_location = cur_location &gt;&gt; <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p>cur_location的值是随机生成的，shared_mem数组是一个64KB的SHM内存区域，数组中的每一个字节表示是否命中对应的( <code>branch_src</code>, <code>branch_dst</code>) 元组。最后一行的右移是为了使元组具有方向性。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2021/11/27/AFL-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="buffer0verflooow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/27/AFL-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">AFL++ 阅读笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-27 23:32:38" itemprop="dateCreated datePublished" datetime="2021-11-27T23:32:38+08:00">2021-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2021-11-28 22:16:39" itemprop="dateModified" datetime="2021-11-28T22:16:39+08:00">2021-11-28</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="afl-fuzz的环境变量"><a href="#afl-fuzz的环境变量" class="headerlink" title="afl-fuzz的环境变量"></a>afl-fuzz的环境变量</h1><ul>
+<li>AFL_SKIP_CPUFREQ：跳过 CPU 扩展策略的检查（不知道是什么），看介绍是指在无法更改系统设置的情况下（如，不是root，没有权限更改），可以跳过检查。</li>
+<li>AFL_EXIT_WHEN_DONE：模糊测试有一段时间没有更新了，停止fuzz，UI 中的循环计数器将变为绿色。</li>
+<li>AFL_EXIT_ON_TIME：指定时间内（以秒为单位）没有新路径，停止fuzz。</li>
+<li>AFL_EXIT_ON_SEED_ISSUES：恢复初始afl-fuzz行为，不允许-i种子中有crash或timeout种子。</li>
+<li>AFL_MAP_SIZE：设置 afl-fuzz、afl-showmap、afl-tmin 和 afl-analyze 创建的共享内存的大小，以从目标收集检测数据。必须大于等于编译目标的大小。（这么大？？？）</li>
+<li>AFL_CMPLOG_ONLY_NEW：只为新发现的测试用例执行昂贵的<em><strong>cmplog功能</strong></em>，而不是为启动时加载的测试用例 ( <code>-i in</code>) 执行。这是恢复fuzz会话时要设置的重要功能。</li>
+<li>AFL_TESTCACHE_SIZE：修改config.h中<code>#define TESTCASE_CACHE</code> 的大小。推荐值为 50-250MB - 如果模糊测试发现了大量输入的路径，则建议使用更多。</li>
+<li>AFL_DISABLE_TRIM：禁止afl-fuzz修剪测试用例，不推荐。</li>
+<li>AFL_NO_AFFINITY：禁止尝试绑定Linux系统上的特定CPU内核，会减慢速度，但是能运行更多的测试用例。</li>
+<li>AFL_TRY_AFFINITY：尝试绑定到 Linux 系统上的特定 CPU 内核，如果失败并不会终止。</li>
+<li>AFL_NO_AUTODICT：不会加载编译到目标中的 LTO 生成的自动字典。</li>
+<li>AFL_HANG_TMOUT：通过指定不同的超时时间来决定特定测试用例是否“挂起”。默认为1秒或<code>-t</code>参数的值，以较大者为准。如果非常关心缓慢的输入，或者如果不希望 AFL++ 花费太多时间对这些东西进行分类，而只是快速地将所有超时放入该 bin 中，则将值调低可能会很有用。</li>
+<li>AFL_FORKSRV_INIT_TMOUT：允许你指定一个不同的超时时间来等待forkserver的启动。默认值是 <code>config.h</code> 中 <code>FORK_WAIT_MULT</code> 的 -t 值（通常是 10），所以对于<code> -t 100</code>，默认会等待 1000 毫秒。如果目标有非常慢的启动时间，例如在进行全系统模糊测试或仿真时，在这里设置不同的时间是很有用的。</li>
+<li>AFL_NO_ARITH： AFL++ 跳过大多数确定性算术。这对于加速基于文本的文件格式的模糊测试很有用。</li>
+<li>AFL_NO_SNAPSHOT：如果加载了快照 lkm，将建议 afl-fuzz 不要使用<em><strong>快照功能</strong></em>。</li>
+<li>AFL_SHUFFLE_QUEUE：在启动时随机重新排序输入队列。什么用？</li>
+<li>AFL_TMPDIR：是用来写.cur_input文件的，如果存在的话，则写在正常的输出目录中。你可以用它来指向ramdisk&#x2F;tmpfs。这可以使速度提高一点，同时也减少了对SSD的压力。</li>
+<li>AFL_SKIP_BIN_CHECK：当在使用自定义的插桩方法时，你可以使用 AFL_SKIP_BIN_CHECK 阻止对非插桩的二进制文件和 shell 脚本的检查；以及 AFL_DUMB_FORKSRV 结合 -n 设置，指示 afl-fuzz 仍然遵循 fork 服务器协议而不期望任何插桩数据返回。注意，这也关闭了自动地图大小检测。</li>
+<li>AFL_IMPORT_FIRST：当在-M或-S模式下运行时，设置AFL_IMPORT_FIRST会使fuzzer在做其他事情之前从其他实例导入测试案例。这使得用户界面中的 “own finds”计数器更加准确。除了计数器的美观，其他方面不应该有太大变化。</li>
+<li>AFL_KILL_SIGNAL：设置超时时要传递给子进程的信号ID。除非是自己实现了目标或插桩，否则不需要设置它。默认情况下，在超时和退出时，SIGKILL（AFL_KILL_SIGNAL&#x3D;9）将被传递给子进程。</li>
+<li>AFL_CUSTOM_MUTATOR_LIBRARY：设置为 afl_custom_fuzz() 的共享库，通过这个库创造额外的突变。如果 afl-fuzz 是用 Python 编译的（在构建 afl-fuzz 时会自动检测），将 AFL_PYTHON_MODULE 设置为一个 Python 模块也可以提供额外的突变。如果 AFL_CUSTOM_MUTATOR_ONLY 也被设置，所有的突变将只由自定义突变器执行。这个功能允许配置自定义突变器，例如对XML或其他高度灵活的结构化输入进行模糊处理。详见 <a target="_blank" rel="noopener" href="https://aflplus.plus/docs/env_variables/custom_mutators.md">custom_mutators.md</a>。</li>
+<li>AFL_FAST_CAL：保持<em>校准阶段</em>大约2.5倍的速度（尽管不那么精确），这在开始对一个慢速目标的训练时可以起到帮助。AFL_CAL_FAST有同样的效果。</li>
+<li>AFL_NO_CPU_RED：避免CPU红色警报。</li>
+<li>AFL_PATH：在 QEMU 模式 (-Q) 和 Frida 模式 (-O)，AFL_PATH 将被搜索到 afl-qemu-trace 和 afl-frida-trace.so。</li>
+<li>AFL_QEMU_CUSTOM_BIN：在 QEMU 模式（-Q），设置 AFL_QEMU_CUSTOM_BIN 会使 afl-fuzz 跳过预置 afl-qemu-trace 到你的命令行。如果你想使用一个自定义的 afl-qemu-trace 或需要修改 afl-qemu-trace 参数，请使用此选项。</li>
+<li>AFL_CYCLE_SCHEDULES：每当一个周期结束，就会切换到不同的调度。</li>
+<li>AFL_EXPAND_HAVOC_NOW：afl-fuzz在认为有用的情况下，会自动启用这个模式，包括昂贵的突变。</li>
+<li>AFL_PRELOAD：导致 AFL++ 为目标二进制文件设置 LD_PRELOAD 而不中断 afl-fuzz 进程本身。除其他外，这对引导 libdislocator.so 是有用的。</li>
+<li>AFL_TARGET_ENV：AFL++为目标二进制文件设置额外的环境变量。</li>
+<li>AFL_NO_UI：取消用户界面，定期打印一些基本的统计数据。当 afl-fuzz 的输出被重定向到一个文件或管道时，这种行为也会自动触发。</li>
+<li>AFL_NO_COLOR&#x2F;AFL_NO_COLOUR：当配置为 USE_COLOR 而不是 ALWAYS_COLORED 时，将省略控制台输出的着色控制序列。</li>
+<li>AFL_FORCE_UI：强制在屏幕上绘制用户界面，即使没有检测到有效的终端（对于虚拟控制台）。</li>
+<li>AFL_PERSISTENT_RECORD：如果你使用<em><strong>持久模式</strong></em>，一些目标会保持固有的状态，由于检测到的崩溃测试案例不会在测试案例给出时再次崩溃。为了能够重新触发这些崩溃，你可以使用AFL_PERSISTENT_RECORD变量，该变量的值是在崩溃前保留多少个先前的模糊测试案例。如果设置为例如10，那么先前的9个输入将作为RECORD:0000,cnt:0000到RECORD:0000,cnt:000008被写入out&#x2F;default&#x2F;rashes。注意：这个选项需要先在config.h中启用!</li>
+<li>AFL_IGNORE_PROBLEMS：afl-fuzz 在摸索过程中遇到不正确的摸索设置（不是在启动时），它将终止。设置此选项将阻止afl-fuzz终止。</li>
+<li>AFL_I_DONT_CARE_ABOUT_MISSING_CRASHES：如果是Jakub（python-afl），可能需要设置此选项。此外，如果想禁用&#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;core_pattern检查，也可以设置此选项。</li>
+<li>AFL_BENCH_JUST_ONE：仅限基准测试，fuzzer在处理第一个队列条目后退出。</li>
+<li>AFL_BENCH_UNTIL_CRASH：仅限基准测试，fuzzer发现第一个崩溃后退出。</li>
+<li>AFL_DEBUG_CHILD：将不会阻止子代的输出。这可以看到子系统的所有输出，使设置问题变得可见。例如，在unicornafl线束中，你可能会看到python的堆栈跟踪。你也可以通过这种方式看到其他日志，说明为什么forkerver不能启动。对于调试来说是很好的，需要注意的是，AFL_DEBUG_CHILD_OUTPUT已被废弃。</li>
+<li>AFL_AUTORESUME：将恢复一个现有out文件夹的模糊测试（与提供-i -相同），即使提供了不同的-i。如果没有这个设置，afl-fuzz 将会拒绝执行一个long-fuzz的 out 目录。</li>
+<li>AFL_MAX_DET_EXRAS：将改变 -x 词典和 LTO autodict（合并）中的元素数量的阈值，概率模式将启动。在概率模式下，并不是所有的字典条目都会被用于模糊突变，以避免减缓模糊突变的速度。默认计数为200个元素。因此，对于200+1个元素，有1&#x2F;201的机会，其中一个字典条目不会被直接使用。</li>
+<li>AFL_NO_FORKSRV：禁用forkerver优化，对每一个被测试的输入恢复到fork + execve()调用。这在处理“不守规矩”的库时非常有用，这些库在初始化时创建线程或做其他疯狂的事情（在插桩指令有机会运行之前）。</li>
+<li>AFL_STATSD：启用StatsD指标收集。默认情况下，AFL++将通过UDP发送这些指标到127.0.0.1:8125。主机和端口可以分别用AFL_STATSD_HOST和AFL_STATSD_PORT配置。要启用标签（banner和afl_version），你应该提供与你的StatsD服务器匹配的AFL_STATSD_TAGS_FLAVOR（见AFL_STATSD_TAGS_FLAVOR）。</li>
+<li>AFL_STATSD_TAGS_FLAVOR：将AFL_STATSD_TAGS_FLAVOR设置为dogstatsd、librato、signalfx或influxdb中的一个，允许你为你的模糊测试实例添加标签。这在运行多个实例时特别有用（例如，-M&#x2F;-S）。应用的标签是banner和afl_version。banner对应于通过-M&#x2F;-S提供的fuzzer的名字。afl_version对应于当前运行的AFL版本（例如++3.0c）。默认（空&#x2F;不存在）将不给指标添加任何标签。更多信息见rpc_statsd.md。</li>
+<li>AFL_CRASH_EXITCODE：设置AFL将退出代码视为崩溃。例如，如果设置了AFL_CRASH_EXITCODE&#x3D;’-1’，每一个导致-1返回代码的输入（即exit(-1)被调用），将被视为发生了崩溃的情况。</li>
+</ul>
+<h1 id="afl-的power-schedule"><a href="#afl-的power-schedule" class="headerlink" title="afl++的power schedule"></a>afl++的power schedule</h1><p>由于大多数的输入会触发同样的路径，导致某些路径被触发的频率较高，因此AFL++设计了几种搜索策略，以决定以何种顺序对种子进行模糊测试，以及巧妙地调节从种子生成的输入数量（即，对种子进行模糊测试所花费的时间）的<strong>power schedule</strong>。我们将种子产生的输入数量称为种子<strong>能量</strong>。</p>
+<p>实现上，修改了种子性能得分 ( <code>calculate_score</code>)的计算，哪个种子被标记为最喜欢的 ( <code>update_bitmap_score</code>)，以及接下来从循环队列中选择哪个种子 ( <code>main</code>)。</p>
+<p>实施的调度表（按效果顺序，最好在前）：</p>
+<ul>
+<li><code>-p explore</code></li>
+</ul>
+<p><img src="http://latex.codecogs.com/gif.latex?p(i)=%5Cfrac%7B%5Calpha(i)%7D%7B%5Cbeta%7D"></p>
+<ul>
+<li><code>-p fast</code> （默认）</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://latex.codecogs.com/gif.latex?p(i)=%5Cmin%5Cleft(%5Cfrac%7B%5Calpha(i)%7D%7B%5Cbeta%7D%5Ccdot%5Cfrac%7B2%5E%7Bs(i)%7D%7D%7Bf(i)%7D,M%5Cright">http://latex.codecogs.com/gif.latex?p(i)=%5Cmin%5Cleft(%5Cfrac%7B%5Calpha(i)%7D%7B%5Cbeta%7D%5Ccdot%5Cfrac%7B2%5E%7Bs(i)%7D%7D%7Bf(i)%7D,M%5Cright</a>)</p>
+<ul>
+<li><code>-p coe</code></li>
+</ul>
+<p><img src="http://latex.codecogs.com/gif.latex?p(i)=%5Cbegin%7Bcases%7D%200%20&%20%5Ctext%7B%20if%20%7D%20f(i)%20%3E%20%5Cmu%5C%5C%20%5Cmin%5Cleft(%5Cfrac%7B%5Calpha(i)%7D%7B%5Cbeta%7D%5Ccdot%202%5E%7Bs(i)%7D,%20M%5Cright)%20&%20%5Ctext%7B%20otherwise.%7D%20%5Cend%7Bcases%7D"></p>
+<ul>
+<li><code>-p quad</code></li>
+</ul>
+<p><img src="http://latex.codecogs.com/gif.latex?p(i)%20=%20%5Cmin%5Cleft(%5Cfrac%7B%5Calpha(i)%7D%7B%5Cbeta%7D%5Ccdot%5Cfrac%7Bs(i)%5E2%7D%7Bf(i)%7D,M%5Cright)"></p>
+<ul>
+<li><code>-p lin</code></li>
+</ul>
+<p><img src="http://latex.codecogs.com/gif.latex?p(i)%20=%20%5Cmin%5Cleft(%5Cfrac%7B%5Calpha(i)%7D%7B%5Cbeta%7D%5Ccdot%5Cfrac%7Bs(i)%7D%7Bf(i)%7D,M%5Cright)"></p>
+<ul>
+<li><code>-p exploit</code> (AFL)</li>
+</ul>
+<p><img src="http://latex.codecogs.com/gif.latex?p(i)%20=%20%5Calpha(i)"></p>
+<ul>
+<li><code>-p mmopt</code></li>
+</ul>
+<p>实验性：<code>explore</code>对运行时没有权重，并增加了最后 5 个队列条目的权重。</p>
+<ul>
+<li><code>-p rare</code></li>
+</ul>
+<p>实验性：<code>rare</code>将重点放在命中稀有边缘的队列条目上。</p>
+<ul>
+<li><code>-p seek</code></li>
+</ul>
+<p>实验性：<code>seek</code>是 EXPLORE 但忽略队列输入的运行时间，较少关注大小。</p>
+<p>更多信息在<a target="_blank" rel="noopener" href="https://www.sigsac.org/ccs/CCS2016/accepted-papers/">23rd ACM Conference on Computer and Communications Security (CCS’16)</a>。</p>
+<p>其中<em>α(i)<em>是 AFL 用于计算种子输入</em>i</em>的性能分数，<em>β(i)&gt;1</em>是一个常数，<em>s(i)<em>是从队列中选择种子</em>i</em>的次数，<em>f (i)<em>是执行与种子</em>i</em>相同路径的生成输入的数量，<em>μ</em>是执行路径的生成输入的平均数量。</p>
+<p>在并行模式下（多个实例共享队列），建议使用exploit时间表（-p exploit）来运行主节点，用cut-exponential（-p coe）、exponential（-p fast；默认）和explore（-p explore）调度的组合来运行从节点。在单一模式下，默认设置就可以了。</p>
+<p>在并行模式下，AFLFast似乎表现不佳，因为导入的种子的路径概率估计不正确。希望通过在不同实例间同步估算来解决这个问题。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2021/11/27/OnePlus-Nord-2%E6%BC%8F%E6%B4%9E-root-shell/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="buffer0verflooow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/11/27/OnePlus-Nord-2%E6%BC%8F%E6%B4%9E-root-shell/" class="post-title-link" itemprop="url">OnePlus Nord 2漏洞 - root shell</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-11-27 18:58:56 / Modified: 21:14:42" itemprop="dateCreated datePublished" datetime="2021-11-27T18:58:56+08:00">2021-11-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在手机生产时，厂商需要开启包括root访问权限在内的各种调试功能，在手机上线时关闭这些功能。</p>
+<p>但OnePlus Nord 2的官方<a target="_blank" rel="noopener" href="https://www.xda-developers.com/tag/oxygenos/">OxygenOS</a>版本忘记关闭root功能了，这样就导致可以在OnePlus Nord 2的recovery环境获取到一个<strong>root shell</strong>。</p>
+<h1 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h1><p>1.重启OnePlus Nord 2至recovery模式（也可以不进，因为漏洞出现在恢复模式之前）：同时按下音量和电源按钮，直到在屏幕左下角看到一个小小的“恢复模式”；</p>
+<p>2.连接adb；</p>
+<p>3.执行<code>adb root</code>命令，可能会超时，但adbd会以root身份运行；</p>
+<p>4.执行<code>adb shell whoami</code>可以看到输出为root。</p>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><p>1.取证，转储设备的每个分区。</p>
+<p>2.上传可执行文件到<code>/data/local/tmp</code>并运行，加载执行其他漏洞利用。</p>
+<p>3.以root身份调用setprop修改prop值，劫持特权OEM变量。</p>
+<p>由于即使没有解锁开发者选项，在恢复模式或正常android中连接usb，也会提示usb调试访问请求，因此这个漏洞不仅仅局限于恢复模式。</p>
+<h1 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h1><p>截至2021年11月26日，<a target="_blank" rel="noopener" href="https://www.xda-developers.com/oneplus-nord-2-oxygenos-november-2021-patches/">印度与欧洲的OxygenOS</a>都存在，可能还会影响部分后续固件。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://buffer0verflooow.github.io/2021/08/23/11%20The%20Message%20is%20the%20Medium-Mach%20IPC(the%20user%20mode%20view)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="buffer0verflooow">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | buffer0verflooow - Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/08/23/11%20The%20Message%20is%20the%20Medium-Mach%20IPC(the%20user%20mode%20view)/" class="post-title-link" itemprop="url">The Message is the Medium-Mach IPC(the user mode view)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-23 08:36:43" itemprop="dateCreated datePublished" datetime="2021-08-23T08:36:43+08:00">2021-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-03-27 17:20:14" itemprop="dateModified" datetime="2022-03-27T17:20:14+08:00">2022-03-27</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="本章概览"><a href="#本章概览" class="headerlink" title="本章概览"></a>本章概览</h1><ul>
+<li>A little history</li>
+<li>Ma-xioms</li>
+<li>Scenarios</li>
+<li>Mach Port APIs</li>
+<li>Message format</li>
+<li>Sending and receiving message</li>
+<li>The Mach Interface Generator</li>
+</ul>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>XNU有两个特性：一是，POSIX&#x2F;BSD，以及增加的syscall和功能，它是Mach的隐藏特性，但是，它驱动着大量的内核功能，包括下层的BSD层。其主要责任是传递信息。Mach IPC是有史以来开发的最快的IPC机制之一，也是三巨头中最快的。尽管XNU也支持经典的UNIX socket模型，在不考虑便携性的情况下，Mach被广泛地使用。</p>
+<p>尽管它们十分重要，但Mach消息API通常被Apple轻视，Apple更愿意去提升高层次的框架wrapper以及最近的XPC。但是低层次上，是Mach消息通过Mach port传递消息。本章的主要目的是对这个奇幻的世界进行概述，而且这个世界从其他角度来看，是Darwin操作系统的一个独立方面。</p>
+<p>本章先从介绍消息机制中十分基础的对象开始：端点(endpoint)或端口(port)。它提出了一套简单的设计选择，这些选择必须被接受为公理原则，信息传递将在此基础上进行。因此，出于这些公理原因，消息机制提出了三种常见的方式，以支持对等实体之间的通信建立。这些方式展示了一些端口提供的API，完整的集合在稍后给出。</p>
+<p>在解释清楚端口定义之后，本章将聚焦于消息本身 - 介绍消息结构体和它在用户模式下的处理函数。主要聚焦于Mach接口生成器(Mach Interface Generator, MIG)，即处理器允许消息的快速代码生成。MIG有一个令人愉悦的简单接口，其隐藏了大量的不那么令人愉悦的代码。由于这段代码的本质和普遍性，我们将特别关注怎么理解整段代码 - 以及它在逆向时的产物。</p>
+<blockquote>
+<p>本章主要关注用户模式下的情况，其中Mach消息仅仅是能工作。这样能避免接触底层内核的实现方式，因为这需要了解错综复杂的内核结构 - 最好是放在Volume II 中进行解释。</p>
+</blockquote>
+<h2 id="A-little-history"><a href="#A-little-history" class="headerlink" title="A little history"></a>A little history</h2><p>XNU的基础是NeXTSTEP[1]，并且NeXTSTEP基于Mach。Mach微内核在其加入开源软件基金会之前，是Carnegie Mellon大学的一个研究小组在1985年至1994年之间开发的。Mach项目主页至今仍然在线，仍然保持着古老的WWW网页风格。Mach首次提出是在Usenix上。它一直处于学术范围内，并且，它的文档或者编程环境是十分受限的。Mach3内核准则文档是唯一存在的文档，另一本是绝版书。Carnegie Mellon还保留着一份已出版和未出版的Mach论文清单，提供了关于设计的深刻见解。</p>
+<blockquote>
+<p>[1]NeXTSTEP是由乔布斯在1985年离开苹果后创建的公司，系统基于Mach和BSD。</p>
+</blockquote>
+<p>作为一个微内核，Mach不得不依赖于消息传递机制。在微内核设计中，组件分散在不同的隔离的地址空间中，所以发送与接收消息是它们之间协作完成工作的唯一办法。Mach-er们开发了一个优雅的消息传递机制，主要强调效率和总体上的速度。在消息传递机制中，微内核主要负责接收消息 - 即一小块内存 - 从一个task，然后执行必需的操作将这块内存移动(共享)到另一个task。</p>
+<p>NeXTSTEP严格的遵循了微内核的设计理念，但是仅有微内核不能构成一个系统。FreeBSD 4.3被作为一个高层吸纳进来，提供了类似UNIX&#x2F;POSIX中的进程、线程、信号、文件和套接字。但是在底层，Mach的API保持着可访问性，并允许在内核中单独分离出来，这就是后来的XNU。自此之后，由于XNU的逐步发展，更多的注意力被放在了它的BSD API上，但是Mach始终保持着驱动力。尽管大多数开发者都使用它的API(Apple更喜欢)，但他们的应用程序依然十分依赖于Mach，因为Apple自己的框架和库也是这么做的。</p>
+<p>像它设计的效率性一样，这种方式不得不作出一些让步，到目前为止(在Chapter 2中所述的那样)，XNU是一个庞大的内核。但是，如果简单地将它与Linux和Windows庞大的内核归为一类 - 就好比是将苹果与橙子进行比较。在XNU的深处，消息的发送与接收 - 仅依赖于线程，而不是相分离的进程。</p>
+<p>Mach依然像30年前那样前卫。Mach消息机制依然是有史以来开发的最快的IPC机制之一。它可以轻易的在用户模式进程、用户和内核、或者在内核中使用。很容易地认为Mach消息机制和其他IPC机制类似，如Linux的domain socket，或者Android的Binder。然而，这样想可能会导致误解。<strong>Mach的IPC设计是基于单向通信的，而不是双向的</strong>。不难思考的是，后者可以由前者模拟出来(通过建立两个单独的通道，一个用于发送，一个用于接收)。然而，这样做的过程比其他机制要复杂得多，并且需要无条件的接受其设计决策。即使如此，随着时间的流逝，决策背后的逻辑开始变得清晰(就像它的一些原始假设一样)。</p>
+<blockquote>
+<p>如果你是新入门Mach，本文所提出的概念即使不是很奇怪，但也不直观。我们试图去寻找其与UNIX IPC的相识之初 - 但是这两种机制是完全不同的。这需要在阅读的时候要谨慎，并且可能需要对于概念”sink in”进行重新阅读理解。</p>
+</blockquote>
+<h2 id="Mach-axioms"><a href="#Mach-axioms" class="headerlink" title="Mach-axioms"></a>Mach-axioms</h2><p>Mach消息机制能通过简单的场景进行演示，以观察两个对等实体之间通信所需的步骤。在我们开始之前，我们需要先了解一些创建Mach的设计决策。由于它们深植于Mach架构中(并且，Darwin也是如此)，所以更简单的接受它们的方式是，给出一些公理。</p>
+<ul>
+<li><p><strong>公理1: Mach允许通过port进行IPC:</strong> Mach IPC最基本的元素是<strong>端口</strong>。端口为IPC提供了一个端点。消息可以被发送给一个端口，或者从端口处进行接收。端口可以轻易的被用户空间和内核空间的任何人创建或销毁。如果这是Mach 端口的唯一细节，则读者可能会认为它只是另一个消息队列的实现，而不予理会，比如Windows或System V的msgsend和friend。但是它远不止这些，这将为我们引出下一条公理。</p>
+</li>
+<li><p><strong>公理2: 端口只能被端口权限访问:</strong> 端口的用户永远看不到端口本身，但是可以通过一种叫<strong>端口权限</strong>的东西间接进行访问。以下是一些已有的端口权限类型，这里介绍几个基础的：</p>
+<ul>
+<li><strong>SEND权限:</strong> 允许持有者向底层端口发送消息，但是不从它们那里接收消息。这是一个<strong>只写</strong>能力。它可能被任意数量的线程或task中的持有者所持有。它同样是及物的，因此可以被<strong>拷贝任意次</strong>(通过COPY_SEND)，并传递给其他持有者。</li>
+<li><strong>SEND_ONCE:</strong> 和SEND类似，它拥有相同的能力 - 发送但不接收。不同的是，<strong>这个权限只能使用一次</strong> - 使用完后会立即被内核取消 - 想要再次向底层端口发送消息是不可能的(除非它获取到了其他权限)。同时，它<strong>不能被复制，但是可以被移动</strong>。和SEND类似，任意数量的持有者都可以拥有一项SEND_ONCE权限。</li>
+<li><strong>RECEIVE:</strong> 允许它的持有者读取被发送到端口的任意消息。它在内部将它的持有者标记为端口的owner - 可以创建任意其他想要的权限。不像其他权限 - 一个端口仅有一个RECEIVE权限，并且端口仅存在于权限拥有者存活时。如果拥有者结束了(或取消分配端口)，所有SEND[ONCE]权限将变成DEAD_NAME。</li>
+</ul>
+<p>总结端口权限定义，我们给出以下的表格：</p>
+<p>表 11- 1: Mach端口权限总结</p>
+<table>
+<thead>
+<tr>
+<th>权限</th>
+<th>数量</th>
+<th>及物</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SEND</td>
+<td>0+</td>
+<td>MOVE，COPY</td>
+<td>可以向端口发送任意数量的消息</td>
+</tr>
+<tr>
+<td>SEND_ONCE</td>
+<td>0+</td>
+<td>仅MOVE</td>
+<td>仅能向端口发送一次消息</td>
+</tr>
+<tr>
+<td>DEAD_NAME</td>
+<td>0+</td>
+<td>—</td>
+<td>SEND_ONCE使用后，或者SEND的接受者died&#x2F;deallocated</td>
+</tr>
+<tr>
+<td>RECEIVE</td>
+<td>1</td>
+<td>仅MOVE</td>
+<td>可以从端口接收消息，或者向端口插入其他权限</td>
+</tr>
+</tbody></table>
+<p>因此，端口权限提供了几乎与其他IPC机制相同的能力 - 但是有一个主要的区别：权限和单向，然而大多数IPC机制是双向的。</p>
+</li>
+<li><p><strong>公理3: 端口权限可以通过消息进行传递:</strong> 当发送一个消息时，Mach允许发送者在消息中包含0+个端口权限，这是被消息接受者所授予的。这与UNIX的domain socket传递文件描述符的能力相似。</p>
+</li>
+</ul>
+<h2 id="Mach-messaging-scenarios"><a href="#Mach-messaging-scenarios" class="headerlink" title="Mach messaging scenarios"></a>Mach messaging scenarios</h2><p>和几何学与其他科学类似，我们一旦接受了公理，就可以依据它建立更高层次、详细的结构。因此，同样的是Mach的案例。接下来，我们转向去考虑经典的A(lice)和B(ob)场景，将尝试在这两个对等实体之间建立通信。</p>
+<h3 id="Scenario-1-Alice-and-Bob"><a href="#Scenario-1-Alice-and-Bob" class="headerlink" title="Scenario 1: Alice and Bob"></a>Scenario 1: Alice and Bob</h3><p>假设，在这一时刻，Alice先验地知道Bob的情况。用Mach的说法，Alice拥有一个端口的发送权限，这个端口的接收权限是被Bob所有。如果我们将这些作为前提条件，接下来的交互将使Alice和Bob之间建立双向通信：</p>
+<ol>
+<li>Alice创建一个短暂的端口，即一个她拥有接收权限的端口。她通过调用mach_port_allocate()函数实现。(公理 1)</li>
+<li>作为新创建端口的所有者，Alice可以创建任意她想要的其他权限。因此，她接下来为端口创建一个SEND权限，通过mach_port_insert_right()函数实现。(公理 2)</li>
+<li>Alice现在同时拥有了她新创建的端口的接收和发送权限。这对她有什么好处呢？不多，她可以单方面的发送和接收消息 - 给她自己。这几乎没什么用。但是，回忆一下，端口权限可通过消息进行传递。Alice紧接着创建一个消息给Bob，在消息中放入她的端口的发送权限，然后投递给Bob - 鉴于先验持有对Bob的发送权，我们假定她有。(假设+公理 3)</li>
+<li>Bob通过拥有接收权限的端口收到Alice的消息。依据公理3，Bob拥有了Alice端口的SEND权限。现在双方可以进行双向通信。他们可以使用任一已有的端口权限 -  尽管两者都能进一步创建一个短暂的端口(通过Alice所使用的方式)，并赋予其他人发送权限 - 因此建立了另一条单向通信通道(并且，结果是，双向通道)。</li>
+</ol>
+<p>这个场景可能看上去不是很有效率(尤其是和UNIX的socket进行对比)，但是毫无疑问的是，它得到了自己想要的结果 - Alice和Bob能够自由地进行通信。事实上，不像socket，Alice享有socket不能提供的巨大的好处，即：</p>
+<ul>
+<li>Alice可能对和Bob之间的持续通信不感兴趣。她可能只需要Bob的一次性帮助，仅此而已。在这种情况下，Alice可以通过检查进程，将SEND权限替换为SEND_ONCE权限即可。<em>Bob仍然可以根据Alice的这个权限进行回复 - 一旦他回复了，他和Alice的连接就将终止。</em>不像socket，Bob不知道Alice的位置在哪，也没有任何形式的地址可以找到她。</li>
+<li>Alice可能甚至不想给Bob一个回复的机会。当然，对等实体可以重置连接。但是其他人可以持续进行连接访问，以及重新初始化连接 - 这将导致从小问题变成完全的DoS攻击。Mach的SEND_ONCE权限提供了socket难以模拟的独特的功能。更进一步来说，发送消息但没有回复地址(实际上，是一个匿名消息)的能力是根本不存在的。</li>
+</ul>
+<hr>
+<p>*- 这有点像POSIX的pip(2)系统调用，其创建了两个文件描述符并互相连接。在自己的进程中这样做是无用的，但是当两个文件描述符不在一起的时候，是十分有价值的 - 任意两个线程或进程 - 可以通过它们建立通信。</p>
+<p>图 11-2: 第一个Mach消息场景</p>
+<img src="/Users/DarkMatter/Documents/Hacking/Blog/source/pictures/11-2_The first Mach messaging scenario.png" alt="11-2_The first Mach messaging scenario" style="zoom:33%;" />
+
+<p>回顾一下以演示的场景，这里仍然有一个问题需要去考虑。我们先验地假设Alice已经知道了Bob。Alice拥有向Bob的RECEIVE端口SEND的权限。但是，这是一个很难的任务。Alice怎么知道Bob，他们是否以某种方式相互联系？更进一步，如果Alice已经有了一个Bob的SEND权限，并且相应的，Bob也拥有了一个Alice的SEND权限，那么所有这些复杂的交互都是无意义的。</p>
+<h3 id="Scenario-2-The-Bootstrap-Server-Registration"><a href="#Scenario-2-The-Bootstrap-Server-Registration" class="headerlink" title="Scenario 2: The Bootstrap Server(Registration)"></a>Scenario 2: The Bootstrap Server(Registration)</h3><p>不存在一个简单的方式能够脱离Alice和Bob的先验性假设。它形成了一个环形的依赖关系，就像鸡和蛋问题，不是轻易能够解决的。相比于直接去击败它，我们可以将它转变为一个公理，将它变成我们的优点。因此有以下公理：</p>
+<p><strong>公理4: 存在一个先验的实体，系统上所有的task都拥有对其的SEND权限</strong>。</p>
+<p>将这个新的公理付诸实施是一个简单的问题。在对等实体之间无法建立可信联系时，一般会采用一个可信的第三方的方式。一些人喜欢叫这个第三方Trent，另一些人喜欢叫Raymond。而我们将这个实体叫做<strong>bootstrap server</strong>。</p>
+<p>现在Alice和Bob的场景将略有不同 - 因为现在不是从Alice开始的，而是从Bob和bootstrap server开始。</p>
+<ol>
+<li>Bob拥有一个bootstrap server的SEND权限。(公理4)</li>
+<li>使用这个权限，Bob能够和bootstrap server建立联系，然后通过简单的场景建立与bootstrap server之间的双向通信。(这是不是必需的，因为Bob可以在建立与server之间的联系之前，先执行下一阶段)</li>
+<li>Bob创建一个拥有RECEIVE权限的临时端口。(公理1)</li>
+<li>Bob为这个端口创建SEND权限。(公理2)</li>
+<li>Bob通过消息将SNED权限发送给bootstrap server(公理3)。这个权限可能会被移动或拷贝(这没有什么问题，因为Bob可以重新创建权限)。</li>
+<li>同时在这个消息中，Bob会要求bootstrap server将这个权限与公开的名称相关联起来(如，”com.apple.Bob”)。这被称为bootstrap_register()消息。</li>
+</ol>
+<p>过了一会儿，Alice出现了：</p>
+<ol>
+<li>Alice拥有一个bootstrap server的SEND权限。(公理4)</li>
+<li>使用这个权限，Alice能够和bootstrap server建立联系，然后通过简单的场景建立与bootstrap server之间的双向通信。</li>
+<li>Alice接着向bootstrap server发送一个消息，询问”com.apple.Bob”的位置，或者是其它她想要询问的名字。这被称为一个bootstrap_lookup()消息。</li>
+<li>bootstrap server查询是否有人注册了这个名字。如果有(如前所述，Bob注册了)，就意味着，bootstrap server现在可以拷贝SEND权限给那个端口。这将为那个端口创建一个新的SEND权限，并将它传递给Alice。</li>
+<li>Alice现在可以和Bob进行对话，按照简单的情况。</li>
+</ol>
+<img src="/Users/DarkMatter/Documents/Hacking/Blog/source/pictures/11-3_The second messaging scenario.png" alt="11-3_The second messaging scenario" style="zoom: 33%;" />
+
+<p>Bootstrap server对于连接建立来说是一个非常重要的角色，允许对等实体之间定位其他人的位置。用RPC的话来说，这被称为<strong>endpoint mapper</strong> - 接收者可能与SUNRPC的portmap(TCP 111)或Windows臭名昭著的rpcss.exe类似。在Android中，servicemanager进程提供了这个功能，然而那里的底层的传输机制是binder而不是TCP。</p>
+<p>通过先验的假设知道所有的bootstrap server解决了在不知晓彼此的对等实体之间建立通信的巨大挑战。尽管这样做的一个明显的缺点是需要更多的信息交换，但在每个server的生命周期中注册消息仅需一次，并且查询消息在会话建立之前也仅需一次 - 所以这个缺点是微不足道的。</p>
+<blockquote>
+<p>在继续阅读之前，思考一下能否找出bootstrap server的注册消息是否存在其它的安全相关的问题。</p>
+</blockquote>
+<p>除了缺点之外，使用bootstrap server还是有很多优点的，最重要的是将连接建立集中起来。Bootstrap server可以选择控制连接查询(有益于系统性能)，或者直接拒绝查询特定的client(增强了系统安全性)。但是没有比bootstrap server提供的第二个方法 - Check in - 更大的优点了。</p>
+<h3 id="Scenario-3-The-Bootstrap-Server-Check-in"><a href="#Scenario-3-The-Bootstrap-Server-Check-in" class="headerlink" title="Scenario 3: The Bootstrap Server(Check-in)"></a>Scenario 3: The Bootstrap Server(Check-in)</h3>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span>
   </nav>
 
 </div>

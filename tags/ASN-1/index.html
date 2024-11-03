@@ -1,171 +1,243 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Tag: ASN.1 - buffer0verflooow - Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="buffer0verflooow - Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="buffer0verflooow - Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="buffer0verflooow - Blog"><meta property="og:url" content="https://buffer0verflooow.github.io/"><meta property="og:site_name" content="buffer0verflooow - Blog"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://buffer0verflooow.github.io/img/og_image.png"><meta property="article:author" content="buffer0verflooow"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://buffer0verflooow.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://buffer0verflooow.github.io"},"headline":"buffer0verflooow - Blog","image":["https://buffer0verflooow.github.io/img/og_image.png"],"author":{"@type":"Person","name":"buffer0verflooow"},"publisher":{"@type":"Organization","name":"buffer0verflooow - Blog","logo":{"@type":"ImageObject","url":"https://buffer0verflooow.github.io/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
-
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="buffer0verflooow - Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">ASN.1</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-04-11T11:47:59.000Z" title="2022/4/11 19:47:59">2022-04-11</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-04-13T13:40:26.834Z" title="2022/4/13 21:40:26">2022-04-13</time></span><span class="level-item">35 minutes read (About 5191 words)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/04/11/iOS-ASN-1-%E6%BC%8F%E6%B4%9E-CVE-2021-30737/">iOS ASN.1 漏洞(CVE-2021-30737)</a></p><div class="content"><h1 id="背景知识"><a href="#背景知识" class="headerlink" title="背景知识"></a>背景知识</h1><h2 id="ASN-1编码"><a href="#ASN-1编码" class="headerlink" title="ASN.1编码"></a>ASN.1编码</h2><p>ASN.1是一种Type-Length-Value序列化格式，ASN.1有一个特性，即，如果不知道值的长度，ASN.1仍能对它进行序列化，但是需要ASN.1按照基本编码规则(BER)进行编码。有一种更严格的编码叫区分编码规则(DER)，它强制要求一个特定的值只有一个正确的编码，并且不允许在不知道最终长度的情况下序列化值。</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://luca.ntop.org/Teaching/Appunti/asn1.html">ASN.1指南</a></p>
-</blockquote>
-<p>这里仅介绍漏洞所需的ASN.1知识。</p>
-<p>第一个是类型，其中5位定义了类型标识符。0x1f表示类型标识符不能在这5位中表示，需要其他的表示方法，而是以不同的方式进行编码。</p>
-<p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJvKMxjksjyIsG6m0LKukaFNjF_NRfiFDS4-rC8jg9smNCsH9emMFDKFncfg18NZxl0HWhsxa-FED-djCqDY7OdDF8-LRDdsGgz8S80Dx4r35EaIG_nYI_I78lbgnY_eQjayHZYpt1jA-O3MaCyOnHAfSjRNAz1L3pCwkSlvpNe9qrHrYwGUHWZaknCA/s600/image6%20%281%29.png" alt="Diagram showing first two bytes of a serialized ASN.1 object. The first byte in this case is the type and class identifier and the second is the length."></p>
-<p>第一个字节的前两位表示该类型的类别：universal、application、content-specific或private。对我们来说，设置为0（universal）。</p>
-<p>第6位如果为1，就说明这是一个原始编码，也就是说，在长度后面是可以直接解释为预定类型的内容。例如，作为ASN.1可打印字符串的 “HELLO”的原始编码将有一个长度为5的字节，后面是ASCII字符 “HELLO”。</p>
-<p>第6位的值为0，表示这是一个构建的编码。这意味着长度后面的字节是一个或多个 “块 “的ASN.1编码，需要单独解析和串联以形成最终的输出值。还可以指定一个长度值为0，这意味着甚至不知道重建的输出会有多长，或者需要多少后续输入来完全建立输出。</p>
-<p>这种最后的情况（长度不确定的构造类型）被称为不确定的形式。构成单个不确定值的输入的结束是由一个序列化的类型发出的信号，该类型的标识符、构造、类和长度值都等于0，它被编码为两个NULL字节。</p>
-<h2 id="ASN-1-bitstrings"><a href="#ASN-1-bitstrings" class="headerlink" title="ASN.1 bitstrings"></a>ASN.1 bitstrings</h2><p>大多数ASN.1字符串类型不需要特殊处理，只是原始字节。它们中的一些有长度限制。例如：BMP字符串必须是偶数长度，UNIVERSAL字符串的长度必须是4字节的倍数，但仅此而已。</p>
-<p>ASN.1比特串是比特的字符串，而不是字节的字符串。例如，可以有一个长度为一个比特的比特串（所以要么是0，要么是1）或者一个长度为127比特的比特串（所以是15个完整的字节加上一个额外的7比特。）</p>
-<p>编码后的ASN.1比特串在长度之后、内容之前有一个额外的元数据字节，它编码了最后一个字节中未使用的比特数。</p>
-<p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiLFuO8lb9EEiWHIAHNFcZQGqIWDtJ-V8DVI8GZC2Bc0d1qsrM3SugjE8dkb2z1IXa86wWlUiPJ4X0PquX_Vozl_6oJUNT9dU0LMgNh1x4L86-cjKpRuDpQdPRPbyp-Rmu0gbipzRY9XRmQz5q_7ZfmXW4MJ_6YcR735HO0YngIFvrYyjymoiwKYmP9RA/s600/image1%20%282%29.png" alt="Diagram showing the complete encoding of a 3-bit bitstring. The length of 2 includes the unused-bits count byte which has a value of 5, indicating that only the 3 most-significant bits of the final byte are valid."></p>
-<h2 id="ASN-1解析"><a href="#ASN-1解析" class="headerlink" title="ASN.1解析"></a>ASN.1解析</h2><p>ASN.1数据总是需要与模板一起解码，模板告诉解析器应该期待什么数据，还提供输出指针，以填入解析后的输出数据。下面是一个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> SecAsn1Template simple_bitstring_template[] = &#123;</span><br><span class="line">  &#123;</span><br><span class="line">    SEC_ASN1_BIT_STRING | SEC_ASN1_MAY_STREAM, <span class="comment">// kind: bit string,</span></span><br><span class="line">                                               <span class="comment">//  may be constructed</span></span><br><span class="line">    <span class="number">0</span>,     <span class="comment">// offset: in dest/src</span></span><br><span class="line">    <span class="literal">NULL</span>,  <span class="comment">// sub: subtemplate for indirection</span></span><br><span class="line">    <span class="keyword">sizeof</span>(SecAsn1Item) <span class="comment">// size: of output structure</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">SecAsn1Item decoded = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">PLArenaPool* pool = PORT_NewArena(<span class="number">1024</span>);</span><br><span class="line">SECStatus status =</span><br><span class="line">  SEC_ASN1Decode(pool,     <span class="comment">// pool: arena for destination allocations</span></span><br><span class="line">                 &amp;decoded, <span class="comment">// dest: decoded encoded items in to here</span></span><br><span class="line">                 &amp;simple_bitstring_template, <span class="comment">// template</span></span><br><span class="line">                 asn1_bytes,      <span class="comment">// buf: asn1 input bytes</span></span><br><span class="line">                 asn1_bytes_len); <span class="comment">// len: input size</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="NSS-ASN-1-状态机"><a href="#NSS-ASN-1-状态机" class="headerlink" title="NSS ASN.1 状态机"></a>NSS ASN.1 状态机</h2><p>该状态机有两个核心数据结构。</p>
-<p>-<br>  SEC_ASN1DecoderContext - 整体的解析环境。</p>
-<ul>
-<li>sec_asn1d_state - 一个单一的解析器状态，保存在一个双链接的列表中，形成一个嵌套状态的堆栈。</li>
-</ul>
-<p>部分字段如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">sec_asn1d_state_struct</span> &#123;</span></span><br><span class="line">  SEC_ASN1DecoderContext *top; </span><br><span class="line">  <span class="type">const</span> SecAsn1Template *theTemplate;</span><br><span class="line">  <span class="type">void</span> *dest;</span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sec_asn1d_state_struct</span> *<span class="title">parent</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sec_asn1d_state_struct</span> *<span class="title">child</span>;</span></span><br><span class="line">  sec_asn1d_parse_place place;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> contents_length;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> pending;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">long</span> consumed;</span><br><span class="line">  <span class="type">int</span> depth;</span><br><span class="line">&#125; sec_asn1d_state;</span><br></pre></td></tr></table></figure>
-
-<p>解析状态机的主要引擎是SEC_ASN1DecoderUpdate方法，它接收一个上下文对象、原始输入缓冲区和长度：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SECStatus</span><br><span class="line"><span class="title function_">SEC_ASN1DecoderUpdate</span> <span class="params">(SEC_ASN1DecoderContext *cx,</span></span><br><span class="line"><span class="params">                       <span class="type">const</span> <span class="type">char</span> *buf, <span class="type">size_t</span> len)</span></span><br></pre></td></tr></table></figure>
-
-<p>当前状态存储在上下文对象的current字段中，而该当前状态的place字段决定了解析器当前所处的状态，这些状态字段如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">enum</span> &#123;</span></span><br><span class="line">    beforeIdentifier,</span><br><span class="line">    duringIdentifier,</span><br><span class="line">    afterIdentifier,</span><br><span class="line">    beforeLength,</span><br><span class="line">    duringLength,</span><br><span class="line">    afterLength,</span><br><span class="line">    beforeBitString,</span><br><span class="line">    duringBitString,</span><br><span class="line">    duringConstructedString,</span><br><span class="line">    duringGroup,</span><br><span class="line">    duringLeaf,</span><br><span class="line">    duringSaveEncoding,</span><br><span class="line">    duringSequence,</span><br><span class="line">    afterConstructedString,</span><br><span class="line">    afterGroup,</span><br><span class="line">    afterExplicit,</span><br><span class="line">    afterImplicit,</span><br><span class="line">    afterInline,</span><br><span class="line">    afterPointer,</span><br><span class="line">    afterSaveEncoding,</span><br><span class="line">    beforeEndOfContents,</span><br><span class="line">    duringEndOfContents,</span><br><span class="line">    afterEndOfContents,</span><br><span class="line">    beforeChoice,</span><br><span class="line">    duringChoice,</span><br><span class="line">    afterChoice,</span><br><span class="line">    notInUse</span><br><span class="line">&#125; sec_asn1d_parse_place;</span><br></pre></td></tr></table></figure>
-
-<p>状态机通过switch进行判断：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (state-&gt;place) &#123;</span><br><span class="line">    <span class="keyword">case</span> beforeIdentifier:</span><br><span class="line">      consumed = sec_asn1d_parse_identifier(state, buf, len);</span><br><span class="line">      what = SEC_ASN1_Identifier;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> duringIdentifier:</span><br><span class="line">      consumed = sec_asn1d_parse_more_identifier(state, buf, len);</span><br><span class="line">      what = SEC_ASN1_Identifier;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> afterIdentifier:</span><br><span class="line">      sec_asn1d_confirm_identifier(state);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p>每个可以消耗输入的状态方法，都会被传递一个指向原始输入缓冲区中下一个未消耗的字节的指针（buf）和一个剩余未消耗的字节数（len）。然后这些方法返回他们所消耗的输入量，并通过更新上下文对象的状态字段来发出任何错误信号。</p>
-<p>解析器可以是递归的：一个状态可以把它的-&gt;place字段设置为一个期望处理解析的子状态的状态，然后分配一个新的子状态。例如，当解析一个ASN.1序列时。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">state-&gt;place = duringSequence;</span><br><span class="line">state = sec_asn1d_push_state(state-&gt;top, state-&gt;theTemplate + <span class="number">1</span>,</span><br><span class="line">                              state-&gt;dest, PR_TRUE);</span><br></pre></td></tr></table></figure>
-
-<p>当前状态将自己的下一个状态设置为 duringSequence，然后调用 sec_asn1d_push_state，它分配了一个新的状态对象，有一个新的模板和一个父代的 dest 字段的副本。</p>
-<p>sec_asn1d_push_state会更新上下文的当前字段，这样一来，SEC_ASN1DecoderUpdate的下一个循环就会把这个子状态视为当前状态。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cx-&gt;current = new_state;</span><br></pre></td></tr></table></figure>
-
-<p>新分配的子的位置字段（决定当前状态）的初始值由模板决定。然后，该子代所遵循的状态机路径中的最终状态将负责将自己从状态堆栈中弹出，以便其父代可以到达 duringSequence 状态，以消费子代的结果。</p>
-<h2 id="缓冲区管理"><a href="#缓冲区管理" class="headerlink" title="缓冲区管理"></a>缓冲区管理</h2><p>缓冲区管理是NSS ASN.1解析器开始变得非常令人费解的地方。如果你仔细阅读代码，你会注意到当输出缓冲区被填入时极度缺乏边界检查–基本上没有。例如，sec_asn1d_parse_leaf将原始编码的字符串字节复制到输出缓冲区中，但没有对字符串的长度与缓冲区的大小进行界限检查。</p>
-<p>与其使用明确的边界检查来确保长度有效，不如依靠这样的事实来实现内存安全，即有效的ASN.1解码永远不会产生大于其输入的输出。</p>
-<p>也就是说，没有任何形式的解压或输入扩展，所以任何解析的输出数据必须等于或短于编码它的输入。NSS利用这一点，将所有的输出缓冲区过度分配，使其与输入一样大。</p>
-<p>对于原始字符串来说，这是很简单的：长度和输入都是提供的，所以实际上没有什么可以出错的。但是对于构造字符串来说，这就有点麻烦了……</p>
-<p>构建字符串的一种方式是将其视为子字符串的树，最多嵌套32层。这里有一个例子。</p>
-<p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTR4nwonetxF1WHDpaUkJme_Ywz-VWc63Qy1j2PJJrAWN0Z7Drcal63h6umti0HFcEaAFlCIH8lmFFGTXkdRsrJ1fAtyzNCAw9c1alni0EPXiAHuRLDBsn0b0FcRRGOzH14wqaOueV_ThhnOWLhuJJbllQChJGfRY5i8VOIEoXsmYOgT4NEfgbs_l_4A/s600/image3%20%281%29.png" alt="An outer constructed definite length string with three children: a primitive string &quot;abc&quot;, a constructed indefinite length string and a primitive string &quot;ghi&quot;. The constructed indefinite string has two children, a primitive string &quot;def&quot; and an end-of-contents marker."></p>
-<p>我们从一个构建好的确定长度的字符串开始。这个字符串的长度值L是构成这个字符串的剩余输入的完整大小；这个数量的输入字节应该被解析为子串，并连接起来形成解析后的输出。</p>
-<p>在这一点上，NSS ASN.1字符串解析器使用该第一个输入字符串的长度L，为解析后的输出字符串分配输出缓冲区。这个缓冲区是一个过度分配的最坏情况。但真正有趣的部分是，NSS分配了输出缓冲区，然后立即扔掉了这个长度！这一点在快速浏览代码时可能不是那么明显。被分配的缓冲区被存储为缓冲区封装类型的Data字段。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">cssm_data</span> &#123;</span></span><br><span class="line">    <span class="type">size_t</span> Length;</span><br><span class="line">    <span class="type">uint8_t</span> * __nullable Data;</span><br><span class="line">&#125; SecAsn1Item, SecAsn1Oid;</span><br></pre></td></tr></table></figure>
-
-<p>Length字段不是分配的Data缓冲区的大小。它是一个（特定类型的）计数，决定了Data所指向的缓冲区有多少比特或字节是有效的。(CVE-2016-1950是NSS中的一个错误，代码混淆了这些单位。)</p>
-<p>与其将分配的缓冲区大小与缓冲区指针一起存储，不如在每次遇到子串时，解析器在当前正在解析的状态堆栈中往上走，找到最里面的确定长度的字符串。当它向上查询的时候，会检查每个状态，以确定它已经消耗了多少输入，以便能够确定当前要解析的子串是否完全被包围在最内层的定长字符串中。如下所示：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">sec_asn1d_state *parent = sec_asn1d_get_enclosing_construct(state);</span><br><span class="line"><span class="keyword">while</span> (parent &amp;&amp; parent-&gt;indefinite) &#123;</span><br><span class="line">  parent = sec_asn1d_get_enclosing_construct(parent);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">unsigned</span> <span class="type">long</span> remaining = parent-&gt;pending;</span><br><span class="line">parent = state;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (!sec_asn1d_check_and_subtract_length(&amp;remaining,</span><br><span class="line">                                           parent-&gt;consumed,</span><br><span class="line">                                           state-&gt;top)</span><br><span class="line">      ||</span><br><span class="line">      <span class="comment">/* If parent-&gt;indefinite is true, parent-&gt;contents_length is</span></span><br><span class="line"><span class="comment">       * zero and this is a no-op. */</span></span><br><span class="line">      !sec_asn1d_check_and_subtract_length(&amp;remaining,</span><br><span class="line">                                           parent-&gt;contents_length,</span><br><span class="line">                                           state-&gt;top)</span><br><span class="line">      ||</span><br><span class="line">      <span class="comment">/* If parent-&gt;indefinite is true, then ensure there is enough</span></span><br><span class="line"><span class="comment">       * space for an EOC tag of 2 bytes. */</span></span><br><span class="line">      (  parent-&gt;indefinite</span><br><span class="line">          &amp;&amp;</span><br><span class="line">          !sec_asn1d_check_and_subtract_length(&amp;remaining,</span><br><span class="line">                                               <span class="number">2</span>,</span><br><span class="line">                                               state-&gt;top)</span><br><span class="line">      )</span><br><span class="line">    ) &#123;</span><br><span class="line">      <span class="comment">/* This element is larger than its enclosing element, which is</span></span><br><span class="line"><span class="comment">       * invalid. */</span></span><br><span class="line">       <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">while</span> ((parent = sec_asn1d_get_enclosing_construct(parent))</span><br><span class="line">         &amp;&amp;</span><br><span class="line">         parent-&gt;indefinite);</span><br></pre></td></tr></table></figure>
-
-<p>首先沿着状态栈向上走，找到最内层构建的确定状态，并使用其状态&gt;待定值作为上限。然后，再走一遍状态栈，对于每一个中间状态，从原来的挂起值中减去那些中间状态可能消耗的字节数。很明显，待定值是非常重要的；它被用来确定一个上限，所以如果我们把它弄乱了，这个 “边界检查 “就会出错。</p>
-<h1 id="漏洞原理"><a href="#漏洞原理" class="headerlink" title="漏洞原理"></a>漏洞原理</h1><p>漏洞位于<code>sec_asn1d_parse_bit_string</code>中，包含 ASN.1 解析器的 MacOS 11.4 和 11.3 版本的<a target="_blank" rel="noopener" href="https://opensource.apple.com/source/Security/Security-59754.120.12/OSX/libsecurity_asn1/lib/secasn1d.c.auto.html">secasn1d.c之间的差异：</a></p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">diff --git a/OSX/libsecurity_asn1/lib/secasn1d.c b/OSX/libsecurity_asn1/lib/secasn1d.c</span></span><br><span class="line"><span class="comment">index f338527..5b4915a 100644</span></span><br><span class="line"><span class="comment">--- a/OSX/libsecurity_asn1/lib/secasn1d.c</span></span><br><span class="line"><span class="comment">+++ b/OSX/libsecurity_asn1/lib/secasn1d.c</span></span><br><span class="line"><span class="meta">@@ -434,9 +434,6 @@</span> loser:</span><br><span class="line">         PORT_ArenaRelease(cx-&gt;our_pool, state-&gt;our_mark);</span><br><span class="line">         state-&gt;our_mark = NULL;</span><br><span class="line">     &#125;</span><br><span class="line"><span class="deletion">-    if (new_state != NULL) &#123;</span></span><br><span class="line"><span class="deletion">-        PORT_Free(new_state);</span></span><br><span class="line"><span class="deletion">-    &#125;</span></span><br><span class="line">     return NULL;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@@ -1794,19 +1791,13 @@</span> sec_asn1d_parse_bit_string (sec_asn1d_state *state,</span><br><span class="line">     /*PORT_Assert (state-&gt;pending &gt; 0); */</span><br><span class="line">     PORT_Assert (state-&gt;place == beforeBitString);</span><br><span class="line"><span class="deletion">-    if ((state-&gt;pending == 0) || (state-&gt;contents_length == 1)) &#123;</span></span><br><span class="line"><span class="addition">+    if (state-&gt;pending == 0) &#123;</span></span><br><span class="line">                if (state-&gt;dest != NULL) &#123;</span><br><span class="line">                        SecAsn1Item *item = (SecAsn1Item *)(state-&gt;dest);</span><br><span class="line">                        item-&gt;Data = NULL;</span><br><span class="line">                        item-&gt;Length = 0;</span><br><span class="line">                        state-&gt;place = beforeEndOfContents;</span><br><span class="line"><span class="deletion">-               &#125;</span></span><br><span class="line"><span class="deletion">-               if(state-&gt;contents_length == 1) &#123;</span></span><br><span class="line"><span class="deletion">-                       /* skip over (unused) remainder byte */</span></span><br><span class="line"><span class="deletion">-                       return 1;</span></span><br><span class="line"><span class="deletion">-               &#125;</span></span><br><span class="line"><span class="deletion">-               else &#123;</span></span><br><span class="line"><span class="deletion">-                       return 0;</span></span><br><span class="line"><span class="addition">+            return 0;</span></span><br><span class="line">                &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
-
-<p>在确定边界检查可能会出问题以后，看一下<code>sec_asn1d_parse_bit_string</code>函数。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">static</span> <span class="type">unsigned</span> <span class="type">long</span></span><br><span class="line"><span class="title function_">sec_asn1d_parse_bit_string</span> <span class="params">(sec_asn1d_state *state, <span class="type">const</span> <span class="type">char</span> *buf, <span class="type">unsigned</span> <span class="type">long</span> len)</span> &#123;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> byte;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*PORT_Assert (state-&gt;pending &gt; 0); */</span></span><br><span class="line">    PORT_Assert (state-&gt;place == beforeBitString);</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">if</span> ((state-&gt;pending == <span class="number">0</span>) || $(state-&gt;contents_length == <span class="number">1</span>)$) &#123;</span><br><span class="line">        <span class="keyword">if</span> (state-&gt;dest != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            SecAsn1Item *item = (SecAsn1Item *)(state-&gt;dest);</span><br><span class="line">            item-&gt;Data = <span class="literal">NULL</span>;</span><br><span class="line">            item-&gt;Length = <span class="number">0</span>;</span><br><span class="line">            state-&gt;place = beforeEndOfContents;</span><br><span class="line">        &#125;</span><br><span class="line">				</span><br><span class="line">        $ <span class="keyword">if</span>(state-&gt;contents_length == <span class="number">1</span>) &#123;</span><br><span class="line">        $     <span class="comment">/* skip over (unused) remainder byte */</span></span><br><span class="line">        $     <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        $ &#125;</span><br><span class="line">        $ <span class="keyword">else</span> &#123;</span><br><span class="line">        $     <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        $ &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (len == <span class="number">0</span>) &#123;</span><br><span class="line">        state-&gt;top-&gt;status = needBytes;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    byte = (<span class="type">unsigned</span> <span class="type">char</span>) *buf;</span><br><span class="line">    <span class="keyword">if</span> (byte &gt; <span class="number">7</span>) &#123;</span><br><span class="line">        dprintf(<span class="string">&quot;decodeError: parse_bit_string remainder oflow\n&quot;</span>);</span><br><span class="line">        PORT_SetError (SEC_ERROR_BAD_DER);</span><br><span class="line">        state-&gt;top-&gt;status = decodeError;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">    state-&gt;bit_string_unused_bits = byte;</span><br><span class="line">    state-&gt;place = duringBitString;</span><br><span class="line">    state-&gt;pending -= <span class="number">1</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>$注释的区域是被补丁删除的部分。这个函数的目的是返回它所消耗的输入字节数（由buf指向），我最初的直觉是注意到补丁删除了一个通过这个函数的路径，在那里你可以得到所消耗的输入字节数和待定字节数的同步。应该是这样的，当他们在被删除的代码中返回1时，他们也会递减state&gt;pending，就像他们在该函数返回1的其他地方所做的那样。</p>
-<p>达到这个状态时，buf指向一个原始位串的长度值之后的第一个字节。state&gt;contents_length是这个解析后的长度值。正如前面所讨论的，位串是一种独特的ASN.1字符串类型，因为它们在开头有一个额外的元数据字节（未使用的位数字节）。有一个明确的零长度的字符串是完全可以的–事实上，这在prepareForContents状态中已经（有点）提前处理了，它直接短路到afterEndOfContents。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (state-&gt;contents_length == <span class="number">0</span> &amp;&amp; (! state-&gt;indefinite)) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * A zero-length simple or constructed string; we are done.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  state-&gt;place = afterEndOfContents;</span><br></pre></td></tr></table></figure>
-
-<p>这里他们检测的是一个内容长度为0的确定长度的字符串类型。但这并没有处理一个只由未使用的位数字节组成的位串的边缘情况。该位串的state&gt;contents_length值将是1，但它实际上没有任何 内容。</p>
-<p>sec_asn1d_parse_bit_string中的(state&gt;contents_length &#x3D;&#x3D; 1)条件正是符合这种情况。</p>
-<p>通过将state&gt;place设置为beforeEndOfContents，他们再次试图绕过状态机，跳到字符串内容被消耗后的状态。但在这里，他们采取了一个额外的步骤，而在prepareForContents中他们并没有采取同样的步骤。除了更新state&gt;place之外，他们还把目的地SecAsn1Item的Data字段空出来，并把Length设置为0。</p>
-<p>前面提到，为递归解析构建的字符串的子字符串而分配的新子状态得到了父状态的dest字段的副本（它是一个指向输出缓冲区的指针）。(从技术上讲，如果最外层的字符串是无限长的，实际上不是这样的，对这种情况有单独的处理，而是建立一个子字符串的链接列表，最终被连接起来，见sec_asn1d_concat_substrings)。</p>
-<p>如果输出缓冲区只分配一次，那么如果你像这里一样将数据设置为NULL会怎样？退一步讲，这实际上有任何意义吗？</p>
-<p>不，我不认为这有任何意义。在这一点上，将Data设置为NULL至少会导致内存泄漏，因为它是输出缓冲区的唯一指针。</p>
-<p>但有趣的是，这并不是将该指针设为NULL的唯一后果， item-&gt;Data被用来发出其他信号。</p>
-<p>下面是prepare_for_contents的一个片段，当它确定输出缓冲区中是否有足够的空间给这个子串时：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (state-&gt;substring) &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * If we are a substring of a constructed string, then we may</span></span><br><span class="line"><span class="comment">   * not have to allocate anything (because our parent, the</span></span><br><span class="line"><span class="comment">   * actual constructed string, did it for us).  If we are a</span></span><br><span class="line"><span class="comment">   * substring and we *do* have to allocate, that means our</span></span><br><span class="line"><span class="comment">   * parent is an indefinite-length, so we allocate from our pool;</span></span><br><span class="line"><span class="comment">   * later our parent will copy our string into the aggregated</span></span><br><span class="line"><span class="comment">   * whole and free our pool allocation.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (item-&gt;Data == <span class="literal">NULL</span>) &#123;</span><br><span class="line">    PORT_Assert (item-&gt;Length == <span class="number">0</span>);</span><br><span class="line">    poolp = state-&gt;top-&gt;our_pool;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    alloc_len = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>如果此时 item-&gt;Data 是 NULL，state&gt;substring 是真的，那么一定是他们目前正在解析一个外层不确定字符串的子串，这个字符串没有已经分配的确定大小的缓冲区。在这种情况下，item-&gt;Data指针的含义与我们前面描述的不同：它只是一个临时缓冲区，目的是只容纳这个子串。就在上面，alloc_len被设置为这个子串的内容长度；对于外部定义长度的情况，至关重要的是alloc_len在这里被设置为0（这实际上是表明一个缓冲区已经被分配了，他们必须不分配一个新的。）</p>
-<p>为了强调这个潜在的微妙之处：问题在于，使用这个连词（state&gt;substring &amp;&amp; !item-&gt;Data）来确定这是一个确定长度的子串还是外层不确定的字符串，与我们前面看到的复杂的边界检查代码所使用的方法不同。那个方法是沿着当前状态堆栈向上走，检查超字符串的不定位，以确定它们是否在处理一个外层不定字符串的子串。</p>
-<p>假设我们有一个外层定长构造的比特串，有三个原始比特串作为子串。</p>
-<p><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJrFict8RB7ceuAnNar7zlVvCo6pD9Li2Pbf3LJneP7BuRb9W7ZDtn-QMp4oofVurZqXctrbIJy_qXQ_NmvyteSEoqOeXmuk2W2JqrWl7_bIyKZk3C7HuN5zv3rLmT6fX5BZjoQAdAm_PQHl8b2xvEPFAAD9IP-WFKJcgzh_n_Sg5FZAZsT0FcHu5-tw/s600/image5%20%281%29.png" alt="img"></p>
-<p>在遇到第一个最外层的确定长度的比特串时，代码将分配一个固定大小的缓冲区，其大小足以存储构成这个字符串的所有剩余输入，在本例中是42字节。在这一点上，dest-&gt;Data指向该缓冲区。</p>
-<p>然后他们分配一个子状态，获得dest指针的拷贝（不是dest SecAsn1Item对象的拷贝；是指向它的指针的拷贝），并继续解析第一个子字符串。</p>
-<p>这是一个长度为1的原始位串，它触发了sec_asn1d_parse_bit_string中的脆弱路径并将dest-&gt;Data设置为NULL。状态机跳转到beforeEndOfContents，然后最终下一个子串被解析–这次dest-&gt;Data &#x3D;&#x3D; NULL。</p>
-<p>现在逻辑出了问题，正如我们在上面的片段中看到的，一个新的dest-&gt;Data缓冲区被分配，其大小只有这个子串（2字节），而事实上dest-&gt;Data应该已经指向一个足够大的缓冲区来容纳整个外层不确定的输入字符串。然后，这个子串的内容被解析并复制到该缓冲区。</p>
-<p>现在我们来到了第三个子串。 dest-&gt;Data不再是NULL；但是代码现在没有办法确定缓冲区实际上只是（错误地）被分配来容纳一个子串。它相信 item-&gt;Data 只被分配一次的不变性，当遇到第一个外层确定长度的字符串时，它仅用这个事实来确定 dest-&gt;Data 是否指向一个足够大的缓冲区，以便将这个子串追加到其中。然后它很高兴地追加了这第三个子串，在分配给只存储第二个子串的缓冲区的范围之外写入。</p>
-<p><strong>这里有一个很好的内存破坏原语：可以造成一个受控大小的分配，然后用任意数量的任意字节溢出它们。</strong></p>
-<p>触发的例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">uint8_t</span> concat_bitstrings_constructed_definite_with_zero_len_realloc[]</span><br><span class="line">     = &#123;ASN1_CLASS_UNIVERSAL | ASN1_CONSTRUCTED | ASN1_BIT_STRING, <span class="comment">// (0x23)</span></span><br><span class="line">        <span class="number">0x4a</span>, <span class="comment">// initial allocation size</span></span><br><span class="line">        ASN1_CLASS_UNIVERSAL | ASN1_PRIMITIVE | ASN1_BIT_STRING,</span><br><span class="line">        <span class="number">0x1</span>, <span class="comment">// force item-&gt;Data = NULL</span></span><br><span class="line">        <span class="number">0x0</span>, <span class="comment">// number of unused bits in the final byte</span></span><br><span class="line">        ASN1_CLASS_UNIVERSAL | ASN1_PRIMITIVE | ASN1_BIT_STRING,</span><br><span class="line">        <span class="number">0x2</span>, <span class="comment">// this is the reallocation size</span></span><br><span class="line">        <span class="number">0x0</span>, <span class="comment">// number of unused bits in the final byte</span></span><br><span class="line">        <span class="number">0xff</span>, <span class="comment">// only byte of bitstring</span></span><br><span class="line">        ASN1_CLASS_UNIVERSAL | ASN1_PRIMITIVE | ASN1_BIT_STRING,</span><br><span class="line">        <span class="number">0x41</span>, <span class="comment">// 64 actual bytes, plus the remainder, will cause 0x40 byte memcpy one byte in to 2 byte allocation</span></span><br><span class="line">        <span class="number">0x0</span>, <span class="comment">// number of unused bits in the final byte</span></span><br><span class="line">        <span class="number">0xff</span>,</span><br><span class="line">        <span class="number">0xff</span>,<span class="comment">// -- continues for overflow</span></span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="/css/main.css">
 
 
 
-<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><p><a target="_blank" rel="noopener" href="https://googleprojectzero.blogspot.com/2022/04/cve-2021-30737-xerubs-2021-ios-asn1.html?m=1">https://googleprojectzero.blogspot.com/2022/04/cve-2021-30737-xerubs-2021-ios-asn1.html?m=1</a></p>
-</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/19711495?v=4" alt="buffer0verflooow"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">buffer0verflooow</p><p class="is-size-6 is-block">Security Researcher</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">56</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">51</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-10-10T06:23:56.000Z">2022-10-10</time></p><p class="title"><a href="/2022/10/10/%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-30T07:29:09.000Z">2022-07-30</time></p><p class="title"><a href="/2022/07/30/Android%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/">Android安全笔记</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-20T12:35:56.000Z">2022-07-20</time></p><p class="title"><a href="/2022/07/20/Android%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">Android中间人攻击方法整理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-04T12:34:01.000Z">2022-07-04</time></p><p class="title"><a href="/2022/07/04/Android-11-%E9%AD%94%E5%BD%A2%E5%A5%B3%E6%BC%8F%E6%B4%9E/">Android 11 魔形女漏洞</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-01T13:59:36.000Z">2022-07-01</time></p><p class="title"><a href="/2022/07/01/macOS-Intel%E5%9B%BE%E5%BD%A2%E5%86%85%E6%A0%B8%E6%8B%93%E5%B1%95RCE-EOP/">macOS Intel图形内核拓展RCE+EOP</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/10/"><span class="level-start"><span class="level-item">October 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">July 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">June 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">May 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">April 2022</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">March 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">January 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">November 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">August 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/ASN-1/"><span class="tag">ASN.1</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AppleAVE2/"><span class="tag">AppleAVE2</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ContentProvider/"><span class="tag">ContentProvider</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/IOServices/"><span class="tag">IOServices</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LPE/"><span class="tag">LPE</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PendingIntent/"><span class="tag">PendingIntent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/adobe/"><span class="tag">adobe</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/afl/"><span class="tag">afl++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ams/"><span class="tag">ams</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/android/"><span class="tag">android</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/aosp/"><span class="tag">aosp</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/apple/"><span class="tag">apple</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/arm64/"><span class="tag">arm64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/cfprefsd/"><span class="tag">cfprefsd</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/chrome/"><span class="tag">chrome</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/darwin/"><span class="tag">darwin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/exploit/"><span class="tag">exploit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/fuzz/"><span class="tag">fuzz</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/gpu/"><span class="tag">gpu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hook/"><span class="tag">hook</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intel/"><span class="tag">intel</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intent/"><span class="tag">intent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iomfb/"><span class="tag">iomfb</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ios/"><span class="tag">ios</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/logic-vul/"><span class="tag">logic vul</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lpe/"><span class="tag">lpe</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mach/"><span class="tag">mach</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/macos/"><span class="tag">macos</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mig/"><span class="tag">mig</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/npu/"><span class="tag">npu</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pac/"><span class="tag">pac</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pipe/"><span class="tag">pipe</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pongoOS/"><span class="tag">pongoOS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qemu/"><span class="tag">qemu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qualcom/"><span class="tag">qualcom</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qualcomm/"><span class="tag">qualcomm</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rce/"><span class="tag">rce</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/safari/"><span class="tag">safari</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/samsung/"><span class="tag">samsung</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/soot/"><span class="tag">soot</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/static-analysis/"><span class="tag">static analysis</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/syzkaller/"><span class="tag">syzkaller</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tcc/"><span class="tag">tcc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/telecom/"><span class="tag">telecom</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/uaf/"><span class="tag">uaf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vul/"><span class="tag">vul</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/webaudio/"><span class="tag">webaudio</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xnu/"><span class="tag">xnu</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xpc/"><span class="tag">xpc</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="buffer0verflooow - Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 buffer0verflooow</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "This website uses cookies to improve your experience.",
-          dismiss: "Got it!",
-          allow: "Allow cookies",
-          deny: "Decline",
-          link: "Learn more",
-          policy: "Cookie Policy",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
-        });</script></body></html>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"buffer0verflooow.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="buffer0verflooow - Blog">
+<meta property="og:url" content="https://buffer0verflooow.github.io/tags/ASN-1/index.html">
+<meta property="og:site_name" content="buffer0verflooow - Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="buffer0verflooow">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://buffer0verflooow.github.io/tags/ASN-1/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/ASN-1/index.html","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tag: ASN.1 | buffer0verflooow - Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">buffer0verflooow - Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">buffer0verflooow</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner tag posts-collapse">
+
+
+  
+  
+  
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h1 class="collection-header">ASN.1
+          <small>Tag</small>
+        </h1>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2022</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2022-04-11T19:47:59+08:00"
+              content="2022-04-11">
+          04-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2022/04/11/iOS-ASN-1-%E6%BC%8F%E6%B4%9E-CVE-2021-30737/" itemprop="url">
+            <span itemprop="name">iOS ASN.1 漏洞(CVE-2021-30737)</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+    </div>
+  </div>
+  
+  
+  
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">buffer0verflooow</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

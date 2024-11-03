@@ -1,220 +1,243 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Tag: mig - buffer0verflooow - Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="buffer0verflooow - Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="buffer0verflooow - Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="buffer0verflooow - Blog"><meta property="og:url" content="https://buffer0verflooow.github.io/"><meta property="og:site_name" content="buffer0verflooow - Blog"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://buffer0verflooow.github.io/img/og_image.png"><meta property="article:author" content="buffer0verflooow"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://buffer0verflooow.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://buffer0verflooow.github.io"},"headline":"buffer0verflooow - Blog","image":["https://buffer0verflooow.github.io/img/og_image.png"],"author":{"@type":"Person","name":"buffer0verflooow"},"publisher":{"@type":"Organization","name":"buffer0verflooow - Blog","logo":{"@type":"ImageObject","url":"https://buffer0verflooow.github.io/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+<link rel="stylesheet" href="/css/main.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="buffer0verflooow - Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">mig</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-03-26T09:54:43.000Z" title="2022/3/26 17:54:43">2022-03-26</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-03-27T09:18:25.349Z" title="2022/3/27 17:18:25">2022-03-27</time></span><span class="level-item">31 minutes read (About 4705 words)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/03/26/9.6MIG%E5%8E%9F%E7%90%86/">MIG</a></p><div class="content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近在看XNU内核相关的漏洞，遇到了MIG生成器，虽然漏洞分析文章也讲了一些，但感觉还是有必要系统的学习记录一下。内容参考OS Internals一书。</p>
-<h1 id="0x1-MIG"><a href="#0x1-MIG" class="headerlink" title="0x1 MIG"></a>0x1 MIG</h1><p>Mach Interface Generator（MIG）是一个工具，作用是按照<code>.defs</code>文件中的定义为Mach IPC生成RPC代码。<code>.defs</code>文件包含消息传递和过程接口调用规范，能够为消息的发送接收处理自动生成代码，降低了编程错误的可能性。</p>
-<p>MIG在语法上类似于Pascal，生成C语言代码，MIG不会对程序员隐藏底层IPC。</p>
-<h2 id="1-1-规范文件"><a href="#1-1-规范文件" class="headerlink" title="1.1 规范文件"></a>1.1 规范文件</h2><p>文件通常以后缀<code>.defs</code>结尾，MIG解析<code>.defs</code>文件后，主要生成以下三个文件：</p>
-<ul>
-<li>客户端代码包含的头文件</li>
-<li>与客户端代码链接的用户界面模块，包含向服务器请求消息和接收回复的功能</li>
-<li>与服务端代码链接的服务器接口模块，包含用于接收来自客户端的请求、用于根据请求消息的内容调用适当的服务器函数（程序员提供），以及用于发送回复消息的功能。</li>
-</ul>
-<p>MIG文件包含以下类型，并不是强制性的：</p>
-<ul>
-<li>Subsystem identifier（子系统标识符）</li>
-<li>Serverdemux declaration（Server解复用声明）</li>
-<li>Type specifications（Type规格）</li>
-<li>Import declarations（导入声明）</li>
-<li>Operation descriptions（操作描述）</li>
-<li>Options declarations（选项声明）</li>
-</ul>
-<h3 id="1-1-1-Subsystem"><a href="#1-1-1-Subsystem" class="headerlink" title="1.1.1 Subsystem"></a>1.1.1 Subsystem</h3><p>子系统是客户端、客户端调用的服务器以及服务器导出的操作集的统称，subsystem关键字命名了文件所指定的MIG子系统。MIG在其生成的代码文件的名称中使用这个标识符作为前缀。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subsystem   system-name   message-base-id;</span><br></pre></td></tr></table></figure>
 
-<p>subsystem关键字后面是被定义的子系统的ASCII名称（例如，foo）。 message-base-id是整数基值，用作规范文件中第一个操作的IPC消息标识（消息头中的msgh_id字段）。换句话说，这个值是操作顺序编号的基数。message-base-id可以任意选择。然而，如果同一个程序为多个接口服务，那么每个接口必须有一个唯一的标识符，这样服务器就可以明确地确定所调用的操作。</p>
-<p>当MIG创建一个与请求信息相对应的回复信息时，回复标识符通常是请求标识符和数字100的总和。</p>
-<h3 id="1-1-2-Serverdemux"><a href="#1-1-2-Serverdemux" class="headerlink" title="1.1.2 Serverdemux"></a>1.1.2 Serverdemux</h3><p><code>serverdemux</code>声明部分可以用来为<code>server-interface</code>模块中的<code>server demultiplexing routine</code>（服务器解复用例程）指定一个替代名称。解复用例程检查请求消息，根据消息头中的<code>msgh_id</code>值，调用适当的子系统例程。如果该值超出了子系统的范围，解复用例程会返回一个错误。该例程的默认名称是<code>&lt;system-name&gt;_server</code>，其中<code>&lt;system-name&gt;</code>是通过子系统语句指定的名称。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serverdemux   somethingelse_server;</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-1-3-Type-specifications"><a href="#1-1-3-Type-specifications" class="headerlink" title="1.1.3 Type specifications"></a>1.1.3 Type specifications</h3><p>类型规范用于定义与用户界面模块输出的函数调用的参数相对应的数据类型。MIG支持诸如简单、结构化、指针和多态等类型的声明。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment"> * Simple Types  </span></span><br><span class="line"><span class="comment"> * type type-name = type-description;  </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line">type <span class="type">int</span> = MACH_MSG_TYPE_INTEGER_32; </span><br><span class="line">type <span class="type">kern_return_t</span> = <span class="type">int</span>; </span><br><span class="line">type some_string = (MACH_MSG_TYPE_STRING, <span class="number">8</span>*<span class="number">128</span>); </span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment"> * Structured and Pointer Types  </span></span><br><span class="line"><span class="comment"> * type type-name = array [size] of type-description;  </span></span><br><span class="line"><span class="comment"> * type type-name = array [*:maxsize] of type-description;  </span></span><br><span class="line"><span class="comment"> * struct [size] of type-description;  </span></span><br><span class="line"><span class="comment"> * type type-name = ^ type-description;  </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line">type thread_ids = <span class="built_in">array</span>[<span class="number">16</span>] of MACH_MSG_TYPE_INTEGER_32; </span><br><span class="line">type a_structure = <span class="keyword">struct</span>[<span class="number">16</span>] of <span class="built_in">array</span>[<span class="number">8</span>] of <span class="type">int</span>; </span><br><span class="line">type ool_array = ^ <span class="built_in">array</span>[] of MACH_MSG_TYPE_INTEGER_32; </span><br><span class="line">type intptr = ^ MACH_MSG_TYPE_INTEGER_32; </span><br><span class="line">type input_string = <span class="built_in">array</span>[*:<span class="number">64</span>] of <span class="type">char</span>;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<p>多态类型用于指定一个参数，该参数的确切类型在运行时才会确定。MIG自动化包括一个额外的参数来适应这种情况。考虑一下下面这种情况。</p>
-<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/* foo.defs */ </span><br><span class="line">subsystem foo <span class="number">500</span> </span><br><span class="line">#include &lt;mach/std_types.defs&gt; </span><br><span class="line">#include &lt;mach/mach_types.defs&gt; </span><br><span class="line"><span class="keyword">type</span> my_poly_t = polymorphic; </span><br><span class="line">routine foo_func(</span><br><span class="line">	server : mach_port_t; </span><br><span class="line">	arg : my_poly_t</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"buffer0verflooow.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-<p>MIG生成的<code>foo_func()</code>的代码有如下原型。</p>
-<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kern_return_t foo_func( mach_port_t server, my_poly_t arg, mach_msg_type_name_t argPoly);</span><br></pre></td></tr></table></figure>
+    <meta property="og:type" content="website">
+<meta property="og:title" content="buffer0verflooow - Blog">
+<meta property="og:url" content="https://buffer0verflooow.github.io/tags/mig/index.html">
+<meta property="og:site_name" content="buffer0verflooow - Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="buffer0verflooow">
+<meta name="twitter:card" content="summary">
 
-<p>一个类型声明可以选择性地包含指定翻译或取消分配类型的程序的信息。翻译允许一个类型被用户和服务器界面模块以不同的方式看到。取消分配规范允许指定一个析构函数。</p>
-<h3 id="1-1-4-Import-declarations"><a href="#1-1-4-Import-declarations" class="headerlink" title="1.1.4 Import declarations"></a>1.1.4 Import declarations</h3><p>导入声明是用来在MIG生成的模块中包含头文件的。MIG可以被指示在用户和服务器界面模块中都包含这样的头文件，也可以只在这两个模块中包含一个。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment"> * import header-file;  </span></span><br><span class="line"><span class="comment"> * uimport header-file;  </span></span><br><span class="line"><span class="comment"> * simport header-file;  </span></span><br><span class="line"><span class="comment"> */</span> </span><br><span class="line"></span><br><span class="line">import <span class="string">&quot;foo.h&quot;</span>;      <span class="comment">/* imported in both modules */</span> </span><br><span class="line">uimport &lt;stdlib.h&gt;;  <span class="comment">/* only in user-interface module */</span> </span><br><span class="line">simport &lt;stdio.h&gt;;   <span class="comment">/* only in server-interface module */</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="1-1-5-Operation-descriptions"><a href="#1-1-5-Operation-descriptions" class="headerlink" title="1.1.5 Operation descriptions"></a>1.1.5 Operation descriptions</h3><p>操作描述包含一个或多个类型的IPC操作的规范。规范包括描述操作种类的关键字，操作的名称，以及参数的名称和类型。当MIG编译规范文件时，它会为每个操作生成客户和服务器存根。客户端存根存在于用户界面模块中。它的工作是打包并发送与客户程序中的过程调用对应的消息。服务器存根驻留在服务器界面模块中。它对收到的消息进行解包，并调用程序员的服务器代码来实现该操作。</p>
-<p>MIG支持的操作类型包括例程、简单例程、程序、简单程序和函数。</p>
-<table>
-<thead>
-<tr>
-<th>Operation Type</th>
-<th>Reply Received?</th>
-<th>Error Returned?</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>Routine</code></td>
-<td>Yes</td>
-<td>Yes, a <code>kern_return_t</code> return value specifying whether the operation was successfully completed</td>
-</tr>
-<tr>
-<td><code>SimpleRoutine</code></td>
-<td>No</td>
-<td>Yes, the return value from Mach’s message-sending primitive</td>
-</tr>
-<tr>
-<td><code>Procedure</code></td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td><code>SimpleProcedure</code></td>
-<td>No</td>
-<td>No</td>
-</tr>
-<tr>
-<td><code>Function</code></td>
-<td>Yes</td>
-<td>No error code returned, but a value from the server function is returned</td>
-</tr>
-</tbody></table>
-<p>操作声明的例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">routine <span class="title function_">vm_allocate</span><span class="params">(target_task:<span class="type">vm_task_entry_t</span>; inout address:<span class="type">vm_address_t</span>; size:<span class="type">vm_size_t</span>; flags:<span class="type">int</span>)</span>;</span><br></pre></td></tr></table></figure>
+<link rel="canonical" href="https://buffer0verflooow.github.io/tags/mig/">
 
-<p>一个参数说明包含一个名称和一个类型，并且可以选择用一个关键字in、out或inout来装饰，分别代表该参数只发送给服务器，或由服务器在离开时发送，或两者都发送。</p>
-<p>在操作部分，skip关键字会使MIG跳过下一个操作ID的分配，导致操作ID序列中出现漏洞。这对于在接口发展过程中保持兼容性很有帮助。</p>
-<h3 id="1-1-6-Options-declarations"><a href="#1-1-6-Options-declarations" class="headerlink" title="1.1.6 Options declarations"></a>1.1.6 Options declarations</h3><p>选项声明用于指定影响生成代码的特殊目的或全局选项。下面是一些选项的例子：</p>
-<ul>
-<li><p><code>WaitTime</code>用于指定用户界面代码等待从服务器收到回复的最长时间，单位为毫秒。</p>
-</li>
-<li><p><code>MsgType</code>用于设置消息类型（例如，将消息标记为加密的）。</p>
-</li>
-<li><p><code>UserPrefix</code>用于指定一个字符串，该字符串将是调用IPC操作的客户端函数名称的前缀。</p>
-</li>
-<li><p><code>ServerPrefix</code>用于指定一个字符串，它将是实现IPC操作的服务器端函数名称的前缀。</p>
-</li>
-<li><p><code>Rcsid</code>用于指定一个字符串，它将导致在服务器和用户模块中分别声明名为<code>Sys_server_rcsid</code>和<code>Sys_user_rcsid</code>的静态字符串变量，它们的常量值都是指定的字符串。</p>
-</li>
-</ul>
-<p>更多关于MIG规范文件的例子可以查看<code>/usr/include/mach/</code>及其子目录。</p>
-<h1 id="0x2-Demo"><a href="#0x2-Demo" class="headerlink" title="0x2 Demo"></a>0x2 Demo</h1><p>接下来使用MIG创建一个简单的客户-服务器系统。</p>
-<p>MIG服务器是一个Mach任务，使用MIG生成的RPC接口向其客户提供服务。MIG服务器则提供两个例程：一个是计算客户端发送的字符串的长度，另一个是计算客户端发送的数字的阶乘。在这个例子中，客户端将内联发送字符串，而服务器将只发送简单的整数。回顾一下，当一个接口调用返回<code>out-of-line</code>数据时，调用者有责任通过调用vm_deallocate()来取消内存分配。例如，我们可以给我们的接口添加另一个操作，比如说，将客户端发送的字符串反转，并通过在调用者的地址空间为其分配内存来返回反转的字符串。</p>
-<p>源代码由以下四个文件组成：</p>
-<ul>
-<li><p>一个头文件包含了客户端和服务器端使用的有用定义和原型（<code>misc_types.h</code>）。</p>
-</li>
-<li><p>MIG规范文件（<code>misc.defs</code>）。</p>
-</li>
-<li><p>服务器的设置和主循环(<code>server.c</code>)</p>
-</li>
-<li><p>接口的演示（<code>client.c</code>）</p>
-</li>
-</ul>
-<p>下面给出了通用头文件。我们定义了两个新的数据类型：<code>input_string_t</code>，它是一个大小为64个元素的字符数组；<code>xput_number_t</code>，它是<code>int</code>的别名。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// misc_types.h </span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> _MISC_TYPES_H_ </span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> _MISC_TYPES_H_ </span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span> </span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span> </span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span> </span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mach/mach.h&gt;</span> </span></span><br><span class="line">  <span class="meta">#<span class="keyword">include</span> <span class="string">&lt;servers/bootstrap.h&gt;</span> <span class="comment">// The server port will be registered under this name. </span></span></span><br><span class="line">  <span class="meta">#<span class="keyword">define</span> MIG_MISC_SERVICE <span class="string">&quot;MIG-miscservice&quot;</span> <span class="comment">// Data representations </span></span></span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">char</span> <span class="type">input_string_t</span>[<span class="number">64</span>]; </span><br><span class="line">  <span class="keyword">typedef</span> <span class="type">intxput_number_t</span>; </span><br><span class="line">  <span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">mach_msg_header_t</span> head; </span><br><span class="line">    <span class="comment">// The following fields do not represent the actual layout of the request     </span></span><br><span class="line">    <span class="comment">// and reply messages that MIG will use. However, a request or reply     </span></span><br><span class="line">    <span class="comment">// message will not be larger in size than the sum of the sizes of these     </span></span><br><span class="line">    <span class="comment">// fields. We need the size to put an upper bound on the size of an     </span></span><br><span class="line">    <span class="comment">// incoming message in a mach_msg() call.     </span></span><br><span class="line">    NDR_record_t NDR;     </span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">      <span class="type">input_string_t</span> <span class="built_in">string</span>;</span><br><span class="line">      xput_number_tnumber;</span><br><span class="line">    &#125; data;     </span><br><span class="line">    <span class="type">kern_return_t</span> RetCode;</span><br><span class="line">    <span class="type">mach_msg_trailer_t</span> trailer;</span><br><span class="line">  &#125; <span class="type">msg_misc_t</span>; </span><br><span class="line">  <span class="type">xput_number_t</span> <span class="title function_">misc_translate_int_to_xput_number_t</span><span class="params">(<span class="type">int</span>)</span>; </span><br><span class="line">  <span class="type">int</span> <span class="title function_">misc_translate_xput_number_t_to_int</span><span class="params">(<span class="type">xput_number_t</span>)</span>; </span><br><span class="line">  <span class="type">void</span> <span class="title function_">misc_remove_reference</span><span class="params">(<span class="type">xput_number_t</span>)</span>; </span><br><span class="line">  <span class="type">kern_return_t</span> <span class="title function_">string_length</span><span class="params">(<span class="type">mach_port_t</span>, <span class="type">input_string_t</span>, <span class="type">xput_number_t</span> *)</span>; </span><br><span class="line">  <span class="type">kern_return_t</span> <span class="title function_">factorial</span><span class="params">(<span class="type">mach_port_t</span>, <span class="type">xput_number_t</span>, <span class="type">xput_number_t</span> *)</span>; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br><span class="line"><span class="comment">// _MISC_TYPES_H_</span></span><br></pre></td></tr></table></figure>
 
-<p>下面给出了规范文件。注意<code>xput_number_t</code>的类型说明。每个MIG类型最多可以有三个对应的C类型：一个用于用户界面模块的类型（由<code>CUserType</code>选项指定），一个用于服务器模块的类型（由<code>CServerType</code>选项指定），以及一个供服务器例程内部使用的转换类型。如果<code>CType</code>选项与<code>CUserType</code>和<code>CServerType</code>的类型相同，可以用它来代替。在我们的例子中，<code>CType</code>选项指定了MIG类型<code>xput_number_t</code>的C数据类型。</p>
-<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">/*  </span><br><span class="line"> * A &quot;Miscellaneous&quot; Mach Server  </span><br><span class="line"> */ </span><br><span class="line">/*  </span><br><span class="line"> * <span class="keyword">File</span>:    misc.defs  </span><br><span class="line"> * Purpose: Miscellaneous Server subsystem definitions  </span><br><span class="line"> */ </span><br><span class="line">/*  </span><br><span class="line"> * Subsystem identifier  </span><br><span class="line"> */ </span><br><span class="line">Subsystem misc <span class="number">500</span>; </span><br><span class="line">/*  </span><br><span class="line"> * <span class="keyword">Type</span> declarations  </span><br><span class="line"> */ </span><br><span class="line">#include &lt;mach/std_types.defs&gt; </span><br><span class="line">#include &lt;mach/mach_types.defs&gt; </span><br><span class="line"><span class="keyword">type</span> input_string_t = <span class="keyword">array</span>[<span class="number">64</span>] <span class="keyword">of</span> char; </span><br><span class="line"><span class="keyword">type</span> xput_number_t = int CType:int InTran:xput_number_t misc_translate_int_to_xput_number_t(int)          OutTran:int misc_translate_xput_number_t_to_int(xput_number_t)</span><br><span class="line"><span class="function"><span class="keyword">Destructor</span>:</span>misc_remove_reference(xput_number_t); </span><br><span class="line">/*  </span><br><span class="line"> * Import declarations  </span><br><span class="line"> */  </span><br><span class="line">import &quot;misc_types.h&quot;; </span><br><span class="line">/*  </span><br><span class="line"> * Operation descriptions  </span><br><span class="line"> */</span><br><span class="line">/* This should be operation <span class="string">#500</span> */ </span><br><span class="line">routine string_length(server_port:mach_port_t; <span class="keyword">in</span> instring:input_string_t; <span class="keyword">out</span> len:xput_number_t); </span><br><span class="line">/* Create some holes <span class="keyword">in</span> operation sequence */ </span><br><span class="line">Skip; </span><br><span class="line">Skip; </span><br><span class="line">Skip; </span><br><span class="line">/* This should be operation <span class="string">#504</span>, <span class="keyword">as</span> there are three Skip<span class="string">&#x27;s */ </span></span><br><span class="line"><span class="string">routine factorial(server_port:mach_port_t; in num:xput_number_t; out fac:xput_number_t);</span></span><br><span class="line"><span class="string">/*  </span></span><br><span class="line"><span class="string"> * Option declarations  </span></span><br><span class="line"><span class="string"> */ </span></span><br><span class="line"><span class="string">ServerPrefix Server_; </span></span><br><span class="line"><span class="string">UserPrefix Client_;</span></span><br></pre></td></tr></table></figure>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/mig/index.html","title":""}</script>
 
-<p>我们使用<code>InTran</code>、<code>OutTran</code>和<code>Destructor</code>选项来指定我们将为翻译和取消分配提供的程序。当一个类型必须被服务器和客户端以不同的方式看待时，转换是非常有用的。在我们的例子中，我们希望有关的类型对服务器来说是<code>xput_number_t</code>，对客户端来说是<code>int</code>。我们使用<code>InTran</code>指定 <code>misc_translate_int_to_xput_number_t()</code> 作为该类型的传入翻译程序。同样地，<code>misc_translate_xput_number_t_to_int()</code>是输出的翻译例程。由于<code>xput_number_t</code>在我们的例子中实际上只是<code>int</code>的另一个名字，我们的翻译函数是微不足道的：它们只是打印一条信息。</p>
-<p>内核大量使用了翻译函数。</p>
-<p>我们还使用<code>Destructor</code>选项来指定一个MIG将在适当时候调用的取消分配函数。服务器源码如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// server.c </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;misc_types.h&quot;</span> </span></span><br><span class="line"><span class="type">static</span> <span class="type">mach_port_t</span> server_port; </span><br><span class="line"><span class="keyword">extern</span> <span class="type">boolean_t</span> <span class="title function_">misc_server</span><span class="params">(<span class="type">mach_msg_header_t</span> *inhdr, <span class="type">mach_msg_header_t</span> *outhdr)</span>; </span><br><span class="line"><span class="type">void</span> <span class="title function_">server_setup</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	<span class="type">kern_return_t</span> kr;</span><br><span class="line">	<span class="keyword">if</span> ((kr = bootstrap_create_service(bootstrap_port, MIG_MISC_SERVICE, &amp;server_port)) != BOOTSTRAP_SUCCESS)&#123;         		mach_error(<span class="string">&quot;bootstrap_create_service:&quot;</span>, kr);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;     </span><br><span class="line">	<span class="keyword">if</span> ((kr = bootstrap_check_in(bootstrap_port, MIG_MISC_SERVICE, &amp;server_port)) != BOOTSTRAP_SUCCESS) &#123;         		mach_port_deallocate(mach_task_self(), server_port);</span><br><span class="line">		mach_error(<span class="string">&quot;bootstrap_check_in:&quot;</span>, kr);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125; </span><br><span class="line">&#125; </span><br><span class="line"><span class="type">void</span> <span class="title function_">server_loop</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	mach_msg_server(misc_server, <span class="comment">// call the server-interface module </span></span><br><span class="line">	<span class="keyword">sizeof</span>(<span class="type">msg_misc_t</span>),          <span class="comment">// maximum receive size</span></span><br><span class="line">	server_port,                 <span class="comment">// port to receive on </span></span><br><span class="line">	MACH_MSG_TIMEOUT_NONE); <span class="comment">// options </span></span><br><span class="line">&#125; <span class="comment">// InTran </span></span><br><span class="line"><span class="type">xput_number_t</span> <span class="title function_">misc_translate_int_to_xput_number_t</span><span class="params">(<span class="type">int</span> param)</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;misc_translate_incoming(%d)\n&quot;</span>, param);</span><br><span class="line">	<span class="keyword">return</span> (<span class="type">xput_number_t</span>)param; </span><br><span class="line">&#125; <span class="comment">// OutTran </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">misc_translate_xput_number_t_to_int</span><span class="params">(<span class="type">xput_number_t</span> param)</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;misc_translate_outgoing(%d)\n&quot;</span>, (<span class="type">int</span>)param);</span><br><span class="line">	<span class="keyword">return</span> (<span class="type">int</span>)param; </span><br><span class="line">&#125; <span class="comment">// Destructor </span></span><br><span class="line"><span class="type">void</span> <span class="title function_">misc_remove_reference</span><span class="params">(<span class="type">xput_number_t</span> param)</span> &#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;misc_remove_reference(%d)\n&quot;</span>, (<span class="type">int</span>)param); </span><br><span class="line">&#125; <span class="comment">// an operation that we export </span></span><br><span class="line"><span class="type">kern_return_t</span> <span class="title function_">string_length</span><span class="params">(<span class="type">mach_port_t</span> server_port, <span class="type">input_string_t</span> instring, <span class="type">xput_number_t</span> *len)</span> &#123;</span><br><span class="line">	<span class="type">char</span> *in = (<span class="type">char</span> *)instring;</span><br><span class="line">	<span class="keyword">if</span> (!in || !len)</span><br><span class="line">		<span class="keyword">return</span> KERN_INVALID_ADDRESS;</span><br><span class="line">	*len = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (*in++)</span><br><span class="line">		(*len)++;</span><br><span class="line">	<span class="keyword">return</span> KERN_SUCCESS; </span><br><span class="line">&#125; <span class="comment">// an operation that we export </span></span><br><span class="line"><span class="type">kern_return_t</span> <span class="title function_">factorial</span><span class="params">(<span class="type">mach_port_t</span> server_port, <span class="type">xput_number_t</span> num, <span class="type">xput_number_t</span> *fac)</span> &#123;     </span><br><span class="line">	<span class="type">int</span> i;     </span><br><span class="line">	<span class="keyword">if</span> (!fac)</span><br><span class="line">		<span class="keyword">return</span> KERN_INVALID_ADDRESS;</span><br><span class="line">	*fac = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= num; i++)</span><br><span class="line">		*fac *= i;     </span><br><span class="line">	<span class="keyword">return</span> KERN_SUCCESS; </span><br><span class="line">&#125; </span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	server_setup(); </span><br><span class="line">	server_loop(); </span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tag: mig | buffer0verflooow - Blog</title>
+  
 
-<p>下面给出了程序员提供的，将用来调用服务器接口例程的客户端的源代码：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// client.c </span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;misc_types.h&quot;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INPUT_STRING <span class="string">&quot;Hello, MIG!&quot;</span> </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> INPUT_NUMBER 5 </span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span> &#123;</span><br><span class="line">  <span class="type">kern_return_t</span> kr;</span><br><span class="line">  <span class="type">mach_port_t</span> server_port;</span><br><span class="line">  <span class="type">int</span>  len, fac;</span><br><span class="line">  <span class="comment">// look up the service to find the server&#x27;s port</span></span><br><span class="line">  <span class="keyword">if</span> ((kr = bootstrap_look_up(bootstrap_port, MIG_MISC_SERVICE, &amp;server_port)) != BOOTSTRAP_SUCCESS) &#123;         </span><br><span class="line">    mach_error(<span class="string">&quot;bootstrap_look_up:&quot;</span>, kr);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;     </span><br><span class="line">  <span class="comment">// call a procedure </span></span><br><span class="line">  <span class="keyword">if</span> ((kr = string_length(server_port, INPUT_STRING, &amp;len)) != KERN_SUCCESS)         </span><br><span class="line">    mach_error(<span class="string">&quot;string_length:&quot;</span>, kr); </span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;length of \&quot;%s\&quot; is %d\n&quot;</span>, INPUT_STRING, len);</span><br><span class="line">  <span class="comment">// call another procedure     </span></span><br><span class="line">  <span class="keyword">if</span> ((kr = factorial(server_port, INPUT_NUMBER, &amp;fac)) != KERN_SUCCESS)</span><br><span class="line">    mach_error(<span class="string">&quot;factorial:&quot;</span>, kr);</span><br><span class="line">  <span class="keyword">else</span> </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;factorial of %d is %d\n&quot;</span>, INPUT_NUMBER, fac);</span><br><span class="line">  mach_port_deallocate(mach_task_self(), server_port);</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>接下来，我们必须在规范文件上运行MIG程序。如图所示，我们将client.c和miscUser.c编译并连接在一起，得到客户端程序。同样地，server.c和miscServer.c产生了服务器程序。</p>
-<img src="/Users/DarkMatter/Documents/Hacking/Blog/source/pictures/202203271602.png" alt="202203271602" style="zoom: 25%;" />
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">ls</span> -m </span><br><span class="line">	client.c, misc.defs, misc_types.h, server.c </span><br><span class="line">$ mig -v misc.defs </span><br><span class="line">	Subsystem misc:base = 500 </span><br><span class="line">	Type int8_t = (9, 8) </span><br><span class="line">	Type uint8_t = (9, 8) </span><br><span class="line">	... </span><br><span class="line">	Type input_string_t = array [64] of (8, 8) </span><br><span class="line">	Type xput_number_t = (2, 32)</span><br><span class="line">	CUserType: int</span><br><span class="line">	CServerType: int</span><br><span class="line">	InTran: xput_number_t misc_translate_int_to_xput_number_t(int)</span><br><span class="line">	OutTran: int misc_translate_xput_number_t_to_int(xput_number_t)</span><br><span class="line">	Destructor: misc_remove_reference(xput_number_t) </span><br><span class="line">	Import <span class="string">&quot;misc_types.h&quot;</span> </span><br><span class="line">	Routine (0) string_length( </span><br><span class="line">		RequestPort server_port: mach_port_t </span><br><span class="line">		In instring: input_string </span><br><span class="line">		Out len: xput_number) </span><br><span class="line">	Routine (4) factorial( </span><br><span class="line">		RequestPort server_port: mach_port_t </span><br><span class="line">		In num: xput_number </span><br><span class="line">		Out fac: xput_number) </span><br><span class="line">	ServerPrefix Server_ </span><br><span class="line">	UserPrefix Client_ </span><br><span class="line">	Writing misc.h ... <span class="keyword">done</span>. </span><br><span class="line">	Writing miscUser.c ... <span class="keyword">done</span>. </span><br><span class="line">	Writing miscServer.c ... <span class="keyword">done</span>. </span><br><span class="line">$ <span class="built_in">ls</span> -m </span><br><span class="line">		client.c, misc.defs, misc.h, miscServer.c, miscUser.c, misc_types.h, server.c </span><br><span class="line">$ gcc -Wall -o server server.c miscServer.c </span><br><span class="line">$ gcc -Wall -o client client.c miscUser.c </span><br><span class="line">$ ./server</span><br></pre></td></tr></table></figure>
 
-<p>一旦服务器运行，我们也可以使用我们的 <code>bootstrap_info</code> 程序来验证我们的服务名称（MIG-miscservice，定义在 misc_types.h 中）是否被列出。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ bootstrap_info </span><br><span class="line">	... 1   MIG-miscservice                                                 - </span><br><span class="line">$ ./client </span><br><span class="line">	length of <span class="string">&quot;Hello, MIG!&quot;</span> is 11 factorial of 5 is 120</span><br></pre></td></tr></table></figure>
 
-<p>下图显示了客户端调用服务器的<code>string_length()</code>操作时发生的动作序列：</p>
-<img src="/Users/DarkMatter/Documents/Hacking/Blog/source/pictures/202203271624.png" alt="202203271624" style="zoom:25%;" />
 
-<h1 id="0x3-内核中的MIG"><a href="#0x3-内核中的MIG" class="headerlink" title="0x3 内核中的MIG"></a>0x3 内核中的MIG</h1><p>MIG被用来实现大多数Mach的系统调用。一些系统调用，如与任务相关的、与IPC相关的和与VM相关的调用，将目标任务作为其参数之一。MIG根据面向内核的数据类型，在每种情况下翻译任务参数。例如，Mach线程在用户空间中被看作是一个端口名，但在内核中，MIG调用<code>convert_port_to_thread()</code>（osfmk&#x2F;kern&#x2F;ipc_tt.c）将传入的线程端口名转换为指向<code>porta thread</code>结构体所代表的内核对象的指针。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* osfmk/mach/mach_types.defs */</span> </span><br><span class="line">type <span class="type">thread_t</span> = <span class="type">mach_port_t</span> </span><br><span class="line"><span class="meta">#<span class="keyword">if</span> KERNEL_SERVER</span></span><br><span class="line">  intran: <span class="type">thread_t</span> convert_port_to_thread(<span class="type">mach_port_t</span>)</span><br><span class="line">  outtran: <span class="type">mach_port_t</span> convert_thread_to_port(<span class="type">thread_t</span>)</span><br><span class="line">  destructor: thread_deallocate(<span class="type">thread_t</span>) </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span>  <span class="comment">/* KERNEL_SERVER */</span></span></span><br></pre></td></tr></table></figure>
 
-<p>注意<code>KERNEL_SERVER</code>条件指令。Mac OS X内核在MIG规范文件中使用它和一个相关的指令<code>KERNEL_USER</code>来指定<code>KernelServer</code>和<code>KernelUser</code>子系统的修改器。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* osfmk/mach/task.defs */</span></span><br><span class="line">subsystem </span><br><span class="line"><span class="meta">#<span class="keyword">if</span> KERNEL_SERVER</span></span><br><span class="line">	KernelServer </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">/* KERNEL_SERVER */</span></span></span><br><span class="line">task <span class="number">3400</span>;</span><br></pre></td></tr></table></figure>
 
-<p>子系统修改器指示MIG为用户和服务器模块生成特殊环境下的备用代码。例如，当一个MIG服务器例程驻留在内核中时，它被称为在<code>KernelServer</code>环境中。尽管该例程的原型与没有<code>KernelServer</code>修饰符的情况下相同，但后者改变了MIG执行类型转换的方式。在<code>KernelServer</code>子系统的服务器端，一个<code>mach_port_t</code>类型会自动转换为内核类型<code>ipc_port_t</code>。</p>
-<h2 id="3-1-内核对象的接口"><a href="#3-1-内核对象的接口" class="headerlink" title="3.1 内核对象的接口"></a>3.1 内核对象的接口</h2><p>Mach不仅使用端口来表示几种类型的内核对象，而且还通过Mach IPC导出这些对象的接口。这些接口也是用MIG实现的。用户程序可以通过Mach IPC直接使用这些接口，或者，通常情况下，通过调用标准库函数。当系统库被编译时，它链接了与几个内核对象MIG定义文件相对应的用户接口模块。库的构建过程是在定义文件上运行mig，以生成接口模块。</p>
-<p>内核对象类型的例子包括<code>thread</code>、<code>task</code>、<code>host</code>、<code>processor</code>、<code>processor set</code>、<code>memory object</code>、<code>semaphore</code>、<code>lock set</code>和<code>clock</code>。定义的内核对象类型的完整列表在<code>osfmk/kern/ipc_kobject.h</code>中。</p>
-<h2 id="3-2-内核中的MIG初始化"><a href="#3-2-内核中的MIG初始化" class="headerlink" title="3.2 内核中的MIG初始化"></a>3.2 内核中的MIG初始化</h2><p>内核为每种类型的内核对象所对应的MIG子系统维护一个<code>mig_subsystem</code>结构体（<code>osfmk/mach/mig.h</code>）。当IPC子系统在内核启动时被初始化，MIG初始化函数<code>mig_init()</code> （<code>osfmk/kern/ipc_kobject.c</code>）遍历每个子系统，填充一个MIG例程的全局哈希表。下面是这个过程的一个例子：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// osfmk/mach/mig.h </span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">mig_subsystem</span> &#123;</span></span><br><span class="line">	<span class="type">mig_server_routine_t</span> server;   <span class="comment">// pointer to demux routine</span></span><br><span class="line">	<span class="type">mach_msg_id_t</span> start;           <span class="comment">// minimum routine number</span></span><br><span class="line">	<span class="type">mach_msg_id_t</span> end;             <span class="comment">// maximum routine number + 1</span></span><br><span class="line">	<span class="type">mach_msg_size_t</span> maxsize;       <span class="comment">// maximum reply message size</span></span><br><span class="line">	<span class="type">vm_address_t</span> reserved;         <span class="comment">// reserved for MIG use</span></span><br><span class="line">	mig_routine_descriptor routine[<span class="number">1</span>]; <span class="comment">// routine descriptor array </span></span><br><span class="line">&#125; *<span class="type">mig_subsystem_t</span>; <span class="comment">// osfmk/kern/ipc_kobject.c </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span> </span><br><span class="line">	<span class="type">mach_msg_id_t</span> num; </span><br><span class="line">	<span class="type">mig_routine_t</span> routine;</span><br><span class="line">	<span class="type">int</span> size; </span><br><span class="line"><span class="meta">#<span class="keyword">if</span> MACH_COUNTERS</span></span><br><span class="line">	<span class="type">mach_counter_t</span> callcount; </span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> </span></span><br><span class="line">&#125; <span class="type">mig_hash_t</span>; </span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_MIG_ENTRIES 1024 </span></span><br><span class="line"><span class="type">mig_hash_t</span> mig_buckets[MAX_MIG_ENTRIES]; </span><br><span class="line"><span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">mig_subsystem</span>* <span class="title">mig_e</span>[] =</span> &#123;</span><br><span class="line">	(<span class="type">const</span> <span class="keyword">struct</span> mig_subsystem *)&amp;mach_vm_subsystem,</span><br><span class="line">	(<span class="type">const</span> <span class="keyword">struct</span> mig_subsystem *)&amp;mach_port_subsystem,</span><br><span class="line">	(<span class="type">const</span> <span class="keyword">struct</span> mig_subsystem *)&amp;mach_host_subsystem,</span><br><span class="line">	...</span><br><span class="line">	(<span class="type">const</span> <span class="keyword">struct</span> mig_subsystem *)&amp;is_iokit_subsystem),</span><br><span class="line">	... </span><br><span class="line">&#125;; </span><br><span class="line"><span class="type">void</span> <span class="title function_">mig_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">	<span class="type">unsigned</span> <span class="type">int</span> i, n = <span class="keyword">sizeof</span>(mig_e)/<span class="keyword">sizeof</span>(<span class="type">const</span> <span class="keyword">struct</span> mig_subsystem *);</span><br><span class="line">	<span class="type">int</span> howmany;</span><br><span class="line">	<span class="type">mach_msg_id_t</span> j, pos, nentry, range;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; n; i++) &#123; <span class="comment">// for each mig_e[i]</span></span><br><span class="line">		range = mig_e[i]-&gt;end - mig_e[i]-&gt;start;</span><br><span class="line">		... </span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; range; j++) &#123; <span class="comment">// for each routine[j] in mig_e[i]</span></span><br><span class="line">			...  </span><br><span class="line">      <span class="comment">// populate mig_buckets hash table with routines         </span></span><br><span class="line">		&#125;     </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
 
-</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/19711495?v=4" alt="buffer0verflooow"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">buffer0verflooow</p><p class="is-size-6 is-block">Security Researcher</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">56</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">51</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-10-10T06:23:56.000Z">2022-10-10</time></p><p class="title"><a href="/2022/10/10/%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-30T07:29:09.000Z">2022-07-30</time></p><p class="title"><a href="/2022/07/30/Android%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/">Android安全笔记</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-20T12:35:56.000Z">2022-07-20</time></p><p class="title"><a href="/2022/07/20/Android%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">Android中间人攻击方法整理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-04T12:34:01.000Z">2022-07-04</time></p><p class="title"><a href="/2022/07/04/Android-11-%E9%AD%94%E5%BD%A2%E5%A5%B3%E6%BC%8F%E6%B4%9E/">Android 11 魔形女漏洞</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-01T13:59:36.000Z">2022-07-01</time></p><p class="title"><a href="/2022/07/01/macOS-Intel%E5%9B%BE%E5%BD%A2%E5%86%85%E6%A0%B8%E6%8B%93%E5%B1%95RCE-EOP/">macOS Intel图形内核拓展RCE+EOP</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/10/"><span class="level-start"><span class="level-item">October 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">July 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">June 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">May 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">April 2022</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">March 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">January 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">November 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">August 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/ASN-1/"><span class="tag">ASN.1</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AppleAVE2/"><span class="tag">AppleAVE2</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ContentProvider/"><span class="tag">ContentProvider</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/IOServices/"><span class="tag">IOServices</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LPE/"><span class="tag">LPE</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PendingIntent/"><span class="tag">PendingIntent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/adobe/"><span class="tag">adobe</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/afl/"><span class="tag">afl++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ams/"><span class="tag">ams</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/android/"><span class="tag">android</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/aosp/"><span class="tag">aosp</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/apple/"><span class="tag">apple</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/arm64/"><span class="tag">arm64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/cfprefsd/"><span class="tag">cfprefsd</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/chrome/"><span class="tag">chrome</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/darwin/"><span class="tag">darwin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/exploit/"><span class="tag">exploit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/fuzz/"><span class="tag">fuzz</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/gpu/"><span class="tag">gpu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hook/"><span class="tag">hook</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intel/"><span class="tag">intel</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intent/"><span class="tag">intent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iomfb/"><span class="tag">iomfb</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ios/"><span class="tag">ios</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/logic-vul/"><span class="tag">logic vul</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lpe/"><span class="tag">lpe</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mach/"><span class="tag">mach</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/macos/"><span class="tag">macos</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mig/"><span class="tag">mig</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/npu/"><span class="tag">npu</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pac/"><span class="tag">pac</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pipe/"><span class="tag">pipe</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pongoOS/"><span class="tag">pongoOS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qemu/"><span class="tag">qemu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qualcom/"><span class="tag">qualcom</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qualcomm/"><span class="tag">qualcomm</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rce/"><span class="tag">rce</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/safari/"><span class="tag">safari</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/samsung/"><span class="tag">samsung</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/soot/"><span class="tag">soot</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/static-analysis/"><span class="tag">static analysis</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/syzkaller/"><span class="tag">syzkaller</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tcc/"><span class="tag">tcc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/telecom/"><span class="tag">telecom</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/uaf/"><span class="tag">uaf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vul/"><span class="tag">vul</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/webaudio/"><span class="tag">webaudio</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xnu/"><span class="tag">xnu</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xpc/"><span class="tag">xpc</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="buffer0verflooow - Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 buffer0verflooow</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "This website uses cookies to improve your experience.",
-          dismiss: "Got it!",
-          allow: "Allow cookies",
-          deny: "Decline",
-          link: "Learn more",
-          policy: "Cookie Policy",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
-        });</script></body></html>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">buffer0verflooow - Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">buffer0verflooow</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner tag posts-collapse">
+
+
+  
+  
+  
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h1 class="collection-header">mig
+          <small>Tag</small>
+        </h1>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2022</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2022-03-26T17:54:43+08:00"
+              content="2022-03-26">
+          03-26
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2022/03/26/9.6MIG%E5%8E%9F%E7%90%86/" itemprop="url">
+            <span itemprop="name">MIG</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+    </div>
+  </div>
+  
+  
+  
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">buffer0verflooow</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

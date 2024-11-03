@@ -1,151 +1,243 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Tag: darwin - buffer0verflooow - Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="buffer0verflooow - Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="buffer0verflooow - Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="buffer0verflooow - Blog"><meta property="og:url" content="https://buffer0verflooow.github.io/"><meta property="og:site_name" content="buffer0verflooow - Blog"><meta property="og:locale" content="en_US"><meta property="og:image" content="https://buffer0verflooow.github.io/img/og_image.png"><meta property="article:author" content="buffer0verflooow"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://buffer0verflooow.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://buffer0verflooow.github.io"},"headline":"buffer0verflooow - Blog","image":["https://buffer0verflooow.github.io/img/og_image.png"],"author":{"@type":"Person","name":"buffer0verflooow"},"publisher":{"@type":"Organization","name":"buffer0verflooow - Blog","logo":{"@type":"ImageObject","url":"https://buffer0verflooow.github.io/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+<link rel="stylesheet" href="/css/main.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="buffer0verflooow - Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/tags">Tags</a></li><li class="is-active"><a href="#" aria-current="page">darwin</a></li></ul></nav></div></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item">Posted&nbsp;<time dateTime="2022-04-30T12:12:54.000Z" title="2022/4/30 20:12:54">2022-04-30</time></span><span class="level-item">Updated&nbsp;<time dateTime="2022-05-02T08:09:20.373Z" title="2022/5/2 16:09:20">2022-05-02</time></span><span class="level-item">11 minutes read (About 1674 words)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2022/04/30/Darwin%E6%90%AD%E5%BB%BAsyzkaller%E7%8E%AF%E5%A2%83/">Darwin搭建syzkaller环境</a></p><div class="content"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>记录一下在Mac上搭建syzkaller运行环境的过程。</p>
-<h1 id="创建macOS-VM"><a href="#创建macOS-VM" class="headerlink" title="创建macOS VM"></a>创建macOS VM</h1><ol>
-<li>下载macOS镜像，在VMware中创建虚拟机；</li>
-<li>在安装界面中，选择 <code>Utilities -&gt; Terminal</code>；</li>
-<li>输入 <code>csrutil disable</code>禁用系统完整性保护；</li>
-<li>输入 <code>csrutil authenticated-root disable</code>禁用授权root；</li>
-<li>退出终端，继续安装macOS，创建一个<code>user</code>账户；</li>
-<li>进入系统后，选择 <code>System Preferences -&gt; Software Update -&gt; Advanced…</code> ，禁用自动更新；</li>
-<li>进入 <code>System Preferences -&gt; Energy Saver</code> ，选择 <code>Prevent computer from sleeping automatically when the display is off</code>；</li>
-<li>进入 <code>System Preferences -&gt; Sharing</code>，开启 <code>Remote Login</code> 以启用ssh；</li>
-<li>最后，可以使用 <code>sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.WindowServer.plist</code>禁用GUI显示。</li>
-</ol>
-<h1 id="内核编译"><a href="#内核编译" class="headerlink" title="内核编译"></a>内核编译</h1><p>编译内核：</p>
-<ol>
-<li>下载对应macOS虚拟机版本的Xcode；</li>
-<li>提取Xcode，然后移动到<code>/Applications</code>目录下；</li>
-<li>启动Xcode，同意协议；</li>
-<li>在用户主目录下创建一个<code>kernel</code>目录；</li>
-<li>进入<code>kernel</code>目录；</li>
-<li>下载： <code>curl https://jeremya.com/sw/Makefile.xnudeps &gt; Makefile.xnudeps</code> </li>
-<li><code>make -f Makefile.xnudeps macos_version=11.5 xnudeps</code>，自动下载内核源码编译需要的工具，然后自动编译内核源码；</li>
-<li>进入 <code>~/kernel/xnu-&lt;version&gt;/</code>；</li>
-<li>通过 <code>git am</code>，将syzkaller的Darwin补丁应用上；<ul>
-<li><code>MakeInc.def</code>和<code>kasan.c</code>的补丁用于构建<code>KASAN</code>内核；</li>
-<li><code>ksancov.h</code>补丁是构建syzkallers执行器所需要的。执行器是C++的，因此不喜欢无效指针的转换；</li>
-<li><code>cpuid.c</code>和<code>cpu_threads.c</code>补丁是编译的内核在Qemu上启动所需要的；</li>
-</ul>
-</li>
-<li>运行 <code>mount</code> ，查看根挂载设备，这里举例是 <code>/dev/disk2s5s1 on / (apfs, sealed, local, read-only, journaled)</code>，只需要记住设备名称，即 <code>/dev/disk2s5</code>；</li>
-<li>进入 <code>~/kernel/xnu-&lt;version&gt;/</code>，运行以下命令：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p BUILD/mnt</span><br><span class="line"><span class="built_in">sudo</span> mount -o nobrowse -t apfs /dev/&lt;your_disk&gt; <span class="variable">$PWD</span>/BUILD/mnt</span><br><span class="line"></span><br><span class="line">make SDKROOT=macosx TARGET_CONFIGS=<span class="string">&quot;KASAN X86_64 NONE&quot;</span> KSANCOV=1</span><br><span class="line"></span><br><span class="line">kmutil create -a x86_64 -Z -n boot sys \</span><br><span class="line">-B BUILD/BootKernelExtensions.kc.kasan \</span><br><span class="line">-S BUILD/SystemKernelExtensions.kc.kasan \</span><br><span class="line">-k BUILD/obj/kernel.kasan \</span><br><span class="line">--elide-identifier com.apple.driver.AppleIntelTGLGraphicsFramebuffer</span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> ditto BUILD/BootKernelExtensions.kc.kasan <span class="string">&quot;<span class="variable">$PWD</span>/BUILD/mnt/System/Library/KernelCollections/&quot;</span></span><br><span class="line"><span class="built_in">sudo</span> ditto BUILD/SystemKernelExtensions.kc.kasan <span class="string">&quot;<span class="variable">$PWD</span>/BUILD/mnt/System/Library/KernelCollections/&quot;</span></span><br><span class="line"><span class="built_in">sudo</span> ditto BUILD/obj/kernel.kasan <span class="string">&quot;<span class="variable">$PWD</span>/BUILD/mnt/System/Library/Kernels/&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> bless --folder <span class="variable">$PWD</span>/BUILD/mnt/System/Library/CoreServices --bootefi --create-snapshot</span><br><span class="line"><span class="built_in">sudo</span> nvram boot-args=<span class="string">&quot;-v kcsuffix=kasan wlan.skywalk.enable=0&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>重启虚拟机后，内核将改变， <code>uname -a</code>: <code>Darwin users-Mac.local 20.6.0 Darwin Kernel Version 20.6.0: Mon Aug 9 16:12:43 PDT 2021; user:xnu-7195.141.2/BUILD/obj/KASAN_X86_64 x86_64</code>。</p>
-<p>在宿主机上运行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p ~/115/src/Users/user/kernel/ ~/115/obj</span><br><span class="line">rsync -r mac:/Users/user/kernel/xnu-7195.141.2 ~/115/src/Users/user/kernel/</span><br><span class="line"><span class="built_in">mv</span> ~/115/src/Users/user/kernel/xnu-7195.141.2/BUILD/obj/KASAN_X86_64/kernel.kasan ~/115/obj/</span><br><span class="line"><span class="built_in">mv</span> ~/115/src/Users/user/kernel/xnu-7195.141.2/BUILD/obj/KASAN_X86_64/kernel.kasan.dSYM/ ~/115/obj/</span><br></pre></td></tr></table></figure>
 
-<h1 id="Qemu-VM准备"><a href="#Qemu-VM准备" class="headerlink" title="Qemu VM准备"></a>Qemu VM准备</h1><p>在虚拟机查看EFI分区，这里为<code>/dev/disk0s1</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">user@users-Mac ~ % diskutil list</span><br><span class="line">/dev/disk0 (internal, physical):</span><br><span class="line">   <span class="comment">#:                       TYPE NAME                    SIZE       IDENTIFIER</span></span><br><span class="line">   0:      GUID_partition_scheme                        *69.8 GB    disk0</span><br><span class="line">   1:                        EFI EFI                     209.7 MB   disk0s1</span><br><span class="line">   2:                 Apple_APFS Container disk1         69.6 GB    disk0s2</span><br><span class="line"></span><br><span class="line">/dev/disk1 (synthesized):</span><br><span class="line">   <span class="comment">#:                       TYPE NAME                    SIZE       IDENTIFIER</span></span><br><span class="line">   0:      APFS Container Scheme -                      +69.6 GB    disk1</span><br><span class="line">                                 Physical Store disk0s2</span><br><span class="line">   1:                APFS Volume macos - Data            43.2 GB    disk1s1</span><br><span class="line">   2:                APFS Volume Preboot                 385.6 MB   disk1s2</span><br><span class="line">   3:                APFS Volume Recovery                623.2 MB   disk1s3</span><br><span class="line">   4:                APFS Volume VM                      1.1 MB     disk1s4</span><br><span class="line">   5:                APFS Volume macos                   16.0 GB    disk1s5</span><br><span class="line">   6:              APFS Snapshot com.apple.bless.4099... 16.0 GB    disk1s5s1</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<p>下载 <a target="_blank" rel="noopener" href="https://github.com/thenickdude/KVM-Opencore/releases/download/v13/OpenCore-v13.iso.gz">OpenCore-v13.iso.gz</a> ，通过命令进行提取： <code>gzip -d OpenCore-v13.iso.gz</code>。查找EFI分区的偏移和大小：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">user@users-Mac ~ % hdiutil pmap ./OpenCore-v13.iso</span><br><span class="line"></span><br><span class="line">MEDIA: <span class="string">&quot;&quot;</span>; Size 150 MB [307200 x 512]; Max Transfer Blocks 2048</span><br><span class="line">SCHEME: 1 GPT, <span class="string">&quot;GPT Partition Scheme&quot;</span> [16]</span><br><span class="line">SECTION: 1 Type:<span class="string">&#x27;MAP&#x27;</span>; Size 150 MB [307200 x 512]; Offset 34 Blocks (307133 + 67) x 512</span><br><span class="line">ID Type                 Offset       Size         Name                      (1)</span><br><span class="line">-- -------------------- ------------ ------------ -------------------- --------</span><br><span class="line"> 1 EFI                            40       307120 disk image</span><br></pre></td></tr></table></figure>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"buffer0verflooow.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.21.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-<p>接着运行命令 ：<code>sudo dd if=./OpenCore-v13.iso of=/dev/disk0s1 bs=512 iseek=40 count=307120</code>。</p>
-<p>现在通过<code>sudo mount -t msdos /dev/disk0s1 ~/mnt/</code>加载EFI磁盘。还需要对<code>OpenCores</code>的配置文件做一些小小的编辑。禁用启动设备选择器，因为这将阻止在模糊测试期间完全自动启动虚拟机。此外，需要设置boot-args。在VMware Fusion中，我们能够使用正常的macOS工具，如<code>nvram</code>和<code>csrutil</code>。而在<code>OpenCore</code>中，需要在<code>config.plist</code>中设置这些设置。</p>
-<p>编辑 <code>~/mnt/EFI/OC/config.plist</code> ：</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">index 8537ca8..a46de97 100755</span></span><br><span class="line"><span class="comment">--- a/Users/user/mnt/EFI/OC/config.plist</span></span><br><span class="line"><span class="comment">+++ b/Users/user/mnt/EFI/OC/config.plist</span></span><br><span class="line"><span class="meta">@@ -799,7 +799,7 @@</span></span><br><span class="line"> 			&lt;key&gt;PollAppleHotKeys&lt;/key&gt;</span><br><span class="line"> 			&lt;true/&gt;</span><br><span class="line"> 			&lt;key&gt;ShowPicker&lt;/key&gt;</span><br><span class="line"><span class="deletion">-			&lt;true/&gt;</span></span><br><span class="line"><span class="addition">+			&lt;false/&gt;</span></span><br><span class="line"> 			&lt;key&gt;TakeoffDelay&lt;/key&gt;</span><br><span class="line"> 			&lt;integer&gt;0&lt;/integer&gt;</span><br><span class="line"> 			&lt;key&gt;Timeout&lt;/key&gt;</span><br><span class="line"><span class="meta">@@ -944,7 +944,7 @@</span></span><br><span class="line"> 				&lt;key&gt;SystemAudioVolume&lt;/key&gt;</span><br><span class="line"> 				&lt;data&gt;Rg==&lt;/data&gt;</span><br><span class="line"> 				&lt;key&gt;boot-args&lt;/key&gt;</span><br><span class="line"><span class="deletion">-				&lt;string&gt;keepsyms=1&lt;/string&gt;</span></span><br><span class="line"><span class="addition">+				&lt;string&gt;-v kcsuffix=kasan wlan.skywalk.enable=0 keepsyms=1 debug=0x100008 kasan.checks=4294967295&lt;/string&gt;</span></span><br><span class="line"> 				&lt;key&gt;csr-active-config&lt;/key&gt;</span><br><span class="line"> 				&lt;data&gt;Jg8=&lt;/data&gt;</span><br><span class="line"> 				&lt;key&gt;prev-lang:kbd&lt;/key&gt;</span><br></pre></td></tr></table></figure>
+    <meta property="og:type" content="website">
+<meta property="og:title" content="buffer0verflooow - Blog">
+<meta property="og:url" content="https://buffer0verflooow.github.io/tags/darwin/index.html">
+<meta property="og:site_name" content="buffer0verflooow - Blog">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="buffer0verflooow">
+<meta name="twitter:card" content="summary">
 
-<h1 id="准备isa-applesmc"><a href="#准备isa-applesmc" class="headerlink" title="准备isa-applesmc"></a>准备isa-applesmc</h1><p>在启动时，macOS通过从其系统管理控制器中读取一个值并与它所期望的值相比较来检查它是否在一个合适的Mac上启动。现在要检索这个值，并在以后把它传递给qemu。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://web.archive.org/web/20200603015401/http://www.osxbook.com/book/bonus/chapter7/tpmdrmmyth/">下载 smc_read.c 源码</a></li>
-<li><code>gcc -Wall -o smc_read smc_read.c -framework IOKit</code> <code>./smc_read</code></li>
-</ul>
-<p>运行记录结果，在后面将其替换到标有<YOUR_APPLE_SMC_HERE>的地方。</p>
-<h1 id="从Qemu启动macOS-VM"><a href="#从Qemu启动macOS-VM" class="headerlink" title="从Qemu启动macOS VM"></a>从Qemu启动macOS VM</h1><ol>
-<li>找到VM的虚拟磁盘位置，一般是在 <code>~/Virtual\ Machines.localized/macOS-11.5-20G71.vmwarevm/Virtual\ Disk.vmdk</code>，然后将其转化为<code>qcow2</code>格式： <code>qemu-img convert -U ./Virtual\ Disk.vmdk -O qcow2 ~/115/mac_hdd.qcow</code>；</li>
-<li><code>OVMF</code>目前没有被打包在<code>Homebrew</code>中。需要从ubuntu下载<code>ovmf</code>软件包。通过<code>ar -xv ./ovmf_2020.11-4_all.deb</code>和<code>tar -xvf ./data.tar.xz</code>进行提取。然后<code>mv ./usr/share/OVMF /usr/local/share/OVMF</code>。</li>
-</ol>
-<p>启动（没成功）：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-x86_64 \</span><br><span class="line">  -device isa-applesmc,osk=<span class="string">&quot;&lt;YOUR_APPLE_SMC_HERE&gt;&quot;</span> \</span><br><span class="line">  -accel hvf -machine q35 -smp <span class="string">&quot;2&quot;</span>,cores=<span class="string">&quot;2&quot;</span>,sockets=<span class="string">&quot;1&quot;</span> -m <span class="string">&quot;4096&quot;</span> \</span><br><span class="line">  -cpu Penryn,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,<span class="string">&quot;+pcid,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check&quot;</span> \</span><br><span class="line">  -drive <span class="keyword">if</span>=pflash,format=raw,<span class="built_in">readonly</span>=on,file=<span class="string">&quot;/usr/local/share/OVMF/OVMF_CODE.fd&quot;</span> \</span><br><span class="line">  -drive <span class="keyword">if</span>=pflash,format=raw,<span class="built_in">readonly</span>=on,file=<span class="string">&quot;/usr/local/share/OVMF/OVMF_VARS.fd&quot;</span> \</span><br><span class="line">  -device ich9-intel-hda -device hda-duplex -device ich9-ahci,<span class="built_in">id</span>=sata \</span><br><span class="line">  -device ide-hd,bus=sata.4,drive=MacHDD \</span><br><span class="line">  -drive <span class="built_in">id</span>=MacHDD,<span class="keyword">if</span>=none,file=<span class="string">&quot;/Users/user/115/macos_11_5.qcow&quot;</span>,format=qcow2 \</span><br><span class="line">  -netdev user,<span class="built_in">id</span>=net0,hostfwd=tcp::1042-:22, -device e1000-82545em,netdev=net0,<span class="built_in">id</span>=net0 \</span><br><span class="line">  -device usb-ehci,<span class="built_in">id</span>=ehci -usb -device usb-kbd -device usb-tablet \</span><br><span class="line">  -monitor stdio -vga vmware</span><br></pre></td></tr></table></figure>
 
-<p>然后应该能看到macOS的用户界面，并且能够<code>ssh user@localhost -p 1042</code>。确认已经启动到KASAN内核。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user@users-Mac ~ % <span class="built_in">uname</span> -a</span><br><span class="line">Darwin users-Mac.<span class="built_in">local</span> 20.6.0 Darwin Kernel Version 20.6.0: Mon Aug  9 16:12:43 PDT 2021; user:xnu-7195.141.2/BUILD/obj/KASAN_X86_64 x86_64</span><br></pre></td></tr></table></figure>
+<link rel="canonical" href="https://buffer0verflooow.github.io/tags/darwin/">
 
-<h1 id="编译运行Syzkaller"><a href="#编译运行Syzkaller" class="headerlink" title="编译运行Syzkaller"></a>编译运行Syzkaller</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/google/syzkaller</span><br><span class="line"><span class="built_in">cd</span> syzkaller</span><br><span class="line">make HOSTOS=darwin HOSTARCH=amd64 TARGETOS=darwin TARGETARCH=amd64 SOURCEDIR=/Users/user/115/src/Users/user/kernel/xnu-7195.141.2</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>需要<code>g++</code>来使C语言复制者工作。通过<code>homebrew</code>安装<code>gcc@11</code></li>
-<li>需要<code>binutils</code>的<code>addr2line</code>来使<code>/cover</code>端点工作。通过<code>homebrew</code>安装<code>binutils</code></li>
-<li>在你的<code>.zshrc</code>中添加类似这样的内容，<code>export PATH=&quot;/usr/local/opt/binutils/bin:$PATH&quot;</code>。重新启动<code>shell</code></li>
-<li>将以下内容保存到<code>~/115/sykaller.cfg</code>。注意要用<code>&lt;YOUR_APPLE_SMC_HERE&gt;</code>代替。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;target&quot;</span>: <span class="string">&quot;darwin/amd64&quot;</span>,</span><br><span class="line">    <span class="string">&quot;http&quot;</span>: <span class="string">&quot;127.0.0.1:56741&quot;</span>,</span><br><span class="line">    <span class="string">&quot;sshkey&quot;</span>: <span class="string">&quot;/Users/user/.ssh/id_macos115&quot;</span>,</span><br><span class="line">    <span class="string">&quot;workdir&quot;</span>: <span class="string">&quot;/Users/user/sk_darwin/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;kernel_obj&quot;</span>: <span class="string">&quot;/Users/user/115/obj/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;kernel_src&quot;</span>: <span class="string">&quot;/Users/user/115/src/&quot;</span>,</span><br><span class="line">    <span class="string">&quot;syzkaller&quot;</span>: <span class="string">&quot;/Users/user/go/src/github.com/google/syzkaller&quot;</span>,</span><br><span class="line">    <span class="string">&quot;procs&quot;</span>: 2,</span><br><span class="line">    <span class="string">&quot;type&quot;</span>: <span class="string">&quot;qemu&quot;</span>,</span><br><span class="line">    <span class="string">&quot;cover&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;image&quot;</span>: <span class="string">&quot;/Users/user/115/macos_11_5.qcow&quot;</span>,</span><br><span class="line">    <span class="string">&quot;vm&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;count&quot;</span>: 2,</span><br><span class="line">        <span class="string">&quot;cpu&quot;</span>: 2,</span><br><span class="line">        <span class="string">&quot;mem&quot;</span>: 4096,</span><br><span class="line">        <span class="string">&quot;efi_code_device&quot;</span>: <span class="string">&quot;/usr/local/share/OVMF/OVMF_CODE.fd&quot;</span>,</span><br><span class="line">        <span class="string">&quot;efi_vars_device&quot;</span>: <span class="string">&quot;/usr/local/share/OVMF/OVMF_VARS.fd&quot;</span>,</span><br><span class="line">        <span class="string">&quot;apple_smc_osk&quot;</span>: <span class="string">&quot;&lt;YOUR_APPLE_SMC_HERE&gt;&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/darwin/index.html","title":""}</script>
 
-<p>通过<code>~/115/bin/syz-manager -config=/root/115/syzkaller.cfg</code>启动syzkaller并在浏览器中打开<a href="http://localhost:56741。">http://localhost:56741。</a></p>
-</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://avatars.githubusercontent.com/u/19711495?v=4" alt="buffer0verflooow"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">buffer0verflooow</p><p class="is-size-6 is-block">Security Researcher</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Beijing</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">56</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">51</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="me noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-10-10T06:23:56.000Z">2022-10-10</time></p><p class="title"><a href="/2022/10/10/%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"> </a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-30T07:29:09.000Z">2022-07-30</time></p><p class="title"><a href="/2022/07/30/Android%E5%AE%89%E5%85%A8%E7%AC%94%E8%AE%B0/">Android安全笔记</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-20T12:35:56.000Z">2022-07-20</time></p><p class="title"><a href="/2022/07/20/Android%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB%E6%96%B9%E6%B3%95%E6%95%B4%E7%90%86/">Android中间人攻击方法整理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-04T12:34:01.000Z">2022-07-04</time></p><p class="title"><a href="/2022/07/04/Android-11-%E9%AD%94%E5%BD%A2%E5%A5%B3%E6%BC%8F%E6%B4%9E/">Android 11 魔形女漏洞</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-07-01T13:59:36.000Z">2022-07-01</time></p><p class="title"><a href="/2022/07/01/macOS-Intel%E5%9B%BE%E5%BD%A2%E5%86%85%E6%A0%B8%E6%8B%93%E5%B1%95RCE-EOP/">macOS Intel图形内核拓展RCE+EOP</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/10/"><span class="level-start"><span class="level-item">October 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/07/"><span class="level-start"><span class="level-item">July 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/06/"><span class="level-start"><span class="level-item">June 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/05/"><span class="level-start"><span class="level-item">May 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/04/"><span class="level-start"><span class="level-item">April 2022</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/03/"><span class="level-start"><span class="level-item">March 2022</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/02/"><span class="level-start"><span class="level-item">February 2022</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/archives/2022/01/"><span class="level-start"><span class="level-item">January 2022</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/12/"><span class="level-start"><span class="level-item">December 2021</span></span><span class="level-end"><span class="level-item tag">10</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/11/"><span class="level-start"><span class="level-item">November 2021</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2021/08/"><span class="level-start"><span class="level-item">August 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/ASN-1/"><span class="tag">ASN.1</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/AppleAVE2/"><span class="tag">AppleAVE2</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ContentProvider/"><span class="tag">ContentProvider</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/IOServices/"><span class="tag">IOServices</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LPE/"><span class="tag">LPE</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PendingIntent/"><span class="tag">PendingIntent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/adobe/"><span class="tag">adobe</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/afl/"><span class="tag">afl++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ams/"><span class="tag">ams</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/android/"><span class="tag">android</span><span class="tag">18</span></a></div><div class="control"><a class="tags has-addons" href="/tags/aosp/"><span class="tag">aosp</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/apple/"><span class="tag">apple</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/arm64/"><span class="tag">arm64</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/cfprefsd/"><span class="tag">cfprefsd</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/chrome/"><span class="tag">chrome</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/darwin/"><span class="tag">darwin</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/exploit/"><span class="tag">exploit</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/fuzz/"><span class="tag">fuzz</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/gpu/"><span class="tag">gpu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hook/"><span class="tag">hook</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intel/"><span class="tag">intel</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/intent/"><span class="tag">intent</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/iomfb/"><span class="tag">iomfb</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/ios/"><span class="tag">ios</span><span class="tag">14</span></a></div><div class="control"><a class="tags has-addons" href="/tags/linux/"><span class="tag">linux</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/logic-vul/"><span class="tag">logic vul</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/lpe/"><span class="tag">lpe</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mach/"><span class="tag">mach</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/macos/"><span class="tag">macos</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/mig/"><span class="tag">mig</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/note/"><span class="tag">note</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/npu/"><span class="tag">npu</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pac/"><span class="tag">pac</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pipe/"><span class="tag">pipe</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/pongoOS/"><span class="tag">pongoOS</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qemu/"><span class="tag">qemu</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qualcom/"><span class="tag">qualcom</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/qualcomm/"><span class="tag">qualcomm</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/rce/"><span class="tag">rce</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/safari/"><span class="tag">safari</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/samsung/"><span class="tag">samsung</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/soot/"><span class="tag">soot</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/static-analysis/"><span class="tag">static analysis</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/syzkaller/"><span class="tag">syzkaller</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/tcc/"><span class="tag">tcc</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/telecom/"><span class="tag">telecom</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/uaf/"><span class="tag">uaf</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/vul/"><span class="tag">vul</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/webaudio/"><span class="tag">webaudio</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xnu/"><span class="tag">xnu</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/xpc/"><span class="tag">xpc</span><span class="tag">1</span></a></div></div></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="buffer0verflooow - Blog" height="28"></a><p class="is-size-7"><span>&copy; 2024 buffer0verflooow</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
-      window.cookieconsent.initialise({
-        type: "info",
-        theme: "edgeless",
-        static: false,
-        position: "bottom-left",
-        content: {
-          message: "This website uses cookies to improve your experience.",
-          dismiss: "Got it!",
-          allow: "Allow cookies",
-          deny: "Decline",
-          link: "Learn more",
-          policy: "Cookie Policy",
-          href: "https://www.cookiesandyou.com/",
-        },
-        palette: {
-          popup: {
-            background: "#edeff5",
-            text: "#838391"
-          },
-          button: {
-            background: "#4b81e8"
-          },
-        },
-      });
-    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
-        });</script></body></html>
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tag: darwin | buffer0verflooow - Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">buffer0verflooow - Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/home/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">buffer0verflooow</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">51</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner tag posts-collapse">
+
+
+  
+  
+  
+  <div class="post-block">
+    <div class="post-content">
+      <div class="collection-title">
+        <h1 class="collection-header">darwin
+          <small>Tag</small>
+        </h1>
+      </div>
+
+      
+    <div class="collection-year">
+      <span class="collection-header">2022</span>
+    </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+      <div class="post-meta-container">
+        <time itemprop="dateCreated"
+              datetime="2022-04-30T20:12:54+08:00"
+              content="2022-04-30">
+          04-30
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2022/04/30/Darwin%E6%90%AD%E5%BB%BAsyzkaller%E7%8E%AF%E5%A2%83/" itemprop="url">
+            <span itemprop="name">Darwin搭建syzkaller环境</span>
+          </a>
+      </div>
+
+      
+    </header>
+  </article>
+
+    </div>
+  </div>
+  
+  
+  
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">buffer0verflooow</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
